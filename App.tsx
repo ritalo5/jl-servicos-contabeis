@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
   User, 
@@ -45,14 +44,18 @@ const App: React.FC = () => {
     const savedAuth = localStorage.getItem('portal_auth');
     if (savedAuth) {
       try {
-        const parsed = JSON.parse(savedAuth);
-        setAuth(parsed);
-        if (parsed.user?.role === UserRole.CLIENTE && !parsed.user.isPlanActive) {
-          setView('PRICING');
-        } else if (parsed.isAuthenticated) {
-          setView('DASHBOARD');
+        const parsed = JSON.parse(savedAuth) as AuthState;
+        if (parsed && parsed.user) {
+          setAuth(parsed);
+          // Redirecionamento inteligente baseado no estado do plano
+          if (parsed.user.role === UserRole.CLIENTE && !parsed.user.isPlanActive) {
+            setView('PRICING');
+          } else if (parsed.isAuthenticated) {
+            setView('DASHBOARD');
+          }
         }
       } catch (e) {
+        console.error("Erro ao carregar sessão:", e);
         localStorage.removeItem('portal_auth');
       }
     }
@@ -62,9 +65,14 @@ const App: React.FC = () => {
     const newState = { user, isAuthenticated: true };
     setAuth(newState);
     localStorage.setItem('portal_auth', JSON.stringify(newState));
-    if (user.role === UserRole.ADMIN) setView('DASHBOARD');
-    else if (!user.isPlanActive) setView('PRICING');
-    else setView('DASHBOARD');
+    
+    if (user.role === UserRole.ADMIN) {
+      setView('DASHBOARD');
+    } else if (!user.isPlanActive) {
+      setView('PRICING');
+    } else {
+      setView('DASHBOARD');
+    }
   };
 
   const handleLogout = () => {
@@ -74,33 +82,97 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar auth={auth} onLogout={handleLogout} onNavigate={setView} identity={companyIdentity} />
+    <div className="min-h-screen flex flex-col bg-slate-50">
+      <Navbar 
+        auth={auth} 
+        onLogout={handleLogout} 
+        onNavigate={(v: any) => setView(v)} 
+        identity={companyIdentity} 
+      />
       
       <main className="flex-grow">
-        {view === 'LANDING' && <LandingPage onStart={() => setView('PRICING')} onLogin={() => setView('LOGIN')} identity={companyIdentity} />}
-        {view === 'LOGIN' && <Login onLogin={handleLogin} onBack={() => setView('LANDING')} onRegister={() => setView('REGISTER')} onResetPassword={() => setView('RESET_PASSWORD')} identity={companyIdentity} />}
-        {view === 'REGISTER' && <Register onRegister={handleLogin} onBack={() => setView('LANDING')} onLogin={() => setView('LOGIN')} identity={companyIdentity} />}
-        {view === 'PRICING' && <PricingPage identity={companyIdentity} plans={plans} onContract={() => setView('DASHBOARD')} isAuthenticated={auth.isAuthenticated} onGoToRegister={() => setView('REGISTER')} />}
-        {view === 'FAQ' && <FaqPage faqs={faqs} identity={companyIdentity} onBack={() => setView('LANDING')} />}
-        {view === 'RESET_PASSWORD' && <PasswordReset identity={companyIdentity} onBack={() => setView('LOGIN')} />}
+        {view === 'LANDING' && (
+          <LandingPage 
+            onStart={() => setView('PRICING')} 
+            onLogin={() => setView('LOGIN')} 
+            identity={companyIdentity} 
+          />
+        )}
+        
+        {view === 'LOGIN' && (
+          <Login 
+            onLogin={handleLogin} 
+            onBack={() => setView('LANDING')} 
+            onRegister={() => setView('REGISTER')} 
+            onResetPassword={() => setView('RESET_PASSWORD')} 
+            identity={companyIdentity} 
+          />
+        )}
+        
+        {view === 'REGISTER' && (
+          <Register 
+            onRegister={handleLogin} 
+            onBack={() => setView('LANDING')} 
+            onLogin={() => setView('LOGIN')} 
+            identity={companyIdentity} 
+          />
+        )}
+        
+        {view === 'PRICING' && (
+          <PricingPage 
+            identity={companyIdentity} 
+            plans={plans} 
+            onContract={() => setView('DASHBOARD')} 
+            isAuthenticated={auth.isAuthenticated} 
+            onGoToRegister={() => setView('REGISTER')} 
+          />
+        )}
+        
+        {view === 'FAQ' && (
+          <FaqPage 
+            faqs={faqs} 
+            identity={companyIdentity} 
+            onBack={() => setView('LANDING')} 
+          />
+        )}
+        
+        {view === 'RESET_PASSWORD' && (
+          <PasswordReset 
+            identity={companyIdentity} 
+            onBack={() => setView('LOGIN')} 
+          />
+        )}
         
         {view === 'DASHBOARD' && auth.isAuthenticated && auth.user && (
           auth.user.role === UserRole.ADMIN ? (
             <AdminDashboard 
-              admin={auth.user} services={services} setServices={setServices}
-              clients={clients} setClients={setClients}
-              invoices={invoices} setInvoices={setInvoices}
-              clientInvoiceData={clientInvoiceData} identity={companyIdentity}
-              onUpdateIdentity={setCompanyIdentity} plans={plans} onUpdatePlans={setPlans}
-              faqs={faqs} onUpdateFaqs={setFaqs} alerts={alerts} setAlerts={setAlerts}
+              admin={auth.user} 
+              services={services} 
+              setServices={setServices}
+              clients={clients} 
+              setClients={setClients}
+              invoices={invoices} 
+              setInvoices={setInvoices}
+              clientInvoiceData={clientInvoiceData} 
+              identity={companyIdentity}
+              onUpdateIdentity={setCompanyIdentity} 
+              plans={plans} 
+              onUpdatePlans={setPlans}
+              faqs={faqs} 
+              onUpdateFaqs={setFaqs} 
+              alerts={alerts} 
+              setAlerts={setAlerts}
             />
           ) : (
             <ClientDashboard 
-              user={auth.user} services={services.filter(s => s.clientId === auth.user?.id)}
-              setServices={setServices} invoices={invoices.filter(i => i.clientId === auth.user?.id)}
-              invoiceData={clientInvoiceData[auth.user.id]} setInvoiceData={(data) => setClientInvoiceData(prev => ({ ...prev, [auth.user!.id]: data }))}
-              identity={companyIdentity} activePlan={plans.find(p => p.id === auth.user?.activePlanId)}
+              user={auth.user} 
+              services={services.filter(s => s.clientId === auth.user?.id)}
+              setServices={setServices} 
+              invoices={invoices.filter(i => i.clientId === auth.user?.id)}
+              invoiceData={clientInvoiceData[auth.user.id]} 
+              setInvoiceData={(data) => setClientInvoiceData(prev => ({ ...prev, [auth.user!.id]: data }))}
+              identity={companyIdentity} 
+              activePlan={plans.find(p => p.id === auth.user?.activePlanId)}
             />
           )
         )}
@@ -110,9 +182,9 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <p>© 2024 {companyIdentity.name} - Segurança LGPD Ativa.</p>
           <div className="flex gap-6">
-            <button onClick={() => setView('FAQ')} className="hover:text-white">Perguntas Frequentes</button>
-            <a href="#" className="hover:text-white">Termos</a>
-            <a href="#" className="hover:text-white">Privacidade</a>
+            <button onClick={() => setView('FAQ')} className="hover:text-white transition-colors">Perguntas Frequentes</button>
+            <a href="#" className="hover:text-white transition-colors">Termos</a>
+            <a href="#" className="hover:text-white transition-colors">Privacidade</a>
           </div>
         </div>
       </footer>
