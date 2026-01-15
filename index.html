@@ -6,9 +6,113 @@
   <title>J L Serviços Contábeis - Atendimento Online</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  
 </head>
 <body>
-  <!-- HTML permanece igual, com conteúdo previamente criado -->
+
+  <!-- Header / Menu -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">J L Serviços Contábeis</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#perfil">Perfil</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero / Introdução -->
+  <section id="home" class="hero">
+    <h1>Bem-vindo à Consultoria Contábil e Serviços para MEI</h1>
+    <p>Planilhas financeiras, certificado digital e suporte completo para o seu negócio.</p>
+  </section>
+
+  <!-- Serviços -->
+  <section id="servicos" class="servicos">
+    <h2>Nossos Serviços</h2>
+    <div class="cards-container">
+      <div class="card">
+        <h3>Consultoria Contábil</h3>
+        <p>Assessoria completa para MEI e empresas.</p>
+      </div>
+      <div class="card">
+        <h3>Planilhas Financeiras</h3>
+        <p>Controle financeiro e relatórios prontos.</p>
+      </div>
+      <div class="card">
+        <h3>Certificado Digital</h3>
+        <p>Emissão rápida e segura.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planos -->
+  <section id="planos" class="planos">
+    <h2>Planos</h2>
+    <div class="cards-container">
+      <div class="card">
+        <h3>Mensal MEI</h3>
+        <p>Acesso completo por 1 mês.</p>
+      </div>
+      <div class="card">
+        <h3>Anual MEI</h3>
+        <p>Acesso completo por 12 meses.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <h2>Perguntas Frequentes</h2>
+    <div class="faq-item">
+      <button class="faq-question">Como contratar um serviço?</button>
+      <div class="faq-answer"><p>Basta acessar a área de serviços e escolher o que deseja.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Quais são os planos disponíveis?</button>
+      <div class="faq-answer"><p>Mensal e anual, adaptáveis ao seu negócio.</p></div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section id="blog" class="blog">
+    <h2>Blog</h2>
+    <div class="cards-container">
+      <div class="card">
+        <h3>Título do Post</h3>
+        <p>Resumo do conteúdo do post...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Perfil do Cliente -->
+  <section id="perfil" class="perfil">
+    <h2>Área do Cliente</h2>
+    <p>Bem-vindo, [Nome do Cliente]</p>
+    <div class="cards-container">
+      <div class="card">
+        <h3>Serviço Contratado</h3>
+        <p>Prazos e observações.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 J L Serviços Contábeis - Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- JS FAQ interativo -->
+  <script>
+    const questions = document.querySelectorAll('.faq-question');
+    questions.forEach(q => q.addEventListener('click', () => {
+      const answer = q.nextElementSibling;
+      answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    }));
+  </script>
+
 </body>
 </html>
