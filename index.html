@@ -9,57 +9,135 @@
 </head>
 <body>
 
-  <!-- Header / Menu -->
+  <!-- Header / Logo -->
   <header>
+    <div class="logo">
+      J L Serviços Contábeis
+      <div class="subtitulo">Atendimento Online</div>
+    </div>
     <nav class="navbar">
-      <div class="logo">J L Serviços Contábeis</div>
       <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#servicos">Serviços</a></li>
-        <li><a href="#planos">Planos</a></li>
-        <li><a href="#faq">FAQ</a></li>
         <li><a href="#blog">Blog</a></li>
-        <li><a href="#perfil">Perfil</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#sobre">Sobre a Empresa</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contato">Contato</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Hero / Introdução -->
-  <section id="home" class="hero">
-    <h1>Bem-vindo à Consultoria Contábil e Serviços para MEI</h1>
-    <p>Planilhas financeiras, certificado digital e suporte completo para o seu negócio.</p>
-  </section>
+  <!-- Blog em destaque -->
+  <section id="blog" class="blog">
+    <h2>Últimas Notícias</h2>
 
-  <!-- Serviços -->
-  <section id="servicos" class="servicos">
-    <h2>Nossos Serviços</h2>
     <div class="cards-container">
+      <!-- Notícia em destaque -->
+      <div class="card destaque">
+        <h3>Notícia Mais Importante</h3>
+        <p>Resumo da notícia em destaque que o cliente deve ver primeiro...</p>
+      </div>
+
+      <!-- Outras notícias -->
       <div class="card">
-        <h3>Consultoria Contábil</h3>
-        <p>Assessoria completa para MEI e empresas.</p>
+        <h3>Outra Notícia</h3>
+        <p>Resumo da notícia...</p>
       </div>
       <div class="card">
-        <h3>Planilhas Financeiras</h3>
-        <p>Controle financeiro e relatórios prontos.</p>
+        <h3>Mais Notícias</h3>
+        <p>Resumo adicional...</p>
       </div>
-      <div class="card">
-        <h3>Certificado Digital</h3>
-        <p>Emissão rápida e segura.</p>
-      </div>
+    </div>
+
+    <div class="blog-acessar">
+      <a href="/blog-completo" class="botao">Acessar Blog</a>
     </div>
   </section>
 
-  <!-- Planos -->
+  <!-- LGPD / Privacidade -->
+  <section id="lgpd" class="lgpd">
+    <p>Os dados fornecidos neste site serão utilizados exclusivamente para a prestação de serviços e são protegidos de acordo com a LGPD.</p>
+  </section>
+
+  <!-- Serviços por categoria -->
+  <section id="servicos" class="servicos">
+    <h2>Nossos Serviços</h2>
+
+    <h3>MEI</h3>
+    <div class="cards-container">
+      <div class="card">Abertura de MEI</div>
+      <div class="card">Regularização de MEI</div>
+      <div class="card">Encerramento de MEI</div>
+      <div class="card">Emissão de DAS</div>
+      <div class="card">Declaração Anual MEI (DASN-SIMEI)</div>
+      <div class="card">Parcelamento de Débitos do MEI</div>
+      <div class="card">Alteração de Dados do MEI</div>
+      <div class="card">Acompanhamento Mensal do MEI</div>
+    </div>
+
+    <h3>Pessoa Física (CPF)</h3>
+    <div class="cards-container">
+      <div class="card">Declaração de IRPF</div>
+      <div class="card">Regularização de CPF</div>
+      <div class="card">Consulta e Orientação Fiscal PF</div>
+    </div>
+
+    <h3>Certidões e Regularidades</h3>
+    <div class="cards-container">
+      <div class="card">Consulta de Pendências Fiscais</div>
+      <div class="card">Emissão de Certidões Negativas (CND)</div>
+      <div class="card">Regularização de Situação Fiscal</div>
+    </div>
+
+    <h3>Certificado Digital</h3>
+    <div class="cards-container">
+      <div class="card">Emissão de Certificado Digital A1 (CPF ou CNPJ)</div>
+      <div class="card">Renovação de Certificado Digital</div>
+    </div>
+
+    <h3>Serviços Contábeis Gerais</h3>
+    <div class="cards-container">
+      <div class="card">Consultoria Contábil</div>
+      <div class="card">Orientação para Abertura de Negócio</div>
+      <div class="card">Suporte Contábil Online</div>
+    </div>
+
+    <h3>Outros</h3>
+    <div class="cards-container">
+      <div class="card">Planilhas Financeiras Personalizadas</div>
+      <div class="card">Organização Financeira Básica</div>
+    </div>
+  </section>
+
+  <!-- Planos MEI -->
   <section id="planos" class="planos">
-    <h2>Planos</h2>
+    <h2>Planos MEI</h2>
     <div class="cards-container">
       <div class="card">
-        <h3>Mensal MEI</h3>
-        <p>Acesso completo por 1 mês.</p>
+        <h3>Plano Básico</h3>
+        <p>💰 R$ 79 a R$ 99 / mês</p>
+        <ul>
+          <li>Emissão mensal do DAS</li>
+          <li>Lembrete de vencimentos</li>
+          <li>DASN-SIMEI 1x/ano</li>
+          <li>Acompanhamento básico</li>
+          <li>Suporte via WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/" class="botao">Contratar Agora</a>
       </div>
+
       <div class="card">
-        <h3>Anual MEI</h3>
-        <p>Acesso completo por 12 meses.</p>
+        <h3>Plano Premium</h3>
+        <p>💰 R$ 129 a R$ 159 / mês</p>
+        <ul>
+          <li>Tudo do Básico</li>
+          <li>Parcelamento de débitos</li>
+          <li>Regularização de pendências fiscais</li>
+          <li>Orientação mensal personalizada</li>
+          <li>Emissão de certidões</li>
+          <li>Suporte prioritário</li>
+          <li>Relatório fiscal mensal</li>
+        </ul>
+        <a href="https://wa.me/" class="botao">Contratar Agora</a>
       </div>
     </div>
   </section>
@@ -67,42 +145,37 @@
   <!-- FAQ -->
   <section id="faq" class="faq">
     <h2>Perguntas Frequentes</h2>
+
     <div class="faq-item">
       <button class="faq-question">Como contratar um serviço?</button>
-      <div class="faq-answer"><p>Basta acessar a área de serviços e escolher o que deseja.</p></div>
+      <div class="faq-answer"><p>Você pode contratar qualquer serviço diretamente na área de serviços clicando no que deseja.</p></div>
     </div>
+
     <div class="faq-item">
-      <button class="faq-question">Quais são os planos disponíveis?</button>
-      <div class="faq-answer"><p>Mensal e anual, adaptáveis ao seu negócio.</p></div>
+      <button class="faq-question">Quais são os planos disponíveis para MEI?</button>
+      <div class="faq-answer"><p>Oferecemos planos Básico e Premium, com benefícios distintos como emissão de DAS e acompanhamento mensal.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">Meus dados estão seguros?</button>
+      <div class="faq-answer"><p>Sim! Todos os dados são tratados conforme a LGPD e usados apenas para prestação de serviços.</p></div>
     </div>
   </section>
 
-  <!-- Blog -->
-  <section id="blog" class="blog">
-    <h2>Blog</h2>
-    <div class="cards-container">
-      <div class="card">
-        <h3>Título do Post</h3>
-        <p>Resumo do conteúdo do post...</p>
-      </div>
-    </div>
+  <!-- Sobre a empresa -->
+  <section id="sobre" class="sobre">
+    <h2>Sobre a Empresa</h2>
+    <p>Prestamos serviços contábeis completos para MEI, Pessoa Física e Certificados Digitais, garantindo segurança e confiabilidade.</p>
   </section>
 
-  <!-- Perfil do Cliente -->
-  <section id="perfil" class="perfil">
-    <h2>Área do Cliente</h2>
-    <p>Bem-vindo, [Nome do Cliente]</p>
-    <div class="cards-container">
-      <div class="card">
-        <h3>Serviço Contratado</h3>
-        <p>Prazos e observações.</p>
-      </div>
+  <!-- Contato / Footer -->
+  <footer id="contato">
+    <p>© 2026 J L Serviços Contábeis</p>
+    <p>Atendimento Online | Protegido pela LGPD</p>
+    <div class="redes-sociais">
+      <a href="#">WhatsApp</a> | <a href="#">Instagram</a> | <a href="#">Facebook</a>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2026 J L Serviços Contábeis - Todos os direitos reservados.</p>
+    <p class="lema">Seu sucesso contábil começa aqui!</p>
   </footer>
 
   <!-- JS FAQ interativo -->
