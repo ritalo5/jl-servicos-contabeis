@@ -3,36 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>J L Serviços Contábeis | Atendimento Online</title>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Fonte -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <header class="site-header">
-  <div class="container">
+  <div class="container header-center">
 
-    <div class="header-top">
-      <h1 class="site-title">J L Serviços Contábeis</h1>
+    <h1 class="site-title">J L Serviços Contábeis</h1>
+    <p class="site-subtitle">Atendimento Online</p>
 
-      <!-- BOTÃO MOBILE -->
-      <button class="menu-toggle" aria-label="Abrir menu">☰</button>
-    </div>
+    <!-- BOTÃO MOBILE -->
+    <button class="menu-toggle" aria-label="Abrir menu">☰</button>
 
+    <!-- MENU -->
     <nav class="main-nav">
       <ul class="menu">
 
         <li class="menu-item dropdown">
           <a href="#" class="dropdown-toggle">Serviços</a>
           <ul class="dropdown-menu">
-            <li><a href="servicos/MEI/">MEI</a></li>
+            <li><a href="servicos/mei/">MEI</a></li>
             <li><a href="servicos/pessoa-fisica/">Pessoa Física</a></li>
-            <li><a href="servicos/certidoes-regularizacoes/">Certidões</a></li>
+            <li><a href="servicos/certidoes-regularizacoes/">Certidões e Regularizações</a></li>
             <li><a href="servicos/certificado-digital/">Certificado Digital</a></li>
             <li><a href="servicos/contabeis/">Serviços Contábeis</a></li>
-            <li><a href="servicos/outros/">Outros</a></li>
+            <li><a href="servicos/outros/">Outros Serviços</a></li>
           </ul>
         </li>
 
@@ -48,52 +52,79 @@
 
 <main class="container">
 
-<section class="blog-home">
+  <section class="blog-home">
 
-  <article class="blog-highlight">
-    <img src="https://via.placeholder.com/800x400">
-    <div class="blog-content">
-      <h2>Contabilidade Geral</h2>
-      <p>Entenda os principais conceitos contábeis.</p>
-    </div>
-  </article>
+    <article class="blog-highlight">
+      <img src="https://via.placeholder.com/900x400" alt="Contabilidade Geral">
+      <div class="blog-content">
+        <h2>Contabilidade Geral</h2>
+        <p>Conceitos essenciais de contabilidade explicados de forma simples e prática.</p>
+        <div class="blog-actions">
+          <a class="btn" href="blog/contabilidade/">Ler mais</a>
+          <a class="btn-outline" href="blog/contabilidade/">Ver todos</a>
+        </div>
+      </div>
+    </article>
 
-  <article class="blog-highlight">
-    <img src="https://via.placeholder.com/800x400">
-    <div class="blog-content">
-      <h2>Legislação Contábil</h2>
-      <p>Mudanças que impactam MEIs e empresas.</p>
-    </div>
-  </article>
+    <article class="blog-highlight">
+      <img src="https://via.placeholder.com/900x400" alt="Legislação">
+      <div class="blog-content">
+        <h2>Legislação Contábil</h2>
+        <p>Atualizações legais que impactam MEI, PF e pequenos negócios.</p>
+        <div class="blog-actions">
+          <a class="btn" href="blog/legislacao/">Ler mais</a>
+          <a class="btn-outline" href="blog/legislacao/">Ver todos</a>
+        </div>
+      </div>
+    </article>
 
-  <article class="blog-highlight">
-    <img src="https://via.placeholder.com/800x400">
-    <div class="blog-content">
-      <h2>Departamento Pessoal</h2>
-      <p>Folha, direitos e obrigações.</p>
-    </div>
-  </article>
+    <article class="blog-highlight">
+      <img src="https://via.placeholder.com/900x400" alt="Departamento Pessoal">
+      <div class="blog-content">
+        <h2>Departamento Pessoal</h2>
+        <p>Direitos trabalhistas, folha de pagamento e obrigações.</p>
+        <div class="blog-actions">
+          <a class="btn" href="blog/departamento-pessoal/">Ler mais</a>
+          <a class="btn-outline" href="blog/departamento-pessoal/">Ver todos</a>
+        </div>
+      </div>
+    </article>
 
-  <article class="blog-highlight">
-    <img src="https://via.placeholder.com/800x400">
-    <div class="blog-content">
-      <h2>Fiscal</h2>
-      <p>Tributos e impostos explicados.</p>
-    </div>
-  </article>
+    <article class="blog-highlight">
+      <img src="https://via.placeholder.com/900x400" alt="Fiscal">
+      <div class="blog-content">
+        <h2>Fiscal</h2>
+        <p>Impostos, tributos e responsabilidades fiscais.</p>
+        <div class="blog-actions">
+          <a class="btn" href="blog/fiscal/">Ler mais</a>
+          <a class="btn-outline" href="blog/fiscal/">Ver todos</a>
+        </div>
+      </div>
+    </article>
 
-  <article class="blog-highlight">
-    <img src="https://via.placeholder.com/800x400">
-    <div class="blog-content">
-      <h2>Contábil</h2>
-      <p>Dicas para manter tudo organizado.</p>
-    </div>
-  </article>
+    <article class="blog-highlight">
+      <img src="https://via.placeholder.com/900x400" alt="Contábil">
+      <div class="blog-content">
+        <h2>Contábil</h2>
+        <p>Dicas práticas para manter tudo organizado e regular.</p>
+        <div class="blog-actions">
+          <a class="btn" href="blog/contabil/">Ler mais</a>
+          <a class="btn-outline" href="blog/contabil/">Ver todos</a>
+        </div>
+      </div>
+    </article>
 
-</section>
+  </section>
 
 </main>
 
-<script src="menu.js"></script>
+<a class="cta-fixed" href="https://wa.me/5500000000000" target="_blank">
+  WhatsApp
+</a>
+
+<button id="btn-topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script src="js/menu.js"></script>
 </body>
 </html>
+
