@@ -1,13 +1,15 @@
 import { supabase } from '/jl-servicos-contabeis/supabase.js'
 
-/* SERVIÇOS */
+/* ===============================
+   CONFIGURAÇÃO DOS SERVIÇOS
+================================ */
 const servicos = {
   'abertura-mei': {
     titulo: 'Abertura de MEI',
     inclusos: [
       'Análise do perfil do empreendedor',
-      'Cadastro no Portal do Empreendedor',
       'Definição correta da atividade (CNAE)',
+      'Cadastro no Portal do Empreendedor',
       'Emissão do CNPJ',
       'Orientações iniciais',
       'Suporte após a abertura'
@@ -16,47 +18,99 @@ const servicos = {
   'regularizacao-mei': {
     titulo: 'Regularização de MEI',
     inclusos: [
-      'Diagnóstico da situação',
+      'Diagnóstico completo da situação',
       'Identificação de pendências',
-      'Regularização de DAS',
+      'Regularização de débitos',
       'Orientações fiscais',
-      'Suporte completo'
+      'Suporte durante o processo'
     ]
   },
   'encerramento-mei': {
     titulo: 'Encerramento de MEI',
     inclusos: [
-      'Análise antes da baixa',
-      'Encerramento correto',
-      'Verificação de pendências',
-      'Orientações pós-baixa'
+      'Análise prévia de pendências',
+      'Baixa correta do MEI',
+      'Orientações pós-encerramento',
+      'Suporte final'
+    ]
+  },
+  'emissao-das': {
+    titulo: 'Emissão de DAS',
+    inclusos: [
+      'Emissão da guia DAS',
+      'Orientação sobre vencimento',
+      'Envio da guia para pagamento'
+    ]
+  },
+  'dasn': {
+    titulo: 'Declaração Anual DASN-SIMEI',
+    inclusos: [
+      'Conferência das informações',
+      'Envio da declaração',
+      'Comprovante de entrega',
+      'Orientações finais'
+    ]
+  },
+  'parcelamento': {
+    titulo: 'Parcelamento de Débitos',
+    inclusos: [
+      'Análise dos débitos',
+      'Simulação de parcelamento',
+      'Solicitação junto à Receita',
+      'Orientações completas'
+    ]
+  },
+  'alteracao-mei': {
+    titulo: 'Alteração de Dados do MEI',
+    inclusos: [
+      'Alteração cadastral solicitada',
+      'Atualização no portal oficial',
+      'Conferência final',
+      'Orientações'
     ]
   }
 }
 
-/* CAPTURA SERVIÇO */
+/* ===============================
+   CAPTURA DO SERVIÇO
+================================ */
 const params = new URLSearchParams(window.location.search)
 const servicoKey = params.get('servico')
 const servico = servicos[servicoKey]
 
 if (!servico) {
-  document.body.innerHTML = '<p>Serviço não encontrado.</p>'
+  alert('Serviço inválido')
   throw new Error('Serviço inválido')
 }
 
-/* RENDER */
+/* ===============================
+   RENDERIZA CONTEÚDO
+================================ */
 document.getElementById('titulo-servico').textContent = servico.titulo
-document.getElementById('servico').value = servicoKey
 
 const lista = document.getElementById('lista-inclusos')
+lista.innerHTML = ''
 servico.inclusos.forEach(item => {
   const li = document.createElement('li')
-  li.textContent = '✔ ' + item
+  li.textContent = item
   lista.appendChild(li)
 })
 
-/* MÁSCARAS */
+/* ===============================
+   FORMULÁRIO
+================================ */
+const form = document.getElementById('form-pedido')
+const btnEnviar = document.getElementById('btn-enviar')
+
+const nome = document.getElementById('nome')
+const email = document.getElementById('email')
 const cpf = document.getElementById('cpf')
+const whatsapp = document.getElementById('whatsapp')
+const obs = document.getElementById('obs')
+
+/* ===============================
+   MÁSCARAS
+================================ */
 cpf.addEventListener('input', () => {
   cpf.value = cpf.value
     .replace(/\D/g, '')
@@ -65,7 +119,6 @@ cpf.addEventListener('input', () => {
     .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
 })
 
-const whatsapp = document.getElementById('whatsapp')
 whatsapp.addEventListener('input', () => {
   whatsapp.value = whatsapp.value
     .replace(/\D/g, '')
@@ -73,39 +126,63 @@ whatsapp.addEventListener('input', () => {
     .replace(/(\d{5})(\d)/, '$1-$2')
 })
 
-/* ATIVAR BOTÃO */
-const form = document.getElementById('form-pedido')
-const btn = document.getElementById('btn-enviar')
+/* ===============================
+   VALIDAÇÃO
+================================ */
+function validarFormulario() {
+  const valido =
+    nome.value.trim() &&
+    email.value.trim() &&
+    cpf.value.trim().length === 14 &&
+    whatsapp.value.trim().length >= 14
 
-form.addEventListener('input', () => {
-  if (form.checkValidity()) {
-    btn.disabled = false
-    btn.classList.add('ativo')
+  if (valido) {
+    btnEnviar.classList.add('ativo')
+    btnEnviar.disabled = false
   } else {
-    btn.disabled = true
-    btn.classList.remove('ativo')
+    btnEnviar.classList.remove('ativo')
+    btnEnviar.disabled = true
   }
-})
+}
 
-/* SUBMIT */
+form.addEventListener('input', validarFormulario)
+
+/* ===============================
+   ENVIO
+================================ */
 form.addEventListener('submit', async (e) => {
   e.preventDefault()
+  btnEnviar.disabled = true
 
-  btn.textContent = 'Enviando...'
-  btn.disabled = true
+  const pedido = {
+    servico: servico.titulo,
+    servico_key: servicoKey,
+    nome: nome.value,
+    email: email.value,
+    cpf: cpf.value,
+    whatsapp: whatsapp.value,
+    observacao: obs.value || null
+  }
 
-  const data = Object.fromEntries(new FormData(form))
+  /* ---- SALVA NO SUPABASE ---- */
+  try {
+    await supabase.from('pedidos').insert([pedido])
+  } catch (err) {
+    console.warn('Erro ao salvar no Supabase, seguindo para WhatsApp')
+  }
 
-  await supabase.from('pedidos').insert(data)
+  /* ---- WHATSAPP ---- */
+  const mensagem = `
+Olá, gostaria de contratar um serviço:
 
- const msg =
-  `Olá! Gostaria de contratar o serviço: ${servico.titulo}\n\n` +
-  `Nome: ${data.nome}\n` +
-  `E-mail: ${data.email}\n` +
-  `CPF: ${data.cpf}\n` +
-  `WhatsApp: ${data.whatsapp}\n\n` +
-  `Observações: ${data.obs || 'Nenhuma'}`
+📌 Serviço: ${servico.titulo}
+👤 Nome: ${pedido.nome}
+📧 Email: ${pedido.email}
+📄 CPF: ${pedido.cpf}
+📱 WhatsApp: ${pedido.whatsapp}
+📝 Observação: ${pedido.observacao || 'Não informada'}
+`.trim()
 
-  window.location.href =
-    `https://wa.me/61920041427?text=${encodeURIComponent(msg)}`
+  const url = `https://wa.me/61920041427?text=${encodeURIComponent(mensagem)}`
+  window.open(url, '_blank')
 })
