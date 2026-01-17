@@ -171,3 +171,7 @@
   }
 }
 
+.plan-card.premium {
+  border: 2px solid var(--accent-color);
+  position: relative;
+}
