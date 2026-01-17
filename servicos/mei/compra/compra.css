@@ -1,67 +1,90 @@
+/* ===== ESTRUTURA GERAL ===== */
+
+.compra-page {
+  min-height: 100vh;
+  padding: 80px 24px; /* TOPO / LADOS / BASE */
+  box-sizing: border-box;
+}
+
 .compra-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
+
+/* ===== GRID PRINCIPAL ===== */
 
 .compra-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 40px;
+  align-items: stretch;
 }
 
-/* CARD DESCRIÇÃO */
+/* ===== CARD DESCRIÇÃO ===== */
+
 .card-descricao {
   border: 1px solid #bd9617;
   border-radius: 16px;
-  padding: 28px;
+  padding: 32px;
 }
 
 .card-descricao h2 {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-size: 22px;
 }
 
 .card-descricao ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .card-descricao li {
   font-weight: 600;
-  margin-bottom: 14px;
-  line-height: 1.6;
+  margin-bottom: 18px;
+  line-height: 1.8;
+  font-size: 16px;
 }
 
-/* CARD FORM */
+/* ===== CARD FORMULÁRIO ===== */
+
 .card-form {
   border-radius: 16px;
-  padding: 28px;
+  padding: 32px;
 }
 
 .card-form label {
   display: block;
   margin-bottom: 18px;
+  font-weight: 600;
 }
 
 .card-form input,
 .card-form textarea {
   width: 100%;
   margin-top: 6px;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 14px;
+  border-radius: 12px;
   border: none;
+  font-size: 15px;
+  box-sizing: border-box;
 }
 
 .card-form textarea {
   resize: vertical;
+  min-height: 120px;
 }
+
+/* ===== BOTÃO ===== */
 
 #btn-enviar {
   width: 100%;
-  margin-top: 10px;
-  padding: 14px;
-  border-radius: 12px;
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 14px;
   border: none;
   font-weight: 700;
+  font-size: 16px;
   cursor: not-allowed;
   background: #555;
   color: #fff;
@@ -74,28 +97,14 @@
   color: #0b1c2d;
 }
 
-@media (max-width: 768px) {
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 900px) {
   .compra-grid {
     grid-template-columns: 1fr;
   }
-}
 
-/* AJUSTE DE ESPAÇAMENTO SUPERIOR DA PÁGINA DE COMPRA */
-.compra-page {
-  min-height: calc(100vh - 120px);
-  padding-top: 80px;
-  padding-bottom: 80px;
-  box-sizing: border-box;
-}
-
-.compra-content {
-  display: flex;
-  gap: 48px;
-  align-items: stretch;
-}
-
-.compra-content {
-  display: flex;
-  gap: 48px;
-  align-items: stretch;
+  .compra-page {
+    padding: 60px 20px;
+  }
 }
