@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contratar serviço MEI</title>
+  <title>Contratar Serviço | J L Serviços Contábeis</title>
 
   <!-- CSS GLOBAL -->
   <link rel="stylesheet" href="/jl-servicos-contabeis/style.css">
@@ -13,46 +13,60 @@
 
 <body>
 
-<main class="container compra-page">
+  <main class="container compra-page">
 
-  <!-- TÍTULO CENTRAL -->
-  <header class="compra-header">
-    <h1 id="titulo-servico">Serviço</h1>
-  </header>
+    <!-- TÍTULO CENTRALIZADO -->
+    <header class="compra-header">
+      <h1 id="titulo-servico">Serviço</h1>
+    </header>
 
-  <section class="compra-grid">
+    <section class="compra-grid">
 
-    <!-- DESCRIÇÃO -->
-    <div class="descricao-card">
-      <h2>O que está incluso</h2>
-      <ul id="lista-inclusos"></ul>
-    </div>
+      <!-- DESCRIÇÃO -->
+      <div class="card-descricao">
+        <h2>O que está incluso</h2>
+        <ul id="lista-inclusos"></ul>
+      </div>
 
-    <!-- FORMULÁRIO -->
-    <div class="form-card">
-      <h2>Seus dados</h2>
+      <!-- FORMULÁRIO -->
+      <div class="card-form">
+        <h2>Seus dados</h2>
 
-      <form id="form-pedido">
-        <input type="hidden" id="servico">
+        <form id="form-pedido">
 
-        <input type="text" id="nome" placeholder="Nome completo *" required>
+          <input type="hidden" name="servico" id="servico">
 
-        <input type="text" id="cpf" placeholder="CPF (opcional)">
+          <label>
+            Nome completo*
+            <input type="text" name="nome" required>
+          </label>
 
-        <input type="text" id="whatsapp" placeholder="WhatsApp *" required>
+          <label>
+            CPF*
+            <input type="text" name="cpf" id="cpf" required>
+          </label>
 
-        <textarea id="obs" placeholder="Observações"></textarea>
+          <label>
+            WhatsApp*
+            <input type="text" name="whatsapp" id="whatsapp" required>
+          </label>
 
-        <button type="submit" id="btn-enviar" disabled>
-          Enviar pedido
-        </button>
-      </form>
-    </div>
+          <label>
+            Observações
+            <textarea name="obs" rows="3"></textarea>
+          </label>
 
-  </section>
+          <button type="submit" id="btn-enviar" disabled>
+            Enviar pedido
+          </button>
 
-</main>
+        </form>
+      </div>
 
-<script src="./compra.js"></script>
+    </section>
+
+  </main>
+
+  <script type="module" src="./compra.js"></script>
 </body>
 </html>
