@@ -81,7 +81,7 @@
 }
 
 /* AJUSTE DE ESPAÇAMENTO SUPERIOR DA PÁGINA DE COMPRA */
-.compra-page {
-  padding-top: 60px;
+.compra-page h1 {
+  margin-top: 100px;
 }
 
