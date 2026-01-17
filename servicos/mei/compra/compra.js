@@ -1,3 +1,6 @@
+import { supabase } from '/jl-servicos-contabeis/supabase.js'
+
+/* SERVIÇOS */
 const servicos = {
   'abertura-mei': {
     titulo: 'Abertura de MEI',
@@ -6,88 +9,100 @@ const servicos = {
       'Cadastro no Portal do Empreendedor',
       'Definição correta da atividade (CNAE)',
       'Emissão do CNPJ',
-      'Orientações iniciais'
+      'Orientações iniciais',
+      'Suporte após a abertura'
     ]
   },
   'regularizacao-mei': {
     titulo: 'Regularização de MEI',
     inclusos: [
-      'Diagnóstico completo',
+      'Diagnóstico da situação',
       'Identificação de pendências',
-      'Regularização fiscal',
-      'Orientações'
+      'Regularização de DAS',
+      'Orientações fiscais',
+      'Suporte completo'
     ]
   },
   'encerramento-mei': {
     titulo: 'Encerramento de MEI',
     inclusos: [
-      'Análise prévia',
+      'Análise antes da baixa',
       'Encerramento correto',
       'Verificação de pendências',
-      'Orientações finais'
+      'Orientações pós-baixa'
     ]
   }
 }
 
-// CAPTURA SERVIÇO
+/* CAPTURA SERVIÇO */
 const params = new URLSearchParams(window.location.search)
-const key = params.get('servico')
-const servico = servicos[key]
+const servicoKey = params.get('servico')
+const servico = servicos[servicoKey]
 
 if (!servico) {
   document.body.innerHTML = '<p>Serviço não encontrado.</p>'
   throw new Error('Serviço inválido')
 }
 
-// RENDERIZA
+/* RENDER */
 document.getElementById('titulo-servico').textContent = servico.titulo
-document.getElementById('servico').value = key
+document.getElementById('servico').value = servicoKey
 
 const lista = document.getElementById('lista-inclusos')
 servico.inclusos.forEach(item => {
   const li = document.createElement('li')
-  li.textContent = item
+  li.textContent = '✔ ' + item
   lista.appendChild(li)
 })
 
-// AUTO-RESIZE TEXTAREA
-const obs = document.getElementById('obs')
-obs.addEventListener('input', () => {
-  obs.style.height = 'auto'
-  obs.style.height = obs.scrollHeight + 'px'
+/* MÁSCARAS */
+const cpf = document.getElementById('cpf')
+cpf.addEventListener('input', () => {
+  cpf.value = cpf.value
+    .replace(/\D/g, '')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
 })
 
-// VALIDAÇÃO
-const nome = document.getElementById('nome')
 const whatsapp = document.getElementById('whatsapp')
+whatsapp.addEventListener('input', () => {
+  whatsapp.value = whatsapp.value
+    .replace(/\D/g, '')
+    .replace(/(\d{2})(\d)/, '($1) $2')
+    .replace(/(\d{5})(\d)/, '$1-$2')
+})
+
+/* ATIVAR BOTÃO */
+const form = document.getElementById('form-pedido')
 const btn = document.getElementById('btn-enviar')
 
-function validar() {
-  if (nome.value.trim() && whatsapp.value.trim()) {
+form.addEventListener('input', () => {
+  if (form.checkValidity()) {
     btn.disabled = false
     btn.classList.add('ativo')
   } else {
     btn.disabled = true
     btn.classList.remove('ativo')
   }
-}
+})
 
-nome.addEventListener('input', validar)
-whatsapp.addEventListener('input', validar)
-
-// ENVIO WHATSAPP
-document.getElementById('form-pedido').addEventListener('submit', (e) => {
+/* SUBMIT */
+form.addEventListener('submit', async (e) => {
   e.preventDefault()
 
-  const mensagem = `
-Olá! Quero contratar um serviço.
+  btn.textContent = 'Enviando...'
+  btn.disabled = true
 
-📌 Serviço: ${servico.titulo}
-👤 Nome: ${nome.value}
-📱 WhatsApp: ${whatsapp.value}
-📝 Observações: ${obs.value || 'Nenhuma'}
-  `.trim()
+  const data = Object.fromEntries(new FormData(form))
 
-  const url = `https://ea.me/61920041427?text=${encodeURIComponent(mensagem)}`
-  window.open(url, '_blank')
+  await supabase.from('pedidos').insert(data)
+
+  const msg =
+    `Olá! Gostaria de contratar o serviço: ${servico.titulo}\n\n` +
+    `Nome: ${data.nome}\nCPF: ${data.cpf}\nWhatsApp: ${data.whatsapp}\n` +
+    `Observações: ${data.obs || 'Nenhuma'}`
+
+  window.location.href =
+    `https://ea.me/61920041427?text=${encodeURIComponent(msg)}`
 })
