@@ -1,7 +1,7 @@
 import { supabase } from '/jl-servicos-contabeis/supabase.js'
 
 /* ===============================
-   CONFIGURAÇÃO DOS SERVIÇOS
+   SERVIÇOS
 ================================ */
 const servicos = {
   'abertura-mei': {
@@ -18,61 +18,55 @@ const servicos = {
   'regularizacao-mei': {
     titulo: 'Regularização de MEI',
     inclusos: [
-      'Diagnóstico completo da situação',
+      'Diagnóstico da situação',
       'Identificação de pendências',
       'Regularização de débitos',
-      'Orientações fiscais',
-      'Suporte durante o processo'
+      'Orientações fiscais'
     ]
   },
   'encerramento-mei': {
     titulo: 'Encerramento de MEI',
     inclusos: [
-      'Análise prévia de pendências',
-      'Baixa correta do MEI',
-      'Orientações pós-encerramento',
-      'Suporte final'
+      'Análise prévia',
+      'Baixa correta',
+      'Orientações pós-encerramento'
     ]
   },
   'emissao-das': {
     titulo: 'Emissão de DAS',
     inclusos: [
-      'Emissão da guia DAS',
-      'Orientação sobre vencimento',
-      'Envio da guia para pagamento'
+      'Emissão da guia',
+      'Orientações de pagamento'
     ]
   },
   'dasn': {
     titulo: 'Declaração Anual DASN-SIMEI',
     inclusos: [
-      'Conferência das informações',
+      'Conferência',
       'Envio da declaração',
-      'Comprovante de entrega',
-      'Orientações finais'
+      'Comprovante'
     ]
   },
   'parcelamento': {
     titulo: 'Parcelamento de Débitos',
     inclusos: [
       'Análise dos débitos',
-      'Simulação de parcelamento',
-      'Solicitação junto à Receita',
-      'Orientações completas'
+      'Simulação',
+      'Solicitação oficial'
     ]
   },
   'alteracao-mei': {
     titulo: 'Alteração de Dados do MEI',
     inclusos: [
-      'Alteração cadastral solicitada',
-      'Atualização no portal oficial',
-      'Conferência final',
-      'Orientações'
+      'Alteração cadastral',
+      'Atualização no portal',
+      'Conferência final'
     ]
   }
 }
 
 /* ===============================
-   CAPTURA DO SERVIÇO
+   SERVIÇO SELECIONADO
 ================================ */
 const params = new URLSearchParams(window.location.search)
 const servicoKey = params.get('servico')
@@ -83,9 +77,6 @@ if (!servico) {
   throw new Error('Serviço inválido')
 }
 
-/* ===============================
-   RENDERIZA CONTEÚDO
-================================ */
 document.getElementById('titulo-servico').textContent = servico.titulo
 
 const lista = document.getElementById('lista-inclusos')
@@ -97,7 +88,7 @@ servico.inclusos.forEach(item => {
 })
 
 /* ===============================
-   FORMULÁRIO
+   FORM
 ================================ */
 const form = document.getElementById('form-pedido')
 const btnEnviar = document.getElementById('btn-enviar')
@@ -127,14 +118,21 @@ whatsapp.addEventListener('input', () => {
 })
 
 /* ===============================
-   VALIDAÇÃO
+   VALIDAÇÃO ROBUSTA
 ================================ */
+function somenteNumeros(valor) {
+  return valor.replace(/\D/g, '')
+}
+
 function validarFormulario() {
+  const cpfNum = somenteNumeros(cpf.value)
+  const whatsappNum = somenteNumeros(whatsapp.value)
+
   const valido =
-    nome.value.trim() &&
-    email.value.trim() &&
-    cpf.value.trim().length === 14 &&
-    whatsapp.value.trim().length >= 14
+    nome.value.trim().length > 2 &&
+    email.value.includes('@') &&
+    cpfNum.length === 11 &&
+    whatsappNum.length >= 10
 
   if (valido) {
     btnEnviar.classList.add('ativo')
@@ -152,6 +150,8 @@ form.addEventListener('input', validarFormulario)
 ================================ */
 form.addEventListener('submit', async (e) => {
   e.preventDefault()
+
+  btnEnviar.textContent = 'Enviando...'
   btnEnviar.disabled = true
 
   const pedido = {
@@ -164,18 +164,16 @@ form.addEventListener('submit', async (e) => {
     observacao: obs.value || null
   }
 
-  /* ---- SALVA NO SUPABASE ---- */
   try {
     await supabase.from('pedidos').insert([pedido])
   } catch (err) {
-    console.warn('Erro ao salvar no Supabase, seguindo para WhatsApp')
+    console.warn('Erro ao salvar no Supabase')
   }
 
-  /* ---- WHATSAPP ---- */
   const mensagem = `
 Olá, gostaria de contratar um serviço:
 
-📌 Serviço: ${servico.titulo}
+📌 Serviço: ${pedido.servico}
 👤 Nome: ${pedido.nome}
 📧 Email: ${pedido.email}
 📄 CPF: ${pedido.cpf}
@@ -185,4 +183,6 @@ Olá, gostaria de contratar um serviço:
 
   const url = `https://wa.me/61920041427?text=${encodeURIComponent(mensagem)}`
   window.open(url, '_blank')
+
+  btnEnviar.textContent = 'Pedido enviado'
 })
