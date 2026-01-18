@@ -1,6 +1,6 @@
 import { supabase } from '/jl-servicos-contabeis/supabase.js'
 
-// ================= SERVIÇOS (POR CATEGORIA) =================
+// ================= CATÁLOGO =================
 const catalogo = {
   mei: {
     nome: 'MEI',
@@ -121,11 +121,11 @@ const catalogo = {
 
 // ================= PARAMS =================
 const params = new URLSearchParams(window.location.search)
-const categoriaKey = params.get('categoria')
 const servicoKey = params.get('servico')
 const planoKey = params.get('plano')
 
-// ================= VALIDAÇÃO =================
+// ================= DETECTA CATEGORIA =================
+let categoriaKey = params.get('categoria') || 'mei'
 const categoria = catalogo[categoriaKey]
 
 if (!categoria) {
@@ -139,14 +139,14 @@ let listaItens = []
 let tipoPedido = ''
 let valorFinal = ''
 
-if (planoKey && categoria.planos[planoKey]) {
+if (planoKey && categoria.planos?.[planoKey]) {
   const plano = categoria.planos[planoKey]
   tituloFinal = plano.titulo
   listaItens = plano.inclusos
   tipoPedido = `Plano - ${plano.titulo}`
   valorFinal = plano.valor
 
-} else if (servicoKey && categoria.servicos[servicoKey]) {
+} else if (servicoKey && categoria.servicos?.[servicoKey]) {
   const servico = categoria.servicos[servicoKey]
   tituloFinal = servico.titulo
   listaItens = servico.inclusos
@@ -158,15 +158,10 @@ if (planoKey && categoria.planos[planoKey]) {
   throw new Error('Parâmetros inválidos')
 }
 
-// ================= BREADCRUMB =================
-const breadcrumbCategoria = document.getElementById('breadcrumb-categoria')
-breadcrumbCategoria.textContent = categoria.nome
-breadcrumbCategoria.href = categoria.url
-
-document.getElementById('breadcrumb-servico').textContent = tituloFinal
-document.getElementById('titulo-servico').textContent = tituloFinal
-
 // ================= RENDER =================
+document.getElementById('titulo-servico').textContent = tituloFinal
+document.getElementById('breadcrumb-servico').textContent = tituloFinal
+
 const lista = document.getElementById('lista-inclusos')
 lista.innerHTML = ''
 listaItens.forEach(item => {
@@ -178,19 +173,21 @@ listaItens.forEach(item => {
 const elValor = document.getElementById('valor-plano')
 if (elValor) elValor.textContent = valorFinal
 
-// ================= AVISO ECONOMIA =================
-if (servicoKey && !planoKey) {
+// ================= AVISO ECONOMIA (APENAS MEI) =================
+if (categoriaKey === 'mei' && servicoKey && !planoKey) {
   const aviso = document.getElementById('aviso-economia')
 
-  aviso.innerHTML = `
-    🔥 Este serviço já está incluso nos planos mensais.<br>
-    Economize contratando um plano completo.
-    <br><br>
-    <a href="${categoria.url}${categoria.planosAnchor}" class="btn-ver-planos">
-      Ver planos
-    </a>
-  `
-  aviso.style.display = 'block'
+  if (aviso) {
+    aviso.innerHTML = `
+      🔥 Este serviço já está incluso nos planos mensais.<br>
+      Economize contratando um plano completo.
+      <br><br>
+      <a href="${categoria.url}${categoria.planosAnchor}" class="btn-ver-planos">
+        Ver planos
+      </a>
+    `
+    aviso.style.display = 'block'
+  }
 }
 
 // ================= FORM =================
