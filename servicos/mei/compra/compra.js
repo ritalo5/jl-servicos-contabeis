@@ -13,7 +13,6 @@ const servicos = {
       'Suporte após a abertura'
     ]
   },
-
   'regularizacao-mei': {
     titulo: 'Regularização de MEI',
     inclusos: [
@@ -24,7 +23,6 @@ const servicos = {
       'Suporte completo'
     ]
   },
-
   'encerramento-mei': {
     titulo: 'Encerramento de MEI',
     inclusos: [
@@ -35,7 +33,6 @@ const servicos = {
       'Suporte'
     ]
   },
-
   'emissao-das': {
     titulo: 'Emissão de DAS',
     inclusos: [
@@ -46,7 +43,6 @@ const servicos = {
       'Suporte'
     ]
   },
-
   'dasn': {
     titulo: 'Declaração Anual DASN-SIMEI',
     inclusos: [
@@ -57,7 +53,6 @@ const servicos = {
       'Orientações finais'
     ]
   },
-
   'parcelamento': {
     titulo: 'Parcelamento de Débitos',
     inclusos: [
@@ -68,7 +63,6 @@ const servicos = {
       'Orientações'
     ]
   },
-
   'alteracao-mei': {
     titulo: 'Alteração de Dados do MEI',
     inclusos: [
@@ -95,7 +89,6 @@ const planos = {
       '✔ 10% de desconto em serviços avulsos'
     ]
   },
-
   premium: {
     titulo: 'Plano MEI Premium',
     valor: 'R$ 159,00 / mês',
@@ -118,76 +111,62 @@ const params = new URLSearchParams(window.location.search)
 const servicoKey = params.get('servico')
 const planoKey = params.get('plano')
 
-// ================= IDENTIFICA CONTEXTO =================
+// ================= CONTEXTO =================
 let tituloFinal = ''
 let listaItens = []
 let tipoPedido = ''
-let valorPlano = ''
+let valorFinal = ''
 
 if (planoKey && planos[planoKey]) {
-  // ===== PÁGINA DE PLANO =====
   const plano = planos[planoKey]
-  tituloFinal = plano.nome
-  listaItens = plano.beneficios
-  tipoPedido = plano.nome
-  valorPlano = plano.valor
+  tituloFinal = plano.titulo
+  listaItens = plano.inclusos
+  tipoPedido = `Plano - ${plano.titulo}`
+  valorFinal = plano.valor
 
-  // frase exclusiva premium
   if (planoKey === 'premium') {
     const msg = document.getElementById('mensagem-premium')
     if (msg) msg.style.display = 'block'
   }
+
 } else if (servicoKey && servicos[servicoKey]) {
-  // ===== SERVIÇO AVULSO =====
   const servico = servicos[servicoKey]
   tituloFinal = servico.titulo
   listaItens = servico.inclusos
-  tipoPedido = servico.titulo
+  tipoPedido = `Serviço - ${servico.titulo}`
+
 } else {
   alert('Serviço ou plano inválido.')
   throw new Error('Parâmetros inválidos')
 }
 
 // ================= RENDER =================
-// ===== RENDERIZAÇÃO DO TÍTULO =====
-const tituloServicoEl = document.getElementById('titulo-servico')
-const breadcrumbServicoEl = document.getElementById('breadcrumb-servico')
+document.getElementById('titulo-servico').textContent = tituloFinal
+document.getElementById('breadcrumb-servico').textContent = tituloFinal
 
-if (tituloServicoEl) {
-  tituloServicoEl.textContent = servico.titulo
-}
-
-if (breadcrumbServicoEl) {
-  breadcrumbServicoEl.textContent = servico.titulo
-}
-
-// ===== RENDERIZAÇÃO DA LISTA =====
 const lista = document.getElementById('lista-inclusos')
 lista.innerHTML = ''
-
-servico.inclusos.forEach(item => {
+listaItens.forEach(item => {
   const li = document.createElement('li')
   li.textContent = item
   lista.appendChild(li)
 })
 
-// ===== VALOR (SÓ SE EXISTIR) =====
 const elValor = document.getElementById('valor-plano')
-if (elValor && servico.valor) {
-  elValor.textContent = servico.valor
+if (elValor && valorFinal) {
+  elValor.textContent = valorFinal
 }
 
 // ================= FORM =================
 const form = document.getElementById('form-pedido')
 const btnEnviar = document.getElementById('btn-enviar')
 
-const campoNome = form.querySelector('[name="nome"]')
-const campoEmail = form.querySelector('[name="email"]')
-const campoCPF = form.querySelector('[name="cpf"]')
-const campoWhats = form.querySelector('[name="whatsapp"]')
-const campoObs = form.querySelector('[name="obs"]')
+const campoNome = form.nome
+const campoEmail = form.email
+const campoCPF = form.cpf
+const campoWhats = form.whatsapp
+const campoObs = form.obs
 
-// botão começa travado
 btnEnviar.disabled = true
 
 function validarFormulario() {
@@ -198,12 +177,12 @@ function validarFormulario() {
     campoWhats.value.trim()
 
   btnEnviar.disabled = !valido
-  btnEnviar.classList.toggle('ativo', !!valido)
+  btnEnviar.classList.toggle('ativo', valido)
 }
 
-;[campoNome, campoEmail, campoCPF, campoWhats].forEach(campo => {
+;[campoNome, campoEmail, campoCPF, campoWhats].forEach(campo =>
   campo.addEventListener('input', validarFormulario)
-})
+)
 
 form.addEventListener('submit', e => e.preventDefault())
 
@@ -217,7 +196,7 @@ btnEnviar.addEventListener('click', () => {
   const pedido = {
     tipo: planoKey ? 'plano' : 'servico',
     item: tipoPedido,
-    valor: valorPlano || null,
+    valor: valorFinal || null,
     nome: campoNome.value.trim(),
     email: campoEmail.value.trim(),
     cpf: campoCPF.value.trim(),
@@ -228,7 +207,7 @@ btnEnviar.addEventListener('click', () => {
   const mensagem = `
 Novo pedido:
 
-📌 ${pedido.tipo === 'plano' ? 'Plano' : 'Serviço'}: ${pedido.item}
+📌 ${pedido.item}
 ${pedido.valor ? `💰 Valor: ${pedido.valor}` : ''}
 
 👤 Nome: ${pedido.nome}
