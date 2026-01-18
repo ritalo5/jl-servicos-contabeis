@@ -1,7 +1,8 @@
 import { supabase } from '/jl-servicos-contabeis/supabase.js'
 
-// ================= CATÁLOGO =================
 const catalogo = {
+
+  // ===================== MEI =====================
   mei: {
     nome: 'MEI',
     url: '/jl-servicos-contabeis/servicos/mei/',
@@ -113,6 +114,181 @@ const catalogo = {
           '✔ Relatório mensal de situação',
           '✔ Suporte prioritário',
           '✔ 20% de desconto em serviços avulsos'
+        ]
+      }
+    }
+  },
+
+  // ===================== PESSOA FÍSICA =====================
+  'pessoa-fisica': {
+    nome: 'Pessoa Física',
+    url: '/jl-servicos-contabeis/servicos/pessoa-fisica/',
+
+    servicos: {
+      irpf: {
+        titulo: 'Declaração de Imposto de Renda (IRPF)',
+        valor: 'R$ 189,90',
+        inclusos: [
+          'Análise de rendimentos e despesas',
+          'Preenchimento completo da declaração',
+          'Envio à Receita Federal',
+          'Orientações para restituição ou pagamento',
+          'Suporte pós-envio'
+        ]
+      },
+      'ganho-capital': {
+        titulo: 'Apuração de Ganho de Capital',
+        valor: 'R$ 249,90',
+        inclusos: [
+          'Análise da operação',
+          'Cálculo do imposto devido',
+          'Preenchimento do GCAP',
+          'Orientações para pagamento',
+          'Suporte'
+        ]
+      },
+      'regularizacao-cpf': {
+        titulo: 'Regularização de CPF',
+        valor: 'R$ 99,90',
+        inclusos: [
+          'Diagnóstico da situação do CPF',
+          'Regularização junto à Receita Federal',
+          'Orientações finais',
+          'Suporte'
+        ]
+      }
+    }
+  },
+
+  // ===================== CERTIDÕES =====================
+  certidoes: {
+    nome: 'Certidões e Regularizações',
+    url: '/jl-servicos-contabeis/servicos/certidoes/',
+
+    servicos: {
+      'certidao-federal': {
+        titulo: 'Certidão Negativa Federal',
+        valor: 'R$ 79,90',
+        inclusos: [
+          'Emissão da certidão',
+          'Verificação de pendências',
+          'Orientações em caso de restrição',
+          'Envio do documento'
+        ]
+      },
+      'certidao-estadual': {
+        titulo: 'Certidão Negativa Estadual',
+        valor: 'R$ 69,90',
+        inclusos: [
+          'Consulta e emissão',
+          'Orientações',
+          'Envio da certidão'
+        ]
+      },
+      'certidao-municipal': {
+        titulo: 'Certidão Negativa Municipal',
+        valor: 'R$ 69,90',
+        inclusos: [
+          'Emissão da certidão',
+          'Orientações',
+          'Envio do documento'
+        ]
+      }
+    }
+  },
+
+  // ===================== CERTIFICADO DIGITAL =====================
+  'certificado-digital': {
+    nome: 'Certificado Digital',
+    url: '/jl-servicos-contabeis/servicos/certificado-digital/',
+
+    servicos: {
+      'e-cpf': {
+        titulo: 'Certificado Digital e-CPF',
+        valor: 'R$ 169,90',
+        inclusos: [
+          'Orientação na escolha',
+          'Agendamento',
+          'Emissão do certificado',
+          'Suporte'
+        ]
+      },
+      'e-cnpj': {
+        titulo: 'Certificado Digital e-CNPJ',
+        valor: 'R$ 229,90',
+        inclusos: [
+          'Orientação completa',
+          'Agendamento',
+          'Emissão do certificado',
+          'Suporte'
+        ]
+      }
+    }
+  },
+
+  // ===================== SERVIÇOS CONTÁBEIS =====================
+  'servicos-contabeis': {
+    nome: 'Serviços Contábeis',
+    url: '/jl-servicos-contabeis/servicos/servicos-contabeis/',
+
+    servicos: {
+      'consultoria': {
+        titulo: 'Consultoria Contábil',
+        valor: 'R$ 199,90',
+        inclusos: [
+          'Análise da situação contábil',
+          'Orientações estratégicas',
+          'Esclarecimento de dúvidas',
+          'Relatório resumido'
+        ]
+      },
+      'planejamento': {
+        titulo: 'Planejamento Tributário',
+        valor: 'R$ 349,90',
+        inclusos: [
+          'Análise do cenário fiscal',
+          'Simulações',
+          'Orientações para economia de impostos',
+          'Relatório completo'
+        ]
+      }
+    }
+  },
+
+  // ===================== OUTROS SERVIÇOS =====================
+  'outros-servicos': {
+    nome: 'Outros Serviços',
+    url: '/jl-servicos-contabeis/servicos/outros-servicos/',
+
+    servicos: {
+      'planilha-financeira': {
+        titulo: 'Planilha Financeira Básica',
+        valor: 'R$ 79,90',
+        inclusos: [
+          'Planilha personalizada',
+          'Controle de receitas e despesas',
+          'Orientações de uso',
+          'Suporte inicial'
+        ]
+      },
+      'organizacao-financeira': {
+        titulo: 'Organização Financeira Pessoal',
+        valor: 'R$ 149,90',
+        inclusos: [
+          'Análise financeira',
+          'Organização de gastos',
+          'Orientações práticas',
+          'Plano de controle'
+        ]
+      },
+      'consultoria-pessoal': {
+        titulo: 'Consultoria Financeira Pessoal',
+        valor: 'R$ 199,90',
+        inclusos: [
+          'Análise completa',
+          'Orientações personalizadas',
+          'Planejamento financeiro',
+          'Suporte'
         ]
       }
     }
