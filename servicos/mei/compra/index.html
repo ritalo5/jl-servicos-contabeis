@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,61 +14,69 @@
 
 <body>
 
+  <!-- ===== BREADCRUMB ===== -->
   <nav class="breadcrumb container">
-  <a href="/jl-servicos-contabeis/">Início</a>
-  <span>›</span>
+    <a href="/jl-servicos-contabeis/">Início</a>
+    <span>›</span>
 
-  <!-- Serviços volta para a HOME -->
-  <a href="/jl-servicos-contabeis/">Serviços</a>
-  <span>›</span>
+    <a href="/jl-servicos-contabeis/">Serviços</a>
+    <span>›</span>
 
-  <!-- MEI vai para a página do MEI -->
-  <a href="/jl-servicos-contabeis/servicos/mei/">MEI</a>
-  <span>›</span>
+    <a href="/jl-servicos-contabeis/servicos/mei/">MEI</a>
+    <span>›</span>
 
-  <!-- Serviço atual (dinâmico, sem link) -->
-  <strong id="breadcrumb-servico">Serviço</strong>
-</nav>
+    <strong id="breadcrumb-servico">Serviço</strong>
+  </nav>
 
-    <!-- TÍTULO CENTRALIZADO -->
+  <main class="container compra-page">
+
+    <!-- ===== TÍTULO ===== -->
     <header class="compra-header">
       <h1 id="titulo-servico">Serviço</h1>
+
+      <!-- VALOR DO PLANO (aparece só se existir) -->
+      <div id="valor-plano" class="valor-plano"></div>
     </header>
 
+    <!-- ===== GRID ===== -->
     <section class="compra-grid">
 
-      <!-- DESCRIÇÃO -->
+      <!-- ===== DESCRIÇÃO ===== -->
       <div class="card-descricao">
+
+        <!-- CARD PREMIUM (exclusivo / oculto por padrão) -->
+        <div id="mensagem-premium" class="card-premium" style="display:none">
+          ⭐ Você está fazendo a escolha certa!
+        </div>
+
         <h2>O que está incluso</h2>
         <ul id="lista-inclusos"></ul>
       </div>
 
-      <!-- FORMULÁRIO -->
+      <!-- ===== FORMULÁRIO ===== -->
       <div class="card-form">
         <h2>Seus dados</h2>
 
         <form id="form-pedido">
 
-          <input type="hidden" name="servico" id="servico">
-
           <label>
             Nome completo*
-            <input type="text" name="nome" id="nome" required>
+            <input type="text" name="nome" required>
           </label>
 
           <label>
             E-mail*
-            <input type="email" name="email" id="email" required>
+            <input type="email" name="email" required>
           </label>
 
           <label>
             CPF*
-            <input type="text" name="cpf" id="cpf" required>
+            <input type="text" name="cpf" required>
           </label>
 
           <label>
             WhatsApp*
-            <input type="text" name="whatsapp" id="whatsapp" required>
+            <input type="text" name="whatsapp" required>
           </label>
 
           <label>
@@ -75,7 +84,7 @@
             <textarea name="obs" rows="3"></textarea>
           </label>
 
-          <button id="btn-enviar" type="submit">
+          <button id="btn-enviar" type="submit" disabled>
             Enviar pedido
           </button>
 
