@@ -1,8 +1,10 @@
-/* ===== ESTRUTURA GERAL ===== */
+/* ================================================= */
+/* ===== ESTRUTURA GERAL =========================== */
+/* ================================================= */
 
 .compra-page {
   min-height: 100vh;
-  padding: 80px 24px; /* TOPO / LADOS / BASE */
+  padding: 80px 24px;
   box-sizing: border-box;
 }
 
@@ -11,7 +13,9 @@
   margin-bottom: 50px;
 }
 
-/* ===== GRID PRINCIPAL ===== */
+/* ================================================= */
+/* ===== GRID PRINCIPAL ============================ */
+/* ================================================= */
 
 .compra-grid {
   display: grid;
@@ -20,7 +24,9 @@
   align-items: stretch;
 }
 
-/* ===== CARD DESCRIÇÃO ===== */
+/* ================================================= */
+/* ===== CARD DESCRIÇÃO ============================ */
+/* ================================================= */
 
 .card-descricao {
   border: 1px solid #bd9617;
@@ -46,7 +52,9 @@
   font-size: 16px;
 }
 
-/* ===== CARD FORMULÁRIO ===== */
+/* ================================================= */
+/* ===== CARD FORMULÁRIO =========================== */
+/* ================================================= */
 
 .card-form {
   border-radius: 16px;
@@ -75,7 +83,9 @@
   min-height: 120px;
 }
 
-/* ===== BOTÃO ===== */
+/* ================================================= */
+/* ===== BOTÃO ENVIAR ============================== */
+/* ================================================= */
 
 #btn-enviar {
   width: 100%;
@@ -87,17 +97,23 @@
   font-size: 16px;
   cursor: not-allowed;
   background: #555;
-  color: #fff;
+  color: #ffffff;
   transition: 0.3s;
 }
 
-#btn-enviar.ativo {
+#btn-enviar:enabled {
   cursor: pointer;
   background: #bd9617;
   color: #0b1c2d;
 }
 
-/* ===== RESPONSIVO ===== */
+#btn-enviar:hover:enabled {
+  opacity: 0.9;
+}
+
+/* ================================================= */
+/* ===== RESPONSIVO ================================ */
+/* ================================================= */
 
 @media (max-width: 900px) {
   .compra-grid {
@@ -109,7 +125,9 @@
   }
 }
 
-/* ===== CARD PLANO DESTACADO ===== */
+/* ================================================= */
+/* ===== CARD PLANO (CASO FUTURO) ================== */
+/* ================================================= */
 
 .card-plano {
   background: linear-gradient(135deg, #bd9617, #d4af37);
@@ -121,13 +139,15 @@
   justify-content: space-between;
 }
 
-/* LISTA DE BENEFÍCIOS */
 .card-plano ul li {
   font-weight: 600;
   line-height: 1.8;
 }
 
-/* PREÇO EM DESTAQUE */
+/* ================================================= */
+/* ===== PREÇO EM DESTAQUE ========================= */
+/* ================================================= */
+
 .preco-plano {
   margin-top: 28px;
   background: #ffffff;
@@ -150,11 +170,10 @@
   margin-top: 6px;
 }
 
-/* ========================================================= */
-/* ===== NOVOS ELEMENTOS (COMPATÍVEIS COM O JS ATUAL) ====== */
-/* ========================================================= */
+/* ================================================= */
+/* ===== VALOR DO SERVIÇO / PLANO ================== */
+/* ================================================= */
 
-/* ===== VALOR DO SERVIÇO / PLANO ===== */
 .valor-plano {
   margin-top: 12px;
   font-size: 26px;
@@ -162,7 +181,10 @@
   color: #bd9617;
 }
 
-/* ===== AVISO DE ECONOMIA (SERVIÇOS AVULSOS) ===== */
+/* ================================================= */
+/* ===== AVISO DE ECONOMIA ========================= */
+/* ================================================= */
+
 .aviso-economia {
   margin-top: 24px;
   padding: 18px 22px;
@@ -177,7 +199,6 @@
   color: #d4af37;
 }
 
-/* BOTÃO VER PLANOS */
 .aviso-economia a {
   display: inline-block;
   margin-top: 12px;
@@ -194,7 +215,10 @@
   opacity: 0.9;
 }
 
-/* ===== CARD PREMIUM (EXCLUSIVO DA COMPRA) ===== */
+/* ================================================= */
+/* ===== CARD PREMIUM (EXCLUSIVO DA COMPRA) ======== */
+/* ================================================= */
+
 .card-premium {
   margin-bottom: 22px;
   padding: 18px;
