@@ -1,8 +1,9 @@
 import { supabase } from '/jl-servicos-contabeis/supabase.js'
 
+// ================= CATÁLOGO DE SERVIÇOS =================
 const catalogo = {
 
-  // ===================== MEI =====================
+  // ================= MEI =================
   mei: {
     nome: 'MEI',
     url: '/jl-servicos-contabeis/servicos/mei/',
@@ -26,8 +27,7 @@ const catalogo = {
         valor: 'R$ 198,99',
         inclusos: [
           'Diagnóstico da situação',
-          'Identificação de pendências',
-          'Regularização de DAS',
+          'Regularização de pendências',
           'Orientações fiscais',
           'Suporte completo'
         ]
@@ -36,33 +36,27 @@ const catalogo = {
         titulo: 'Encerramento de MEI',
         valor: 'R$ 128,99',
         inclusos: [
-          'Análise antes da baixa',
           'Encerramento correto',
           'Verificação de pendências',
-          'Orientações pós-baixa',
-          'Suporte'
+          'Orientações pós-baixa'
         ]
       },
       'emissao-das': {
         titulo: 'Emissão de DAS',
         valor: 'R$ 48,99',
         inclusos: [
-          'Emissão da guia DAS',
-          'Verificação de valores',
-          'Orientações de pagamento',
-          'Envio da guia',
-          'Suporte'
+          'Emissão da guia',
+          'Conferência de valores',
+          'Orientações de pagamento'
         ]
       },
       'dasn': {
         titulo: 'Declaração Anual DASN-SIMEI',
         valor: 'R$ 98,99',
         inclusos: [
-          'Conferência das informações',
+          'Conferência dos dados',
           'Envio da declaração',
-          'Regularização de pendências',
-          'Comprovante de envio',
-          'Orientações finais'
+          'Comprovante'
         ]
       },
       'parcelamento': {
@@ -70,21 +64,16 @@ const catalogo = {
         valor: 'R$ 178,99',
         inclusos: [
           'Análise dos débitos',
-          'Simulação de parcelamento',
-          'Solicitação junto à Receita',
-          'Acompanhamento',
-          'Orientações'
+          'Solicitação do parcelamento',
+          'Acompanhamento'
         ]
       },
       'alteracao-mei': {
         titulo: 'Alteração de Dados do MEI',
         valor: 'R$ 78,99',
         inclusos: [
-          'Alteração de dados cadastrais',
-          'Atualização no Portal do Empreendedor',
-          'Conferência final',
-          'Orientações',
-          'Suporte'
+          'Atualização cadastral',
+          'Conferência final'
         ]
       }
     },
@@ -95,11 +84,10 @@ const catalogo = {
         valor: 'R$ 99,00 / mês',
         inclusos: [
           '✔ Emissão mensal do DAS',
+          '✔ DASN-SIMEI anual',
           '✔ Lembretes de vencimento',
-          '✔ DASN-SIMEI (1x ao ano)',
-          '✔ Acompanhamento básico',
           '✔ Suporte via WhatsApp',
-          '✔ 10% de desconto em serviços avulsos'
+          '✔ 10% de desconto em serviços'
         ]
       },
       premium: {
@@ -110,185 +98,171 @@ const catalogo = {
           '✔ Regularização fiscal completa',
           '✔ Parcelamento de débitos',
           '✔ Emissão de certidões',
-          '✔ Orientação personalizada',
-          '✔ Relatório mensal de situação',
           '✔ Suporte prioritário',
-          '✔ 20% de desconto em serviços avulsos'
+          '✔ 20% de desconto em serviços'
         ]
       }
     }
   },
 
-  // ===================== PESSOA FÍSICA =====================
+  // ================= PESSOA FÍSICA =================
   'pessoa-fisica': {
     nome: 'Pessoa Física',
     url: '/jl-servicos-contabeis/servicos/pessoa-fisica/',
 
     servicos: {
       irpf: {
-        titulo: 'Declaração de Imposto de Renda (IRPF)',
-        valor: 'R$ 189,90',
+        titulo: 'Declaração de Imposto de Renda',
+        valor: 'R$ 189,99',
         inclusos: [
-          'Análise de rendimentos e despesas',
-          'Preenchimento completo da declaração',
+          'Análise da documentação',
+          'Preenchimento correto',
           'Envio à Receita Federal',
-          'Orientações para restituição ou pagamento',
           'Suporte pós-envio'
         ]
       },
-      'ganho-capital': {
-        titulo: 'Apuração de Ganho de Capital',
-        valor: 'R$ 249,90',
+      'cpf-regularizacao': {
+        titulo: 'Regularização de CPF',
+        valor: 'R$ 79,99',
         inclusos: [
-          'Análise da operação',
-          'Cálculo do imposto devido',
-          'Preenchimento do GCAP',
-          'Orientações para pagamento',
-          'Suporte'
+          'Diagnóstico da pendência',
+          'Regularização junto à Receita',
+          'Orientações finais'
         ]
       },
-      'regularizacao-cpf': {
-        titulo: 'Regularização de CPF',
-        valor: 'R$ 99,90',
+      'orientacao-fiscal-pf': {
+        titulo: 'Orientação Fiscal Pessoa Física',
+        valor: 'R$ 119,99',
         inclusos: [
-          'Diagnóstico da situação do CPF',
-          'Regularização junto à Receita Federal',
-          'Orientações finais',
-          'Suporte'
+          'Esclarecimento de dúvidas',
+          'Planejamento fiscal básico',
+          'Orientações personalizadas'
         ]
       }
     }
   },
 
-  // ===================== CERTIDÕES =====================
+  // ================= CERTIDÕES =================
   certidoes: {
-    nome: 'Certidões e Regularizações',
+    nome: 'Certidões',
     url: '/jl-servicos-contabeis/servicos/certidoes/',
 
     servicos: {
-      'certidao-federal': {
-        titulo: 'Certidão Negativa Federal',
-        valor: 'R$ 79,90',
+      'certidao-negativa': {
+        titulo: 'Certidão Negativa',
+        valor: 'R$ 69,99',
         inclusos: [
           'Emissão da certidão',
-          'Verificação de pendências',
-          'Orientações em caso de restrição',
+          'Conferência de pendências',
           'Envio do documento'
         ]
       },
-      'certidao-estadual': {
-        titulo: 'Certidão Negativa Estadual',
-        valor: 'R$ 69,90',
+      'regularizacao-cadastral': {
+        titulo: 'Regularização Cadastral',
+        valor: 'R$ 129,99',
         inclusos: [
-          'Consulta e emissão',
-          'Orientações',
-          'Envio da certidão'
-        ]
-      },
-      'certidao-municipal': {
-        titulo: 'Certidão Negativa Municipal',
-        valor: 'R$ 69,90',
-        inclusos: [
-          'Emissão da certidão',
-          'Orientações',
-          'Envio do documento'
+          'Correção de dados',
+          'Atualização cadastral',
+          'Orientações'
         ]
       }
     }
   },
 
-  // ===================== CERTIFICADO DIGITAL =====================
+  // ================= CERTIFICADO DIGITAL =================
   'certificado-digital': {
     nome: 'Certificado Digital',
     url: '/jl-servicos-contabeis/servicos/certificado-digital/',
 
     servicos: {
-      'e-cpf': {
-        titulo: 'Certificado Digital e-CPF',
-        valor: 'R$ 169,90',
+      'certificado-a1': {
+        titulo: 'Certificado Digital A1',
+        valor: 'R$ 179,99',
         inclusos: [
-          'Orientação na escolha',
-          'Agendamento',
           'Emissão do certificado',
-          'Suporte'
+          'Validade de 1 ano',
+          'Suporte na instalação'
         ]
       },
-      'e-cnpj': {
-        titulo: 'Certificado Digital e-CNPJ',
-        valor: 'R$ 229,90',
+      'certificado-a3': {
+        titulo: 'Certificado Digital A3',
+        valor: 'R$ 249,99',
         inclusos: [
-          'Orientação completa',
-          'Agendamento',
           'Emissão do certificado',
-          'Suporte'
+          'Token ou cartão',
+          'Suporte técnico'
         ]
       }
     }
   },
 
-  // ===================== SERVIÇOS CONTÁBEIS =====================
-  'servicos-contabeis': {
+  // ================= SERVIÇOS CONTÁBEIS =================
+  contabeis: {
     nome: 'Serviços Contábeis',
-    url: '/jl-servicos-contabeis/servicos/servicos-contabeis/',
+    url: '/jl-servicos-contabeis/servicos/contabeis/',
 
     servicos: {
-      'consultoria': {
+      'consultoria-contabil': {
         titulo: 'Consultoria Contábil',
-        valor: 'R$ 199,90',
+        valor: 'R$ 199,99',
         inclusos: [
-          'Análise da situação contábil',
-          'Orientações estratégicas',
-          'Esclarecimento de dúvidas',
+          'Análise da situação',
+          'Orientação especializada',
           'Relatório resumido'
         ]
       },
-      'planejamento': {
+      'planejamento-tributario': {
         titulo: 'Planejamento Tributário',
-        valor: 'R$ 349,90',
+        valor: 'R$ 299,99',
         inclusos: [
-          'Análise do cenário fiscal',
-          'Simulações',
-          'Orientações para economia de impostos',
-          'Relatório completo'
+          'Análise tributária',
+          'Estratégias de economia',
+          'Orientações práticas'
+        ]
+      },
+      balanco: {
+        titulo: 'Elaboração de Balanço',
+        valor: 'R$ 349,99',
+        inclusos: [
+          'Levantamento de dados',
+          'Elaboração do balanço',
+          'Entrega do relatório'
         ]
       }
     }
   },
 
-  // ===================== OUTROS SERVIÇOS =====================
-  'outros-servicos': {
+  // ================= OUTROS SERVIÇOS =================
+  outros: {
     nome: 'Outros Serviços',
-    url: '/jl-servicos-contabeis/servicos/outros-servicos/',
+    url: '/jl-servicos-contabeis/servicos/outros/',
 
     servicos: {
       'planilha-financeira': {
-        titulo: 'Planilha Financeira Básica',
-        valor: 'R$ 79,90',
+        titulo: 'Planilha Financeira Pessoal',
+        valor: 'R$ 59,99',
         inclusos: [
           'Planilha personalizada',
           'Controle de receitas e despesas',
-          'Orientações de uso',
-          'Suporte inicial'
+          'Orientações de uso'
         ]
       },
-      'organizacao-financeira': {
-        titulo: 'Organização Financeira Pessoal',
-        valor: 'R$ 149,90',
+      'organizacao-documentos': {
+        titulo: 'Organização de Documentos',
+        valor: 'R$ 89,99',
         inclusos: [
-          'Análise financeira',
-          'Organização de gastos',
+          'Organização básica',
+          'Classificação de documentos',
+          'Entrega digital'
+        ]
+      },
+      'orientacao-financeira': {
+        titulo: 'Orientação Financeira Básica',
+        valor: 'R$ 109,99',
+        inclusos: [
+          'Análise da situação',
           'Orientações práticas',
-          'Plano de controle'
-        ]
-      },
-      'consultoria-pessoal': {
-        titulo: 'Consultoria Financeira Pessoal',
-        valor: 'R$ 199,90',
-        inclusos: [
-          'Análise completa',
-          'Orientações personalizadas',
-          'Planejamento financeiro',
-          'Suporte'
+          'Dicas de controle financeiro'
         ]
       }
     }
@@ -297,13 +271,12 @@ const catalogo = {
 
 // ================= PARAMS =================
 const params = new URLSearchParams(window.location.search)
+const categoriaKey = params.get('categoria')
 const servicoKey = params.get('servico')
 const planoKey = params.get('plano')
 
-// ================= DETECTA CATEGORIA =================
-let categoriaKey = params.get('categoria') || 'mei'
+// ================= VALIDAÇÃO =================
 const categoria = catalogo[categoriaKey]
-
 if (!categoria) {
   alert('Categoria inválida.')
   throw new Error('Categoria inválida')
@@ -334,10 +307,13 @@ if (planoKey && categoria.planos?.[planoKey]) {
   throw new Error('Parâmetros inválidos')
 }
 
-// ================= RENDER =================
-document.getElementById('titulo-servico').textContent = tituloFinal
+// ================= BREADCRUMB =================
+document.getElementById('breadcrumb-categoria').textContent = categoria.nome
+document.getElementById('breadcrumb-categoria').href = categoria.url
 document.getElementById('breadcrumb-servico').textContent = tituloFinal
+document.getElementById('titulo-servico').textContent = tituloFinal
 
+// ================= RENDER =================
 const lista = document.getElementById('lista-inclusos')
 lista.innerHTML = ''
 listaItens.forEach(item => {
@@ -349,97 +325,12 @@ listaItens.forEach(item => {
 const elValor = document.getElementById('valor-plano')
 if (elValor) elValor.textContent = valorFinal
 
-// ================= AVISO ECONOMIA (APENAS MEI) =================
+// ================= AVISO ECONOMIA (MEI) =================
 if (categoriaKey === 'mei' && servicoKey && !planoKey) {
   const aviso = document.getElementById('aviso-economia')
-
-  if (aviso) {
-    aviso.innerHTML = `
-      🔥 Este serviço já está incluso nos planos mensais.<br>
-      Economize contratando um plano completo.
-      <br><br>
-      <a href="${categoria.url}${categoria.planosAnchor}" class="btn-ver-planos">
-        Ver planos
-      </a>
-    `
-    aviso.style.display = 'block'
-  }
+  aviso.innerHTML = `
+    🔥 Este serviço já está incluso nos planos MEI.<br><br>
+    <a href="${categoria.url}${categoria.planosAnchor}">Ver planos</a>
+  `
+  aviso.style.display = 'block'
 }
-
-// ================= FORM =================
-const form = document.getElementById('form-pedido')
-const btnEnviar = document.getElementById('btn-enviar')
-
-const campos = {
-  nome: form.nome,
-  email: form.email,
-  cpf: form.cpf,
-  whatsapp: form.whatsapp,
-  obs: form.obs
-}
-
-function validar() {
-  btnEnviar.disabled = !(
-    campos.nome.value.trim() &&
-    campos.email.value.trim() &&
-    campos.cpf.value.trim() &&
-    campos.whatsapp.value.trim()
-  )
-}
-
-Object.values(campos).forEach(c =>
-  c.addEventListener('input', validar)
-)
-
-// ================= ENVIO =================
-btnEnviar.addEventListener('click', () => {
-  if (btnEnviar.disabled) return
-
-  const pedido = {
-    categoria: categoriaKey,
-    tipo: planoKey ? 'plano' : 'servico',
-    item: tipoPedido,
-    valor: valorFinal,
-    nome: campos.nome.value.trim(),
-    email: campos.email.value.trim(),
-    cpf: campos.cpf.value.trim(),
-    whatsapp: campos.whatsapp.value.trim(),
-    obs: campos.obs.value.trim()
-  }
-
-  const msg = `
-Novo pedido:
-
-📌 ${pedido.item}
-💰 Valor: ${pedido.valor}
-
-👤 Nome: ${pedido.nome}
-📧 Email: ${pedido.email}
-📄 CPF: ${pedido.cpf}
-📱 WhatsApp: ${pedido.whatsapp}
-📝 Observações: ${pedido.obs || 'Nenhuma'}
-`.trim()
-
-  window.open(
-    `https://wa.me/5561920041427?text=${encodeURIComponent(msg)}`,
-    '_blank'
-  )
-
-  supabase.from('pedidos').insert(pedido)
-})
-
-// ================= MÁSCARAS =================
-campos.cpf.addEventListener('input', () => {
-  let v = campos.cpf.value.replace(/\D/g, '').slice(0, 11)
-  v = v.replace(/(\d{3})(\d)/, '$1.$2')
-  v = v.replace(/(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
-  v = v.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4')
-  campos.cpf.value = v
-})
-
-campos.whatsapp.addEventListener('input', () => {
-  let v = campos.whatsapp.value.replace(/\D/g, '').slice(0, 11)
-  v = v.replace(/^(\d{2})(\d)/, '($1) $2')
-  v = v.replace(/(\d{5})(\d)/, '$1-$2')
-  campos.whatsapp.value = v
-})
