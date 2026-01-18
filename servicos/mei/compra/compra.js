@@ -99,7 +99,6 @@ const planos = {
   premium: {
     titulo: 'Plano MEI Premium',
     valor: 'R$ 159,00 / mês',
-    destaque: true,
     inclusos: [
       '✔ Todos os benefícios do plano básico',
       '✔ Regularização fiscal completa',
@@ -131,16 +130,12 @@ if (planoKey && planos[planoKey]) {
   tipoPedido = `Plano - ${plano.titulo}`
   valorFinal = plano.valor
 
-  if (planoKey === 'premium') {
-    const msg = document.getElementById('mensagem-premium')
-    if (msg) msg.style.display = 'block'
-  }
-
 } else if (servicoKey && servicos[servicoKey]) {
   const servico = servicos[servicoKey]
   tituloFinal = servico.titulo
   listaItens = servico.inclusos
   tipoPedido = `Serviço - ${servico.titulo}`
+  valorFinal = servico.valor
 
 } else {
   alert('Serviço ou plano inválido.')
@@ -160,8 +155,23 @@ listaItens.forEach(item => {
 })
 
 const elValor = document.getElementById('valor-plano')
-if (elValor && valorFinal) {
-  elValor.textContent = valorFinal
+if (elValor && valorFinal) elValor.textContent = valorFinal
+
+// ================= AVISO + BOTÃO VER PLANOS =================
+if (servicoKey && !planoKey) {
+  const avisoEconomia = document.getElementById('aviso-economia')
+
+  if (avisoEconomia) {
+    avisoEconomia.innerHTML = `
+      🔥 Este serviço já está incluso nos planos mensais.<br>
+      Economize contratando um plano completo.
+      <br><br>
+      <a href="/jl-servicos-contabeis/servicos/mei/#planos" class="btn-ver-planos">
+        Ver planos
+      </a>
+    `
+    avisoEconomia.style.display = 'block'
+  }
 }
 
 // ================= FORM =================
@@ -184,26 +194,20 @@ function validarFormulario() {
     campoWhats.value.trim()
 
   btnEnviar.disabled = !valido
-  btnEnviar.classList.toggle('ativo', valido)
 }
 
 ;[campoNome, campoEmail, campoCPF, campoWhats].forEach(campo =>
   campo.addEventListener('input', validarFormulario)
 )
 
-form.addEventListener('submit', e => e.preventDefault())
-
 // ================= ENVIO =================
 btnEnviar.addEventListener('click', () => {
   if (btnEnviar.disabled) return
 
-  btnEnviar.textContent = 'Enviando...'
-  btnEnviar.disabled = true
-
   const pedido = {
     tipo: planoKey ? 'plano' : 'servico',
     item: tipoPedido,
-    valor: valorFinal || null,
+    valor: valorFinal,
     nome: campoNome.value.trim(),
     email: campoEmail.value.trim(),
     cpf: campoCPF.value.trim(),
@@ -215,7 +219,7 @@ btnEnviar.addEventListener('click', () => {
 Novo pedido:
 
 📌 ${pedido.item}
-${pedido.valor ? `💰 Valor: ${pedido.valor}` : ''}
+💰 Valor: ${pedido.valor}
 
 👤 Nome: ${pedido.nome}
 📧 Email: ${pedido.email}
