@@ -5,34 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Certidões e Regularizações | J L Serviços Contábeis</title>
 
+  <!-- CSS GLOBAL -->
   <link rel="stylesheet" href="/jl-servicos-contabeis/style.css">
+  <!-- CSS BASE (reaproveita o layout do MEI) -->
   <link rel="stylesheet" href="../mei/mei.css">
 </head>
 
 <body>
 
-<nav class="breadcrumb container">
-  <a href="/jl-servicos-contabeis/">Início</a>
-  <span>›</span>
-  <a href="/jl-servicos-contabeis/servicos/">Serviços</a>
-  <span>›</span>
-  <strong>Certidões</strong>
-</nav>
+  <!-- ===== BREADCRUMB ===== -->
+  <nav class="breadcrumb container">
+    <a href="/jl-servicos-contabeis/">Início</a>
+    <span>›</span>
+    <a href="/jl-servicos-contabeis/servicos/">Serviços</a>
+    <span>›</span>
+    <strong>Certidões e Regularizações</strong>
+  </nav>
 
-<main class="container mei-page">
+  <main class="container mei-page">
 
-<header class="mei-header">
-  <h1>Certidões e Regularizações</h1>
-  <p>Emissão e regularização de documentos fiscais e cadastrais.</p>
-</header>
+    <!-- ===== TÍTULO ===== -->
+    <header class="mei-header">
+      <h1>Certidões e Regularizações</h1>
+      <p>Emissão e regularização de documentos fiscais e cadastrais.</p>
+    </header>
 
-<section class="mei-section">
-  <div class="services-grid">
-    <a class="service-card" href="/jl-servicos-contabeis/servicos/compra/?servico=certidao-negativa">Certidão Negativa</a>
-    <a class="service-card" href="/jl-servicos-contabeis/servicos/compra/?servico=regularizacao-cadastral">Regularização Cadastral</a>
-  </div>
-</section>
+    <!-- ===== SERVIÇOS ===== -->
+    <section class="mei-section mei-servicos">
+      <h2>Serviços Disponíveis</h2>
 
-</main>
+      <div class="services-grid">
+
+        <a class="service-card"
+           href="/jl-servicos-contabeis/servicos/compra/?categoria=certidoes&servico=certidao-negativa">
+          Certidão Negativa de Débitos
+          <span>R$ 79,90</span>
+        </a>
+
+        <a class="service-card"
+           href="/jl-servicos-contabeis/servicos/compra/?categoria=certidoes&servico=regularizacao-cadastral">
+          Regularização Cadastral
+          <span>R$ 149,90</span>
+        </a>
+
+        <a class="service-card"
+           href="/jl-servicos-contabeis/servicos/compra/?categoria=certidoes&servico=certidao-estadual">
+          Certidão Estadual
+          <span>R$ 69,90</span>
+        </a>
+
+        <a class="service-card"
+           href="/jl-servicos-contabeis/servicos/compra/?categoria=certidoes&servico=certidao-municipal">
+          Certidão Municipal
+          <span>R$ 69,90</span>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
 </body>
 </html>
