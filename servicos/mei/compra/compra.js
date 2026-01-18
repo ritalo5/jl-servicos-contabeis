@@ -82,8 +82,9 @@ if (servicoURL && servicos[servicoURL]) {
 const servicoKey = sessionStorage.getItem('servicoSelecionado')
 
 if (!servicoKey || !servicos[servicoKey]) {
-  alert('Serviço inválido ou não informado.')
-  throw new Error('Serviço inválido')
+  console.warn('Serviço não encontrado, mantendo estado atual.')
+} else {
+  var servico = servicos[servicoKey]
 }
 
 const servico = servicos[servicoKey]
@@ -159,7 +160,7 @@ Novo pedido de serviço:
 `.trim()
 
   window.location.href =
-    `https://wa.me/61920041427?text=${encodeURIComponent(mensagem)}`
+    `https://wa.me/5561920041427?text=${encodeURIComponent(mensagem)}`
 })
 
 // ================= MÁSCARAS =================
