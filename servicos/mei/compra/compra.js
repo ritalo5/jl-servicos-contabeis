@@ -71,15 +71,9 @@ const servicos = {
   }
 }
 
-// ================= SERVIÇO SELECIONADO =================
+// ================= SERVIÇO =================
 const params = new URLSearchParams(window.location.search)
-const servicoURL = params.get('servico')
-
-if (servicoURL && servicos[servicoURL]) {
-  sessionStorage.setItem('servicoSelecionado', servicoURL)
-}
-
-const servicoKey = sessionStorage.getItem('servicoSelecionado')
+const servicoKey = params.get('servico')
 
 if (!servicoKey || !servicos[servicoKey]) {
   alert('Serviço inválido ou não informado.')
@@ -101,28 +95,22 @@ servico.inclusos.forEach(item => {
 })
 
 // ================= FORM =================
-const form = document.getElementById('form-pedido')
 const btnEnviar = document.getElementById('btn-enviar')
-
-const nomeInput = document.querySelector('input[name="nome"]')
-const emailInput = document.querySelector('input[name="email"]')
-const cpfInput = document.getElementById('cpf')
-const whatsappInput = document.getElementById('whatsapp')
-const obsInput = document.querySelector('textarea[name="obs"]')
-
-const camposObrigatorios = [nomeInput, emailInput, cpfInput, whatsappInput]
+const camposObrigatorios = ['nome', 'email', 'cpf', 'whatsapp']
 
 function validarFormulario() {
-  const valido = camposObrigatorios.every(campo => campo.value.trim() !== '')
+  const valido = camposObrigatorios.every(id => {
+    const campo = document.getElementById(id)
+    return campo && campo.value.trim() !== ''
+  })
+
   btnEnviar.disabled = !valido
   btnEnviar.classList.toggle('ativo', valido)
 }
 
-camposObrigatorios.forEach(campo =>
-  campo.addEventListener('input', validarFormulario)
-)
-
-form.addEventListener('submit', e => e.preventDefault())
+camposObrigatorios.forEach(id => {
+  document.getElementById(id).addEventListener('input', validarFormulario)
+})
 
 // ================= ENVIO =================
 btnEnviar.addEventListener('click', async () => {
@@ -133,21 +121,14 @@ btnEnviar.addEventListener('click', async () => {
 
   const pedido = {
     servico: servicoKey,
-    nome: nomeInput.value.trim(),
-    email: emailInput.value.trim(),
-    cpf: cpfInput.value.trim(),
-    whatsapp: whatsappInput.value.trim(),
-    obs: obsInput.value.trim()
+    nome: nome.value.trim(),
+    email: email.value.trim(),
+    cpf: cpf.value.trim(),
+    whatsapp: whatsapp.value.trim(),
+    obs: obs.value.trim()
   }
 
-  const { error } = await supabase.from('pedidos').insert(pedido)
-
-  if (error) {
-    alert('Erro ao salvar o pedido.')
-    btnEnviar.textContent = 'Enviar pedido'
-    btnEnviar.disabled = false
-    return
-  }
+  await supabase.from('pedidos').insert(pedido)
 
   const mensagem = `
 Novo pedido de serviço:
@@ -165,20 +146,17 @@ Novo pedido de serviço:
 })
 
 // ================= MÁSCARAS =================
-
-// CPF
-cpfInput.addEventListener('input', () => {
-  let v = cpfInput.value.replace(/\D/g, '').slice(0, 11)
+cpf.addEventListener('input', () => {
+  let v = cpf.value.replace(/\D/g, '').slice(0, 11)
   v = v.replace(/(\d{3})(\d)/, '$1.$2')
   v = v.replace(/(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
   v = v.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4')
-  cpfInput.value = v
+  cpf.value = v
 })
 
-// WhatsApp
-whatsappInput.addEventListener('input', () => {
-  let v = whatsappInput.value.replace(/\D/g, '').slice(0, 11)
+whatsapp.addEventListener('input', () => {
+  let v = whatsapp.value.replace(/\D/g, '').slice(0, 11)
   v = v.replace(/^(\d{2})(\d)/, '($1) $2')
   v = v.replace(/(\d{5})(\d)/, '$1-$2')
-  whatsappInput.value = v
+  whatsapp.value = v
 })
