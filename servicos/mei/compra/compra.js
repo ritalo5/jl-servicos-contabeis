@@ -113,7 +113,7 @@ camposObrigatorios.forEach(id => {
 })
 
 // ================= ENVIO =================
-btnEnviar.addEventListener('click', async () => {
+btnEnviar.addEventListener('click', () => {
   if (btnEnviar.disabled) return
 
   btnEnviar.textContent = 'Enviando...'
@@ -128,8 +128,6 @@ btnEnviar.addEventListener('click', async () => {
     obs: obs.value.trim()
   }
 
-  await supabase.from('pedidos').insert(pedido)
-
   const mensagem = `
 Novo pedido de serviço:
 
@@ -141,8 +139,14 @@ Novo pedido de serviço:
 📝 Observações: ${pedido.obs || 'Nenhuma'}
 `.trim()
 
-  window.location.href =
-    `https://wa.me/5561920041427?text=${encodeURIComponent(mensagem)}`
+  // ✅ ABRE WHATSAPP IMEDIATAMENTE (SEM BLOQUEIO)
+  window.open(
+    `https://wa.me/5561920041427?text=${encodeURIComponent(mensagem)}`,
+    '_blank'
+  )
+
+  // 🔁 SALVA EM SEGUNDO PLANO (SEM ATRAPALHAR)
+  supabase.from('pedidos').insert(pedido)
 })
 
 // ================= MÁSCARAS =================
