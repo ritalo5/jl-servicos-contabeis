@@ -109,7 +109,8 @@
   }
 }
 
-/* CARD PLANO DESTACADO */
+/* ===== CARD PLANO DESTACADO ===== */
+
 .card-plano {
   background: linear-gradient(135deg, #bd9617, #d4af37);
   border-radius: 20px;
@@ -147,4 +148,59 @@
   font-size: 36px;
   font-weight: 800;
   margin-top: 6px;
+}
+
+/* ========================================================= */
+/* ===== NOVOS ELEMENTOS (COMPATÍVEIS COM O JS ATUAL) ====== */
+/* ========================================================= */
+
+/* ===== VALOR DO SERVIÇO / PLANO ===== */
+.valor-plano {
+  margin-top: 12px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #bd9617;
+}
+
+/* ===== AVISO DE ECONOMIA (SERVIÇOS AVULSOS) ===== */
+.aviso-economia {
+  margin-top: 24px;
+  padding: 18px 22px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0b1c2d, #132f4c);
+  color: #ffffff;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.aviso-economia strong {
+  color: #d4af37;
+}
+
+/* BOTÃO VER PLANOS */
+.aviso-economia a {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: #bd9617;
+  color: #0b1c2d;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.aviso-economia a:hover {
+  opacity: 0.9;
+}
+
+/* ===== CARD PREMIUM (EXCLUSIVO DA COMPRA) ===== */
+.card-premium {
+  margin-bottom: 22px;
+  padding: 18px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #bd9617, #d4af37);
+  color: #0b1c2d;
+  font-weight: 800;
+  text-align: center;
 }
