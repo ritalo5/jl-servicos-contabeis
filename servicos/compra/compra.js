@@ -5,46 +5,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const camposObrigatorios = ["nome", "whatsapp", "email", "cpf"];
 
   /* ===============================
-     🔹 DADOS MOCK (TEMPORÁRIOS) — ORGANIZADOS POR CATEGORIA E PLANO
+     🔹 DADOS MOCK (TEMPORÁRIOS)
      =============================== */
   const servicosMock = {
     mei: {
       basico: {
-        titulo: "Serviço MEI — Básico",
+        titulo: "Plano MEI — Básico",
         descricao: "Plano básico de serviços para MEI.",
-        inclusos: [
-          "Orientação inicial",
-          "Emissão de DAS",
-          "Suporte simples"
-        ],
-        valor: "R$ 99,90"
+        inclusos: ["Orientação inicial", "Emissão de DAS", "Suporte simples"],
+        valor: "R$ 99,90",
+        categoriaLabel: "MEI"
       },
       premium: {
-        titulo: "Serviço MEI — Premium",
+        titulo: "Plano MEI — Premium",
         descricao: "Plano premium com atendimento completo.",
-        inclusos: [
-          "Tudo do Básico",
-          "Consultoria estendida",
-          "Relatórios adicionais"
-        ],
-        valor: "R$ 149,90"
+        inclusos: ["Tudo do Básico", "Consultoria estendida", "Relatórios adicionais"],
+        valor: "R$ 149,90",
+        categoriaLabel: "MEI"
       }
     },
     certificado: {
       renovacao: {
         titulo: "Renovação de Certificado Digital",
         descricao: "Serviço de renovação do seu certificado digital.",
-        inclusos: [
-          "Renovação imediata",
-          "Suporte especializado"
-        ],
-        valor: "R$ 150,00"
+        inclusos: ["Renovação imediata", "Suporte especializado"],
+        valor: "R$ 150,00",
+        categoriaLabel: "Certificado Digital"
       }
     }
   };
 
   /* ===============================
-     🔹 LER PARÂMETROS DA URL
+     🔹 PARÂMETROS DA URL
      =============================== */
   const params = new URLSearchParams(window.location.search);
   const categoria = params.get("categoria");
@@ -63,7 +55,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ===============================
-     🔹 PREENCHER PÁGINA COM DADOS DO MOCK
+     🔹 BREADCRUMB
+     =============================== */
+  const breadcrumb = document.getElementById("breadcrumb");
+
+  if (breadcrumb) {
+    const categoriaUrl =
+      categoria === "mei"
+        ? "/servicos/mei/"
+        : categoria === "certificado"
+        ? "/servicos/certificado/"
+        : "/";
+
+    breadcrumb.innerHTML = `
+      <a href="/">Início</a>
+      <span>›</span>
+      <a href="/">Serviços</a>
+      <span>›</span>
+      <a href="${categoriaUrl}">${dados.categoriaLabel}</a>
+      <span>›</span>
+      <span>${dados.titulo}</span>
+    `;
+  }
+
+  /* ===============================
+     🔹 PREENCHER CONTEÚDO
      =============================== */
   document.getElementById("nomeServico").innerText = dados.titulo;
   document.getElementById("descricaoServico").innerText = dados.descricao;
@@ -126,12 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   camposObrigatorios.forEach(id => {
-    const campo = document.getElementById(id);
-    campo.addEventListener("input", validarFormulario);
+    document.getElementById(id).addEventListener("input", validarFormulario);
   });
 
   /* ===============================
-     🔹 ENVIO PARA WHATSAPP
+     🔹 ENVIO WHATSAPP
      =============================== */
   form.addEventListener("submit", e => {
     e.preventDefault();
@@ -170,4 +185,3 @@ ${observacoes || "Nenhuma"}
     }, 800);
   });
 });
-
