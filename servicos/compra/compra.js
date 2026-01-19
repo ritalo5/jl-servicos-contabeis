@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
      =============================== */
   const servicosMock = {
     mei: {
-      basico: {
+      "basico": {
         titulo: "Plano MEI — Básico",
         descricao: "Plano básico de serviços para MEI.",
         inclusos: [
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         valor: "R$ 99,90",
         categoriaLabel: "MEI"
       },
-      premium: {
+      "premium": {
         titulo: "Plano MEI — Premium",
         descricao: "Plano premium com atendimento completo.",
         inclusos: [
@@ -32,29 +32,53 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
         valor: "R$ 149,90",
         categoriaLabel: "MEI"
+      },
+      "abertura-mei": {
+        titulo: "Abertura de MEI",
+        descricao: "Abertura completa do MEI com orientação e regularização inicial.",
+        inclusos: [
+          "Cadastro no Portal do Empreendedor",
+          "Emissão de CNPJ",
+          "Orientação inicial"
+        ],
+        valor: "R$ 148,99",
+        categoriaLabel: "MEI"
       }
     },
 
-    certificado: {
-      renovacao: {
+    "certificado-digital": {
+      "renovacao-certificado": {
         titulo: "Renovação de Certificado Digital",
         descricao: "Serviço de renovação do certificado digital.",
         inclusos: [
           "Renovação imediata",
           "Suporte especializado"
         ],
-        valor: "R$ 150,00",
+        valor: "R$ 149,90",
         categoriaLabel: "Certificado Digital"
+      }
+    },
+
+    "certidoes-regularizacoes": {
+      "certidao-negativa": {
+        titulo: "Certidão Negativa de Débitos",
+        descricao: "Emissão de certidão negativa junto aos órgãos competentes.",
+        inclusos: [
+          "Consulta de pendências",
+          "Emissão da certidão"
+        ],
+        valor: "R$ 79,90",
+        categoriaLabel: "Certidões e Regularizações"
       }
     }
   };
 
   /* ===============================
-     🔹 PARÂMETROS
+     🔹 PARÂMETROS DA URL
      =============================== */
   const params = new URLSearchParams(window.location.search);
   const categoria = params.get("categoria");
-  const slug = params.get("slug");
+  const slug = params.get("servico") || params.get("plano") || params.get("slug");
 
   const dados = servicosMock[categoria]?.[slug];
 
@@ -64,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ===============================
-     🔹 BREADCRUMB (100% FUNCIONAL)
+     🔹 BREADCRUMB (CORRETO)
      =============================== */
   const breadcrumb = document.getElementById("breadcrumb");
 
@@ -74,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     breadcrumb.innerHTML = `
       <a href="${BASE_URL}/">Início</a>
       <span>›</span>
-      <a href="${BASE_URL}/">Serviços</a>
+      <a href="${BASE_URL}/servicos/">Serviços</a>
       <span>›</span>
       <a href="${categoriaUrl}">${dados.categoriaLabel}</a>
       <span>›</span>
@@ -91,7 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ul = document.getElementById("inclusosServico");
   ul.innerHTML = "";
-
   dados.inclusos.forEach(item => {
     const li = document.createElement("li");
     li.innerText = item;
