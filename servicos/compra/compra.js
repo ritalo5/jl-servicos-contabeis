@@ -9,6 +9,45 @@ document.addEventListener("DOMContentLoaded", () => {
     "cpf"
   ];
 
+  /* ===============================
+     🔹 CARREGAR SERVIÇO DO SUPABASE
+     =============================== */
+  async function carregarServico() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("id");
+
+    if (!slug) return;
+
+    const { data, error } = await supabase
+      .from("servicos")
+      .select("*")
+      .eq("slug", slug)
+      .single();
+
+    if (error) {
+      console.error("Erro ao carregar serviço:", error);
+      return;
+    }
+
+    document.getElementById("nomeServico").innerText = data.nome;
+    document.getElementById("descricaoServico").innerText = data.descricao;
+    document.getElementById("valorServico").innerText = `R$ ${data.valor}`;
+
+    const ul = document.getElementById("inclusosServico");
+    ul.innerHTML = "";
+
+    data.inclusos.split("\n").forEach(item => {
+      const li = document.createElement("li");
+      li.innerText = item;
+      ul.appendChild(li);
+    });
+  }
+
+  carregarServico();
+
+  /* ===============================
+     🔹 VALIDAÇÃO DO FORMULÁRIO
+     =============================== */
   function validarFormulario() {
     const valido = camposObrigatorios.every(id => {
       const campo = document.getElementById(id);
@@ -22,6 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(id).addEventListener("input", validarFormulario);
   });
 
+  /* ===============================
+     🔹 ENVIO PARA WHATSAPP
+     =============================== */
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -55,4 +97,3 @@ ${observacoes || "Nenhuma"}
     window.open(url, "_blank");
   });
 });
-
