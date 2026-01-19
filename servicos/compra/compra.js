@@ -13,15 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
         titulo: "Plano MEI — Básico",
         descricao: "Plano básico de serviços para MEI.",
         inclusos: ["Orientação inicial", "Emissão de DAS", "Suporte simples"],
-        valor: "R$ 99,90",
-        categoriaLabel: "MEI"
+        valor: "R$ 99,90"
       },
       premium: {
         titulo: "Plano MEI — Premium",
         descricao: "Plano premium com atendimento completo.",
         inclusos: ["Tudo do Básico", "Consultoria estendida", "Relatórios adicionais"],
-        valor: "R$ 149,90",
-        categoriaLabel: "MEI"
+        valor: "R$ 149,90"
       }
     },
     certificado: {
@@ -29,9 +27,26 @@ document.addEventListener("DOMContentLoaded", () => {
         titulo: "Renovação de Certificado Digital",
         descricao: "Serviço de renovação do seu certificado digital.",
         inclusos: ["Renovação imediata", "Suporte especializado"],
-        valor: "R$ 150,00",
-        categoriaLabel: "Certificado Digital"
+        valor: "R$ 150,00"
       }
+    }
+  };
+
+  /* ===============================
+     🔹 MAPA DE CATEGORIAS (BREADCRUMB)
+     =============================== */
+  const categoriasMap = {
+    mei: {
+      nome: "MEI",
+      url: "/servicos/mei/"
+    },
+    "pessoa-fisica": {
+      nome: "Pessoa Física",
+      url: "/servicos/pessoa-fisica/"
+    },
+    certificado: {
+      nome: "Certidões e Regularizações",
+      url: "/servicos/certificado/"
     }
   };
 
@@ -55,24 +70,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ===============================
-     🔹 BREADCRUMB
+     🔹 BREADCRUMB (AJUSTADO)
      =============================== */
   const breadcrumb = document.getElementById("breadcrumb");
 
-  if (breadcrumb) {
-    const categoriaUrl =
-      categoria === "mei"
-        ? "/servicos/mei/"
-        : categoria === "certificado"
-        ? "/servicos/certificado/"
-        : "/";
-
+  if (breadcrumb && categoriasMap[categoria]) {
     breadcrumb.innerHTML = `
       <a href="/">Início</a>
       <span>›</span>
       <a href="/">Serviços</a>
       <span>›</span>
-      <a href="${categoriaUrl}">${dados.categoriaLabel}</a>
+      <a href="${categoriasMap[categoria].url}">
+        ${categoriasMap[categoria].nome}
+      </a>
       <span>›</span>
       <span>${dados.titulo}</span>
     `;
