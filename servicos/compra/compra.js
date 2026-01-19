@@ -14,14 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
      =============================== */
   async function carregarServico() {
     const params = new URLSearchParams(window.location.search);
-    const slug = params.get("id");
+    const id = params.get("id");
 
-    if (!slug) return;
+    if (!id) return;
 
     const { data, error } = await supabase
       .from("servicos")
       .select("*")
-      .eq("slug", slug)
+      .eq("id", id)
       .single();
 
     if (error) {
@@ -29,18 +29,26 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    document.getElementById("nomeServico").innerText = data.nome;
-    document.getElementById("descricaoServico").innerText = data.descricao;
-    document.getElementById("valorServico").innerText = `R$ ${data.valor}`;
+    // Nome do serviço
+    document.getElementById("nomeServico").innerText = data.titulo;
 
+    // Descrição
+    document.getElementById("descricaoServico").innerText = data.descricao;
+
+    // Valor
+    document.getElementById("valorServico").innerText = `R$ ${Number(data.preco_base).toFixed(2)}`;
+
+    // O que está incluso (descrição do preço)
     const ul = document.getElementById("inclusosServico");
     ul.innerHTML = "";
 
-    data.inclusos.split("\n").forEach(item => {
-      const li = document.createElement("li");
-      li.innerText = item;
-      ul.appendChild(li);
-    });
+    if (data.descricao_preco) {
+      data.descricao_preco.split("\n").forEach(item => {
+        const li = document.createElement("li");
+        li.innerText = item;
+        ul.appendChild(li);
+      });
+    }
   }
 
   carregarServico();
