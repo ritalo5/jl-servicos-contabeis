@@ -1,50 +1,58 @@
-const form = document.getElementById('formCompra');
-const btn = document.getElementById('btnEnviar');
-const whatsapp = document.getElementById('whatsapp');
-const cpf = document.getElementById('cpf');
-const observacoes = document.getElementById('observacoes');
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("pedidoForm");
+  const botao = document.getElementById("btnEnviar");
 
-function validar() {
-  btn.disabled = !form.checkValidity();
-}
+  const camposObrigatorios = [
+    "nome",
+    "whatsapp",
+    "email",
+    "cpf"
+  ];
 
-form.addEventListener('input', validar);
+  function validarFormulario() {
+    const valido = camposObrigatorios.every(id => {
+      const campo = document.getElementById(id);
+      return campo && campo.value.trim() !== "";
+    });
 
-// Máscara WhatsApp
-whatsapp.addEventListener('input', () => {
-  whatsapp.value = whatsapp.value
-    .replace(/\D/g, '')
-    .replace(/^(\d{2})(\d)/, '($1) $2')
-    .replace(/(\d{5})(\d)/, '$1-$2')
-    .slice(0, 15);
+    botao.disabled = !valido;
+  }
+
+  camposObrigatorios.forEach(id => {
+    document.getElementById(id).addEventListener("input", validarFormulario);
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const nome = document.getElementById("nome").value;
+    const whatsapp = document.getElementById("whatsapp").value;
+    const email = document.getElementById("email").value;
+    const cpf = document.getElementById("cpf").value;
+    const observacoes = document.getElementById("observacoes").value;
+
+    const servico = document.getElementById("nomeServico").innerText;
+    const valor = document.getElementById("valorServico").innerText;
+
+    const mensagem = `
+Olá! Gostaria de contratar um serviço:
+
+📌 *Serviço:* ${servico}
+💰 *Valor:* ${valor}
+
+👤 *Nome:* ${nome}
+📱 *WhatsApp:* ${whatsapp}
+📧 *Email:* ${email}
+🪪 *CPF:* ${cpf}
+
+📝 *Observações:*
+${observacoes || "Nenhuma"}
+    `.trim();
+
+    const numero = "5561920041427";
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(url, "_blank");
+  });
 });
 
-// Máscara CPF
-cpf.addEventListener('input', () => {
-  cpf.value = cpf.value
-    .replace(/\D/g, '')
-    .replace(/(\d{3})(\d)/, '$1.$2')
-    .replace(/(\d{3})(\d)/, '$1.$2')
-    .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
-    .slice(0, 14);
-});
-
-// Auto grow textarea
-observacoes.addEventListener('input', () => {
-  observacoes.style.height = 'auto';
-  observacoes.style.height = observacoes.scrollHeight + 'px';
-});
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  btn.textContent = 'Enviando...';
-  btn.disabled = true;
-
-  setTimeout(() => {
-    alert('Pedido enviado!');
-    btn.textContent = 'Enviar Pedido';
-    form.reset();
-    validar();
-  }, 1500);
-});
