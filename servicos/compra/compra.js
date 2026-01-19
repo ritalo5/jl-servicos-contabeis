@@ -112,4 +112,3 @@ ${observacoes || "Nenhuma"}
     window.open(url, "_blank");
   });
 });
-
