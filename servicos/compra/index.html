@@ -12,7 +12,7 @@
 <main class="container">
 
   <h1 class="titulo-servico" id="nomeServico">
-    Serviço MEI
+    Serviço
   </h1>
 
   <div class="grid">
@@ -22,8 +22,11 @@
       <h2>Resumo do Serviço</h2>
 
       <p class="descricao" id="descricaoServico">
-        Descrição completa do serviço selecionado.
+        Descrição do serviço.
       </p>
+
+      <!-- O que está incluso -->
+      <ul id="inclusosServico"></ul>
 
       <div class="valor">
         Valor:
@@ -35,15 +38,35 @@
     <div class="card">
       <h2>Dados do Cliente</h2>
 
-      <form id="formCompra">
+      <form id="pedidoForm">
 
-        <input type="text" placeholder="Nome completo *" required />
+        <input
+          type="text"
+          id="nome"
+          placeholder="Nome completo *"
+          required
+        />
 
-        <input type="email" placeholder="E-mail *" required />
+        <input
+          type="email"
+          id="email"
+          placeholder="E-mail *"
+          required
+        />
 
-        <input type="text" id="whatsapp" placeholder="WhatsApp *" required />
+        <input
+          type="text"
+          id="whatsapp"
+          placeholder="WhatsApp *"
+          required
+        />
 
-        <input type="text" id="cpf" placeholder="CPF *" required />
+        <input
+          type="text"
+          id="cpf"
+          placeholder="CPF *"
+          required
+        />
 
         <textarea
           id="observacoes"
@@ -64,4 +87,3 @@
 <script src="./compra.js"></script>
 </body>
 </html>
-
