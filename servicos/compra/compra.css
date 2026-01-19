@@ -68,6 +68,10 @@ button {
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 button:disabled {
@@ -75,8 +79,27 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* ===============================
+   🔹 LOADING ANIMADO
+   =============================== */
+.loading {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #000;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
   }
 }
+
