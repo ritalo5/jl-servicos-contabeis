@@ -5,42 +5,65 @@ document.addEventListener("DOMContentLoaded", () => {
   const camposObrigatorios = ["nome", "whatsapp", "email", "cpf"];
 
   /* ===============================
-     🔹 DADOS MOCK (TEMPORÁRIOS)
+     🔹 DADOS MOCK (TEMPORÁRIOS) — ORGANIZADOS POR CATEGORIA E PLANO
      =============================== */
   const servicosMock = {
     mei: {
-      titulo: "Serviços para MEI",
-      descricao:
-        "Serviço completo para abertura, regularização e manutenção do MEI.",
-      inclusos: [
-        "Abertura ou regularização do MEI",
-        "Emissão de DAS",
-        "Orientações contábeis",
-      ],
-      valor: "R$ 99,90",
+      basico: {
+        titulo: "Serviço MEI — Básico",
+        descricao: "Plano básico de serviços para MEI.",
+        inclusos: [
+          "Orientação inicial",
+          "Emissão de DAS",
+          "Suporte simples"
+        ],
+        valor: "R$ 99,90"
+      },
+      premium: {
+        titulo: "Serviço MEI — Premium",
+        descricao: "Plano premium com atendimento completo.",
+        inclusos: [
+          "Tudo do Básico",
+          "Consultoria estendida",
+          "Relatórios adicionais"
+        ],
+        valor: "R$ 149,90"
+      }
     },
     certificado: {
-      titulo: "Certificado Digital",
-      descricao: "Renovação ou emissão de certificado digital.",
-      inclusos: ["Emissão do certificado", "Suporte completo"],
-      valor: "R$ 150,00",
-    },
+      renovacao: {
+        titulo: "Renovação de Certificado Digital",
+        descricao: "Serviço de renovação do seu certificado digital.",
+        inclusos: [
+          "Renovação imediata",
+          "Suporte especializado"
+        ],
+        valor: "R$ 150,00"
+      }
+    }
   };
 
   /* ===============================
-     🔹 IDENTIFICAR SERVIÇO NA URL
+     🔹 LER PARÂMETROS DA URL
      =============================== */
   const params = new URLSearchParams(window.location.search);
-  const tipo = params.get("servico") || "mei";
-  const dados = servicosMock[tipo];
+  const categoria = params.get("categoria");
+  const plano = params.get("plano");
+
+  if (!categoria || !plano) {
+    document.getElementById("nomeServico").innerText = "Serviço não encontrado";
+    return;
+  }
+
+  const dados = servicosMock[categoria]?.[plano];
 
   if (!dados) {
-    alert("Serviço não encontrado.");
+    document.getElementById("nomeServico").innerText = "Serviço não encontrado";
     return;
   }
 
   /* ===============================
-     🔹 PREENCHER PÁGINA
+     🔹 PREENCHER PÁGINA COM DADOS DO MOCK
      =============================== */
   document.getElementById("nomeServico").innerText = dados.titulo;
   document.getElementById("descricaoServico").innerText = dados.descricao;
@@ -86,7 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function emailValido(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
-
   emailInput.addEventListener("input", validarFormulario);
 
   /* ===============================
