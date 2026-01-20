@@ -348,22 +348,7 @@ servicosMock["certidoes"] = servicosMock["certidoes-regularizacoes"];
 
   const dados = servicosMock[categoria]?.[slug];
 
-  /* ===============================
-     🔹 TRATAMENTO DE ERRO (UX)
-     =============================== */
-  if (!dados) {
-    const nomeEl = document.getElementById("nomeServico");
-    const descEl = document.getElementById("descricaoServico");
-
-    if (nomeEl) nomeEl.innerText = "Serviço não encontrado";
-    if (descEl)
-      descEl.innerText =
-        "O serviço selecionado não existe ou foi removido.";
-
-    return;
-  }
-
-      /* ===============================
+    /* ===============================
      🔹 BREADCRUMB DEFINITIVO
      =============================== */
 const categoriaParaPasta = {
@@ -381,6 +366,21 @@ const categoriaParaPasta = {
   "certificado-digital": "certificado-digital",
   "pessoa-fisica": "pessoa-fisica"
 };
+  
+  /* ===============================
+     🔹 TRATAMENTO DE ERRO (UX)
+     =============================== */
+  if (!dados) {
+    const nomeEl = document.getElementById("nomeServico");
+    const descEl = document.getElementById("descricaoServico");
+
+    if (nomeEl) nomeEl.innerText = "Serviço não encontrado";
+    if (descEl)
+      descEl.innerText =
+        "O serviço selecionado não existe ou foi removido.";
+
+    return;
+  }
 
   /* ===============================
      🔹 CONTEÚDO DO SERVIÇO
