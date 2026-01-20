@@ -358,6 +358,8 @@ if (breadcrumb) {
     <a href="${BASE_URL}/">Serviços</a>
     <span>›</span>
     <span>${dados?.categoriaLabel || "Serviço"}</span>
+    <span>›</span>
+    <strong>${dados?.titulo || ""}</strong>
   `;
 }
 
