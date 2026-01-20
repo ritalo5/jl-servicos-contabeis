@@ -293,3 +293,10 @@ header nav .dropdown-toggle {
   justify-content: center;
   text-align: center;
 }
+
+.btn-plan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
