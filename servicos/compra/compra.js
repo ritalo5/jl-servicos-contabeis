@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
      =============================== */
   const servicosMock = {
     mei: {
-      "basico": {
+      basico: {
         titulo: "Plano MEI — Básico",
         descricao: "Plano básico de serviços para MEI.",
         inclusos: [
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         valor: "R$ 99,99",
         categoriaLabel: "MEI"
       },
-      "premium": {
+      premium: {
         titulo: "Plano MEI — Premium",
         descricao: "Plano premium com atendimento completo.",
         inclusos: [
@@ -74,11 +74,14 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /* ===============================
-     🔹 PARÂMETROS DA 
+     🔹 PARÂMETROS DA URL
      =============================== */
   const params = new URLSearchParams(window.location.search);
   const categoria = params.get("categoria");
-  const slug = params.get("servico") || params.get("plano") || params.get("slug");
+  const slug =
+    params.get("servico") ||
+    params.get("plano") ||
+    params.get("slug");
 
   const dados = servicosMock[categoria]?.[slug];
 
@@ -88,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ===============================
-     🔹 BREADCRUMB (CORRETO)
+     🔹 BREADCRUMB (DEFINITIVO)
      =============================== */
   const breadcrumb = document.getElementById("breadcrumb");
 
@@ -98,11 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
     breadcrumb.innerHTML = `
       <a href="${BASE_URL}/">Início</a>
       <span>›</span>
-      <a href="${BASE_URL}/">Serviços</a>
+      <a href="${BASE_URL}/servicos/">Serviços</a>
       <span>›</span>
       <a href="${categoriaUrl}">${dados.categoriaLabel}</a>
       <span>›</span>
-      <span>${dados.titulo}</span>
+      <strong>${dados.titulo}</strong>
     `;
   }
 
@@ -162,3 +165,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(id).addEventListener("input", validarFormulario);
   });
 });
+
