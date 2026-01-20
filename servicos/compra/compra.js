@@ -348,18 +348,23 @@ servicosMock["certidoes"] = servicosMock["certidoes-regularizacoes"];
 
   const dados = servicosMock[categoria]?.[slug];
 
- // ===== BREADCRUMB (SEMPRE RENDERIZA) =====
+/* ===============================
+   🔹 BREADCRUMB FINAL (CORRETO)
+================================ */
+
 const breadcrumb = document.getElementById("breadcrumb");
 
-if (breadcrumb) {
+if (breadcrumb && dados && categoria) {
   breadcrumb.innerHTML = `
     <a href="${BASE_URL}/">Início</a>
     <span>›</span>
     <a href="${BASE_URL}/">Serviços</a>
     <span>›</span>
-    <span>${dados?.categoriaLabel || "Serviço"}</span>
+    <a href="${BASE_URL}/servicos/${categoria}/">
+      ${dados.categoriaLabel}
+    </a>
     <span>›</span>
-    <strong>${dados?.titulo || ""}</strong>
+    <strong>${dados.titulo}</strong>
   `;
 }
 
