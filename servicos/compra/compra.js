@@ -367,10 +367,10 @@ servicosMock["certidoes"] = servicosMock["certidoes-regularizacoes"];
       /* ===============================
      🔹 BREADCRUMB DEFINITIVO
      =============================== */
-  const breadcrumb = document.getElementById("breadcrumb");
+ const breadcrumb = document.getElementById("breadcrumb");
 
 if (breadcrumb) {
-  const mapaCategorias = {
+  const categoriaParaArquivo = {
     mei: "mei.html",
     contabeis: "contabeis.html",
     outros: "outros.html",
@@ -380,7 +380,7 @@ if (breadcrumb) {
     "certificado-digital": "certificado-digital.html"
   };
 
-  const categoriaArquivo = mapaCategorias[categoria];
+  const arquivoCategoria = categoriaParaArquivo[categoria];
 
   breadcrumb.innerHTML = `
     <a href="${BASE_URL}/">Início</a>
@@ -388,8 +388,8 @@ if (breadcrumb) {
     <a href="${BASE_URL}/">Serviços</a>
     <span>›</span>
     ${
-      categoriaArquivo
-        ? `<a href="${BASE_URL}/servicos/${categoriaArquivo}">${dados.categoriaLabel}</a>`
+      arquivoCategoria
+        ? `<a href="${BASE_URL}/servicos/${arquivoCategoria}">${dados.categoriaLabel}</a>`
         : `<span>${dados.categoriaLabel}</span>`
     }
     <span>›</span>
