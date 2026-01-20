@@ -348,25 +348,19 @@ servicosMock["certidoes"] = servicosMock["certidoes-regularizacoes"];
 
   const dados = servicosMock[categoria]?.[slug];
 
-    /* ===============================
-     🔹 BREADCRUMB DEFINITIVO
-     =============================== */
-const categoriaParaPasta = {
-  mei: "mei",
-  contabeis: "contabeis",
-  outros: "outros",
-  "outros-servicos": "outros",
+  // ===== BREADCRUMB (SEMPRE RENDERIZA) =====
+const breadcrumb = document.getElementById("breadcrumb");
 
-  // ❌ REMOVER certidoes
-  // certidoes: "certidoes",
+if (breadcrumb) {
+  breadcrumb.innerHTML = `
+    <a href="${BASE_URL}/">Início</a>
+    <span>›</span>
+    <a href="${BASE_URL}/">Serviços</a>
+    <span>›</span>
+    <span>${categoriaLabel || "Serviço"}</span>
+  `;
+}
 
-  // ✅ CORRETO
-  "certidoes-regularizacoes": "certidoes-regularizacoes",
-
-  "certificado-digital": "certificado-digital",
-  "pessoa-fisica": "pessoa-fisica"
-};
-  
   /* ===============================
      🔹 TRATAMENTO DE ERRO (UX)
      =============================== */
