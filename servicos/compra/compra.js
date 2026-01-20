@@ -313,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
     breadcrumb.innerHTML = `
       <a href="${BASE_URL}/">Início</a>
       <span>›</span>
-      <a href="${BASE_URL}/servicos/">Serviços</a>
+      <a href="${BASE_URL}/">Serviços</a>
       <span>›</span>
       <a href="${categoriaUrl}">${dados.categoriaLabel}</a>
       <span>›</span>
