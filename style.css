@@ -430,3 +430,7 @@ header nav .dropdown-toggle {
   }
 }
 
+.breadcrumb strong {
+  color: #ffffff;
+  font-weight: 600;
+}
