@@ -382,7 +382,7 @@ servicosMock["certidoes"] = servicosMock["certidoes-regularizacoes"];
     };
 
     const pastaCategoria = rotasCategorias[categoria] || categoria;
-    const categoriaUrl = `${BASE_URL}/servicos/${pastaCategoria}/`;
+    const categoriaUrl = `${BASE_URL}/servicos/${categoria}.html`;
 
     breadcrumb.innerHTML = `
       <a href="${BASE_URL}/">Início</a>
