@@ -334,7 +334,6 @@ if (inputWhatsapp) {
       inputWhatsapp.setCustomValidity("");
     }
   });
-}
 
   /* ===============================
      🔹 MÁSCARA CPF
