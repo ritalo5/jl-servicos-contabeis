@@ -451,35 +451,35 @@ if (breadcrumb && dados && categoria) {
   });
 });
 
-/* ===============================
- 🔹 ENVIO DO PEDIDO (WHATSAPP)
- =============================== */
-let envioEmAndamento = false;
+  /* ===============================
+     🔹 ENVIO DO PEDIDO (WHATSAPP)
+     =============================== */
+  let envioEmAndamento = false;
 
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-    // 🔒 Bloqueio de duplo clique
-    if (envioEmAndamento) return;
-    envioEmAndamento = true;
+      // 🔒 Bloqueio de duplo clique
+      if (envioEmAndamento) return;
+      envioEmAndamento = true;
 
-    const textoOriginal = botao.innerHTML;
+      const textoOriginal = botao.innerHTML;
 
-    botao.disabled = true;
-    botao.innerHTML = `
-      <span class="spinner"></span>
-      Enviando...
-    `;
+      botao.disabled = true;
+      botao.innerHTML = `
+        <span class="spinner"></span>
+        Enviando...
+      `;
 
-    const nome = document.getElementById("nome").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const whatsapp = document.getElementById("whatsapp").value.trim();
-    const cpf = document.getElementById("cpf").value.trim();
-    const observacoes =
-      document.getElementById("observacoes")?.value.trim() || "";
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const whatsapp = document.getElementById("whatsapp").value.trim();
+      const cpf = document.getElementById("cpf").value.trim();
+      const observacoes =
+        document.getElementById("observacoes")?.value.trim() || "";
 
-    const mensagem = `
+      const mensagem = `
 📌 *Novo Pedido de Serviço*
 
 🛎️ *Serviço:* ${dados.titulo}
@@ -493,19 +493,17 @@ if (form) {
 
 📝 *Observações:*
 ${observacoes || "Nenhuma"}
-    `.trim();
+      `.trim();
 
-    const numero = "5561920041427";
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+      const numero = "5561920041427";
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
-    setTimeout(() => {
-      window.open(url, "_blank");
+      setTimeout(() => {
+        window.open(url, "_blank");
 
-      // 🔄 restaura botão
-      botao.innerHTML = textoOriginal;
-      botao.disabled = false;
-      envioEmAndamento = false;
-    }, 600);
-  });
-}
-
+        botao.innerHTML = textoOriginal;
+        botao.disabled = false;
+        envioEmAndamento = false;
+      }, 600);
+    });
+  }
