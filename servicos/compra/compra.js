@@ -9,47 +9,172 @@ document.addEventListener("DOMContentLoaded", () => {
      🔹 DADOS MOCK (PADRÃO COM SLUG)
      ================================================= */
   const servicosMock = {
-    mei: {
-      basico: {
-        titulo: "Plano MEI — Básico",
-        descricao: "Plano básico para manter seu MEI regularizado mensalmente.",
-        inclusos: [
-          "Emissão mensal do DAS",
-          "Lembretes de vencimento",
-          "DASN-SIMEI (1x ao ano)",
-          "Suporte via WhatsApp"
-        ],
-        valor: "R$ 99,99",
-        categoriaLabel: "MEI"
-      },
-      premium: {
-        titulo: "Plano MEI — Premium",
-        descricao: "Plano completo com acompanhamento e regularização total do MEI.",
-        inclusos: [
-          "Todos os benefícios do plano básico",
-          "Regularização fiscal",
-          "Parcelamento de débitos",
-          "Emissão de certidões",
-          "Suporte prioritário"
-        ],
-        valor: "R$ 159,99",
-        categoriaLabel: "MEI"
-      }
+  mei: {
+    basico: {
+      titulo: "Plano MEI — Básico",
+      descricao: "Plano básico para manter seu MEI regularizado mensalmente.",
+      inclusos: [
+        "Emissão mensal do DAS",
+        "Lembretes de vencimento",
+        "DASN-SIMEI (1x ao ano)",
+        "Suporte via WhatsApp"
+      ],
+      valor: "R$ 99,99",
+      categoriaLabel: "MEI"
     },
 
-    "certidoes-regularizacoes": {
-      "certidao-negativa": {
-        titulo: "Certidão Negativa de Débitos",
-        descricao: "Emissão de certidão negativa.",
-        inclusos: ["Consulta de pendências", "Emissão da certidão"],
-        valor: "R$ 79,99",
-        categoriaLabel: "Certidões e Regularizações"
-      }
-    }
-  };
+    premium: {
+      titulo: "Plano MEI — Premium",
+      descricao: "Plano completo com acompanhamento e regularização total do MEI.",
+      inclusos: [
+        "Todos os benefícios do plano básico",
+        "Regularização fiscal",
+        "Parcelamento de débitos",
+        "Emissão de certidões",
+        "Suporte prioritário"
+      ],
+      valor: "R$ 159,99",
+      categoriaLabel: "MEI"
+    },
 
-  servicosMock["certidoes"] = servicosMock["certidoes-regularizacoes"];
-  servicosMock["outros-servicos"] = servicosMock.outros;
+    "abertura-mei": {
+      titulo: "Abertura de MEI",
+      descricao: "Abertura completa do MEI com orientação inicial.",
+      inclusos: [
+        "Cadastro no Portal do Empreendedor",
+        "Emissão de CNPJ",
+        "Orientação inicial"
+      ],
+      valor: "R$ 148,99",
+      categoriaLabel: "MEI"
+    },
+
+    "regularizacao-mei": {
+      titulo: "Regularização de MEI",
+      descricao: "Regularização de pendências fiscais e cadastrais do MEI.",
+      inclusos: [
+        "Análise de pendências",
+        "Regularização fiscal",
+        "Orientação corretiva"
+      ],
+      valor: "R$ 198,99",
+      categoriaLabel: "MEI"
+    },
+
+    "encerramento-mei": {
+      titulo: "Encerramento de MEI",
+      descricao: "Baixa completa do MEI junto aos órgãos oficiais.",
+      inclusos: [
+        "Encerramento no portal",
+        "Baixa do CNPJ",
+        "Orientação final"
+      ],
+      valor: "R$ 128,99",
+      categoriaLabel: "MEI"
+    },
+
+    "emissao-das": {
+      titulo: "Emissão de DAS",
+      descricao: "Emissão da guia DAS do MEI.",
+      inclusos: [
+        "Cálculo do imposto",
+        "Emissão da guia"
+      ],
+      valor: "R$ 48,99",
+      categoriaLabel: "MEI"
+    },
+
+    dasn: {
+      titulo: "Declaração Anual do MEI (DASN-SIMEI)",
+      descricao: "Envio da declaração anual obrigatória do MEI.",
+      inclusos: [
+        "Apuração do faturamento",
+        "Envio da declaração"
+      ],
+      valor: "R$ 98,99",
+      categoriaLabel: "MEI"
+    },
+
+    parcelamento: {
+      titulo: "Parcelamento de Débitos do MEI",
+      descricao: "Parcelamento de débitos em atraso do MEI.",
+      inclusos: [
+        "Análise da dívida",
+        "Simulação e parcelamento"
+      ],
+      valor: "R$ 178,99",
+      categoriaLabel: "MEI"
+    },
+
+    "alteracao-mei": {
+      titulo: "Alteração de Dados do MEI",
+      descricao: "Alteração de dados cadastrais do MEI.",
+      inclusos: [
+        "Alteração no cadastro",
+        "Confirmação das mudanças"
+      ],
+      valor: "R$ 78,99",
+      categoriaLabel: "MEI"
+    }
+  },
+
+  "pessoa-fisica": {
+    irpf: {
+      titulo: "Declaração de Imposto de Renda (IRPF)",
+      descricao: "Elaboração e envio da declaração de Imposto de Renda Pessoa Física.",
+      inclusos: [
+        "Análise de documentos",
+        "Apuração de imposto",
+        "Envio da declaração"
+      ],
+      valor: "R$ 139,99",
+      categoriaLabel: "Pessoa Física"
+    }
+  },
+
+  contabeis: {
+    "consultoria-contabil": {
+      titulo: "Consultoria Contábil",
+      descricao: "Consultoria contábil personalizada para empresas e profissionais.",
+      inclusos: [
+        "Análise contábil",
+        "Orientação estratégica"
+      ],
+      valor: "R$ 199,99",
+      categoriaLabel: "Serviços Contábeis"
+    }
+  },
+
+  "certidoes-regularizacoes": {
+    "certidao-negativa": {
+      titulo: "Certidão Negativa de Débitos",
+      descricao: "Emissão de certidão negativa junto aos órgãos competentes.",
+      inclusos: [
+        "Consulta de pendências",
+        "Emissão da certidão"
+      ],
+      valor: "R$ 79,99",
+      categoriaLabel: "Certidões e Regularizações"
+    }
+  },
+
+  outros: {
+    "planilha-financeira": {
+      titulo: "Planilha Financeira Pessoal",
+      descricao: "Planilha personalizada para controle financeiro mensal.",
+      inclusos: [
+        "Planilha personalizada",
+        "Orientação de uso"
+      ],
+      valor: "R$ 59,99",
+      categoriaLabel: "Outros Serviços"
+    }
+  }
+};
+
+/* aliases seguros (não remover) */
+servicosMock["outros-servicos"] = servicosMock.outros;
+servicosMock["certidoes"] = servicosMock["certidoes-regularizacoes"];
 
   /* ===============================
      🔹 PARÂMETROS DA URL
