@@ -317,12 +317,10 @@ if (inputWhatsapp) {
 
     inputWhatsapp.value = v;
   });
-}
 
   /* 🔹 Validação segura de DDD */
   inputWhatsapp.addEventListener("blur", () => {
     const numeros = inputWhatsapp.value.replace(/\D/g, "");
-
     if (numeros.length < 2) return;
 
     const ddd = numeros.substring(0, 2);
@@ -334,6 +332,7 @@ if (inputWhatsapp) {
       inputWhatsapp.setCustomValidity("");
     }
   });
+}
 
   /* ===============================
      🔹 MÁSCARA CPF
