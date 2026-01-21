@@ -498,12 +498,12 @@ ${observacoes || "Nenhuma"}
       const numero = "5561920041427";
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
-      setTimeout(() => {
-        window.open(url, "_blank");
+     // 🔥 abre o WhatsApp IMEDIATAMENTE (ação do usuário)
+window.open(url, "_blank");
 
-        botao.innerHTML = textoOriginal;
-        botao.disabled = false;
-        envioEmAndamento = false;
-      }, 600);
-    });
-  }
+// 🔄 restaura estado do botão após
+setTimeout(() => {
+  botao.innerHTML = textoOriginal;
+  botao.disabled = false;
+  envioEmAndamento = false;
+}, 600);
