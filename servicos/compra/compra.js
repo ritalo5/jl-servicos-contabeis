@@ -454,13 +454,23 @@ if (breadcrumb && dados && categoria) {
 /* ===============================
  🔹 ENVIO DO PEDIDO (WHATSAPP)
  =============================== */
+let envioEmAndamento = false;
+
 if (form) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // 🔹 Loading no botão
+    // 🔒 Bloqueio de duplo clique
+    if (envioEmAndamento) return;
+    envioEmAndamento = true;
+
+    const textoOriginal = botao.innerHTML;
+
     botao.disabled = true;
-    botao.innerText = "Enviando...";
+    botao.innerHTML = `
+      <span class="spinner"></span>
+      Enviando...
+    `;
 
     const nome = document.getElementById("nome").value.trim();
     const email = document.getElementById("email").value.trim();
@@ -488,12 +498,13 @@ ${observacoes || "Nenhuma"}
     const numero = "5561920041427";
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
-    // 🔹 Pequeno delay para o loading aparecer
     setTimeout(() => {
       window.open(url, "_blank");
 
-      botao.innerText = "Enviar Pedido";
+      // 🔄 restaura botão
+      botao.innerHTML = textoOriginal;
       botao.disabled = false;
+      envioEmAndamento = false;
     }, 600);
   });
 }
