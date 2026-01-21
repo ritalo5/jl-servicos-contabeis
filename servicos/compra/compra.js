@@ -199,6 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputWhatsapp = document.getElementById("whatsapp");
   const inputCpf = document.getElementById("cpf");
 
+  const inputWhatsapp = document.getElementById("whatsapp");
+
   if (inputWhatsapp) {
   let apagando = false;
 
