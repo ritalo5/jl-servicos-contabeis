@@ -291,49 +291,52 @@ servicosMock["certidoes"] = servicosMock["certidoes-regularizacoes"];
 ];
 
 /* ===============================
-   🔹 WHATSAPP – MÁSCARA BR ESTÁVEL
-   (61) 99999-9999
-   =============================== */
+  /* * MÁSCARA DE WHATSAPP (DDD + 9 DÍGITOS)
+ * Formato: (XX) 9XXXX-XXXX
+ */
 
 const inputWhatsapp = document.getElementById("whatsapp");
 
+// Lista de DDDs reais do Brasil para validação rigorosa
+const DDD_VALIDOS = [
+  "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28", "31", "32", "33", "34", "35", "37", "38", "41", "42", "43", "44", "45", "46", "47", "48", "49", "51", "53", "54", "55", "61", "62", "63", "64", "65", "66", "67", "68", "69", "71", "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "86", "87", "88", "89", "91", "92", "93", "94", "95", "96", "97", "98", "99"
+];
+
 if (inputWhatsapp) {
-  let apagando = false;
-
-  inputWhatsapp.addEventListener("keydown", e => {
-    apagando = e.key === "Backspace";
-  });
-
-  inputWhatsapp.addEventListener("input", () => {
-    if (apagando) {
-      apagando = false;
-      return;
-    }
+  inputWhatsapp.addEventListener("input", (e) => {
+    // Impede a máscara de rodar se o usuário estiver apagando
+    if (e.inputType === "deleteContentBackward") return;
 
     let v = inputWhatsapp.value.replace(/\D/g, "").slice(0, 11);
 
+    // Aplica a máscara progressivamente
     if (v.length > 2) v = `(${v.slice(0, 2)}) ${v.slice(2)}`;
-    if (v.length > 7) v = `${v.slice(0, 9)}-${v.slice(9)}`;
+    if (v.length > 7) v = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
 
     inputWhatsapp.value = v;
   });
 
-  /* 🔹 Validação segura de DDD */
   inputWhatsapp.addEventListener("blur", () => {
     const numeros = inputWhatsapp.value.replace(/\D/g, "");
-    if (numeros.length < 2) return;
+    if (numeros.length === 0) return; // Não valida campo vazio
 
     const ddd = numeros.substring(0, 2);
+    const startsWithNine = numeros[2] === "9";
 
-    if (!DDD_VALIDOS.includes(ddd)) {
-      inputWhatsapp.setCustomValidity("DDD inválido. Informe um DDD existente.");
-      inputWhatsapp.reportValidity();
+    // Validação completa
+    if (numeros.length !== 11) {
+      inputWhatsapp.setCustomValidity("O número deve ter 11 dígitos (DDD + número).");
+    } else if (!startsWithNine) {
+      inputWhatsapp.setCustomValidity("O número de celular deve começar com 9.");
+    } else if (!DDD_VALIDOS.includes(ddd)) {
+      inputWhatsapp.setCustomValidity("DDD inválido.");
     } else {
       inputWhatsapp.setCustomValidity("");
     }
+    
+    inputWhatsapp.reportValidity();
   });
 }
-
   /* ===============================
      🔹 MÁSCARA CPF
      =============================== */
