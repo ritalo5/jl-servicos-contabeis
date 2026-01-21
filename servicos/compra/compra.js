@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const botao = document.getElementById("btnEnviar");
 
   const camposObrigatorios = ["nome", "whatsapp", "email", "cpf"];
-
   const BASE_URL = "/jl-servicos-contabeis";
 
   /* =================================================
@@ -35,87 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
         valor: "R$ 159,99",
         categoriaLabel: "MEI"
-      },
-      "abertura-mei": {
-        titulo: "Abertura de MEI",
-        descricao: "Abertura completa do MEI com orientação inicial.",
-        inclusos: [
-          "Cadastro no Portal do Empreendedor",
-          "Emissão de CNPJ",
-          "Orientação inicial"
-        ],
-        valor: "R$ 148,99",
-        categoriaLabel: "MEI"
-      },
-      "regularizacao-mei": {
-        titulo: "Regularização de MEI",
-        descricao: "Regularização de pendências fiscais e cadastrais do MEI.",
-        inclusos: [
-          "Análise de pendências",
-          "Regularização fiscal",
-          "Orientação corretiva"
-        ],
-        valor: "R$ 198,99",
-        categoriaLabel: "MEI"
-      },
-      "encerramento-mei": {
-        titulo: "Encerramento de MEI",
-        descricao: "Baixa completa do MEI junto aos órgãos oficiais.",
-        inclusos: [
-          "Encerramento no portal",
-          "Baixa do CNPJ",
-          "Orientação final"
-        ],
-        valor: "R$ 128,99",
-        categoriaLabel: "MEI"
-      },
-      "emissao-das": {
-        titulo: "Emissão de DAS",
-        descricao: "Emissão da guia DAS do MEI.",
-        inclusos: ["Cálculo do imposto", "Emissão da guia"],
-        valor: "R$ 48,99",
-        categoriaLabel: "MEI"
-      },
-      dasn: {
-        titulo: "Declaração Anual do MEI (DASN-SIMEI)",
-        descricao: "Envio da declaração anual obrigatória do MEI.",
-        inclusos: ["Apuração do faturamento", "Envio da declaração"],
-        valor: "R$ 98,99",
-        categoriaLabel: "MEI"
-      },
-      parcelamento: {
-        titulo: "Parcelamento de Débitos do MEI",
-        descricao: "Parcelamento de débitos em atraso do MEI.",
-        inclusos: ["Análise da dívida", "Simulação e parcelamento"],
-        valor: "R$ 178,99",
-        categoriaLabel: "MEI"
-      },
-      "alteracao-mei": {
-        titulo: "Alteração de Dados do MEI",
-        descricao: "Alteração de dados cadastrais do MEI.",
-        inclusos: ["Alteração no cadastro", "Confirmação das mudanças"],
-        valor: "R$ 78,99",
-        categoriaLabel: "MEI"
-      }
-    },
-
-    "pessoa-fisica": {
-      irpf: {
-        titulo: "Declaração de Imposto de Renda",
-        descricao: "Elaboração e envio da declaração de IRPF.",
-        inclusos: ["Análise de documentos", "Apuração de imposto", "Envio da declaração"],
-        valor: "R$ 139,99",
-        categoriaLabel: "Pessoa Física"
-      }
-    },
-
-    contabeis: {
-      "consultoria-contabil": {
-        titulo: "Consultoria Contábil",
-        descricao: "Consultoria contábil personalizada.",
-        inclusos: ["Análise contábil", "Orientação estratégica"],
-        valor: "R$ 199,99",
-        categoriaLabel: "Serviços Contábeis"
       }
     },
 
@@ -127,32 +45,38 @@ document.addEventListener("DOMContentLoaded", () => {
         valor: "R$ 79,99",
         categoriaLabel: "Certidões e Regularizações"
       }
-    },
-
-    outros: {
-      "planilha-financeira": {
-        titulo: "Planilha Financeira Pessoal",
-        descricao: "Controle financeiro mensal.",
-        inclusos: ["Planilha personalizada", "Orientação de uso"],
-        valor: "R$ 59,99",
-        categoriaLabel: "Outros Serviços"
-      }
     }
   };
 
-  servicosMock["outros-servicos"] = servicosMock.outros;
   servicosMock["certidoes"] = servicosMock["certidoes-regularizacoes"];
+  servicosMock["outros-servicos"] = servicosMock.outros;
 
   /* ===============================
      🔹 PARÂMETROS DA URL
      =============================== */
   const params = new URLSearchParams(window.location.search);
   const categoria = params.get("categoria");
-  const slug = params.get("servico") || params.get("plano") || params.get("slug");
+  const slug =
+    params.get("servico") ||
+    params.get("plano") ||
+    params.get("slug");
 
   const dados = servicosMock[categoria]?.[slug];
 
-  if (!dados) return;
+  /* ===============================
+     🔹 TRATAMENTO DE ERRO (SEM QUEBRAR SCRIPT)
+     =============================== */
+  if (!dados) {
+    const nomeEl = document.getElementById("nomeServico");
+    const descEl = document.getElementById("descricaoServico");
+
+    if (nomeEl) nomeEl.innerText = "Serviço não encontrado";
+    if (descEl)
+      descEl.innerText =
+        "O serviço selecionado não existe ou foi removido.";
+
+    return;
+  }
 
   /* ===============================
      🔹 POPULA DADOS DO SERVIÇO
@@ -172,6 +96,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ===============================
+     🔹 BREADCRUMB
+     =============================== */
+  const breadcrumb = document.getElementById("breadcrumb");
+  if (breadcrumb) {
+    breadcrumb.innerHTML = `
+      <a href="${BASE_URL}/">Início</a>
+      <span>›</span>
+      <a href="${BASE_URL}/">Serviços</a>
+      <span>›</span>
+      <a href="${BASE_URL}/servicos/${categoria}/">
+        ${dados.categoriaLabel}
+      </a>
+      <span>›</span>
+      <strong>${dados.titulo}</strong>
+    `;
+  }
+
+  /* ===============================
      🔹 VALIDAÇÃO
      =============================== */
   function emailValido(email) {
@@ -185,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (id === "email" && !emailValido(campo.value)) return false;
       return true;
     });
+
     botao.disabled = !valido;
   }
 
@@ -194,32 +137,30 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ===============================
-     🔹 MÁSCARAS (SEM INTERFERIR NO FLUXO)
+     🔹 MÁSCARA WHATSAPP (BACKSPACE FUNCIONA)
      =============================== */
   const inputWhatsapp = document.getElementById("whatsapp");
-  const inputCpf = document.getElementById("cpf");
-
-  const inputWhatsapp = document.getElementById("whatsapp");
-
   if (inputWhatsapp) {
-  let apagando = false;
+    let apagando = false;
 
-  inputWhatsapp.addEventListener("keydown", (e) => {
-    apagando = e.key === "Backspace";
-  });
+    inputWhatsapp.addEventListener("keydown", e => {
+      apagando = e.key === "Backspace";
+    });
 
-  inputWhatsapp.addEventListener("input", () => {
-    if (apagando) return;
+    inputWhatsapp.addEventListener("input", () => {
+      if (apagando) return;
 
-    let v = inputWhatsapp.value.replace(/\D/g, "").slice(0, 11);
+      let v = inputWhatsapp.value.replace(/\D/g, "").slice(0, 11);
+      if (v.length > 2) v = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+      if (v.length > 7) v = `${v.slice(0, 9)}-${v.slice(9)}`;
+      inputWhatsapp.value = v;
+    });
+  }
 
-    if (v.length > 2) v = `(${v.slice(0, 2)}) ${v.slice(2)}`;
-    if (v.length > 7) v = `${v.slice(0, 9)}-${v.slice(9)}`;
-
-    inputWhatsapp.value = v;
-  });
-}
-
+  /* ===============================
+     🔹 MÁSCARA CPF
+     =============================== */
+  const inputCpf = document.getElementById("cpf");
   if (inputCpf) {
     inputCpf.addEventListener("input", () => {
       let v = inputCpf.value.replace(/\D/g, "").slice(0, 11);
@@ -235,47 +176,34 @@ document.addEventListener("DOMContentLoaded", () => {
      =============================== */
   let envioEmAndamento = false;
 
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    if (envioEmAndamento) return;
 
-      if (envioEmAndamento) return;
-      envioEmAndamento = true;
+    envioEmAndamento = true;
+    const textoOriginal = botao.innerHTML;
 
-      const textoOriginal = botao.innerHTML;
-      botao.disabled = true;
-      botao.innerHTML = `<span class="spinner"></span> Enviando...`;
+    botao.disabled = true;
+    botao.innerHTML = `<span class="spinner"></span> Enviando...`;
 
-      const nome = document.getElementById("nome").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const whatsapp = document.getElementById("whatsapp").value.trim();
-      const cpf = document.getElementById("cpf").value.trim();
-      const observacoes = document.getElementById("observacoes")?.value.trim() || "";
-
-      const mensagem = `
+    const mensagem = `
 📌 *Novo Pedido de Serviço*
 
 🛎️ *Serviço:* ${dados.titulo}
 📂 *Categoria:* ${dados.categoriaLabel}
 💰 *Valor:* ${dados.valor}
+    `.trim();
 
-👤 *Nome:* ${nome}
-📧 *Email:* ${email}
-📱 *WhatsApp:* ${whatsapp}
-🆔 *CPF:* ${cpf}
+    window.open(
+      `https://wa.me/5561920041427?text=${encodeURIComponent(mensagem)}`,
+      "_blank"
+    );
 
-📝 *Observações:*
-${observacoes || "Nenhuma"}
-      `.trim();
-
-      const url = `https://wa.me/5561920041427?text=${encodeURIComponent(mensagem)}`;
-      window.open(url, "_blank");
-
-      setTimeout(() => {
-        botao.innerHTML = textoOriginal;
-        botao.disabled = false;
-        envioEmAndamento = false;
-      }, 600);
-    });
-  }
+    setTimeout(() => {
+      botao.innerHTML = textoOriginal;
+      botao.disabled = false;
+      envioEmAndamento = false;
+    }, 600);
+  });
 });
+
