@@ -450,3 +450,51 @@ if (breadcrumb && dados && categoria) {
     if (campo) campo.addEventListener("input", validarFormulario);
   });
 });
+
+/* ===============================
+ 🔹 ENVIO DO PEDIDO (WHATSAPP)
+ =============================== */
+if (form) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // 🔹 Loading no botão
+    botao.disabled = true;
+    botao.innerText = "Enviando...";
+
+    const nome = document.getElementById("nome").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const whatsapp = document.getElementById("whatsapp").value.trim();
+    const cpf = document.getElementById("cpf").value.trim();
+    const observacoes =
+      document.getElementById("observacoes")?.value.trim() || "";
+
+    const mensagem = `
+📌 *Novo Pedido de Serviço*
+
+🛎️ *Serviço:* ${dados.titulo}
+📂 *Categoria:* ${dados.categoriaLabel}
+💰 *Valor:* ${dados.valor}
+
+👤 *Nome:* ${nome}
+📧 *Email:* ${email}
+📱 *WhatsApp:* ${whatsapp}
+🆔 *CPF:* ${cpf}
+
+📝 *Observações:*
+${observacoes || "Nenhuma"}
+    `.trim();
+
+    const numero = "5561920041427";
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+    // 🔹 Pequeno delay para o loading aparecer
+    setTimeout(() => {
+      window.open(url, "_blank");
+
+      botao.innerText = "Enviar Pedido";
+      botao.disabled = false;
+    }, 600);
+  });
+}
+
