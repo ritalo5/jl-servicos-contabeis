@@ -1,144 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Serviços Contábeis | J L Serviços Contábeis</title>
-
-  <!-- CSS GLOBAL -->
-  <link rel="stylesheet" href="/jl-servicos-contabeis/style.css">
-  <!-- CSS BASE (PADRÃO MEI) -->
-  <link rel="stylesheet" href="../mei/mei.css">
+  
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="./contabeis.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+<body>
 
-  <body>
+  <header class="site-header">
+    <div class="container header-top">
+      <h1 class="site-title" style="font-size: 1.5rem;">J L Serviços Contábeis</h1>
+      <nav class="main-nav">
+        <ul class="menu">
+          <li class="menu-item"><a href="../../index.html">Início</a></li>
+          <li class="menu-item"><a href="../../blog/index.html">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <!-- ===== BREADCRUMB ===== -->
   <nav class="breadcrumb container">
-  <a href="/jl-servicos-contabeis/">Início</a>
-  <span>›</span>
-  <a href="/jl-servicos-contabeis/">Serviços</a>
-  <span>›</span>
-  <strong>Serviços Contábeis</strong>
-</nav>
+    <a href="../../index.html">Início</a> / <span>Serviços</span> / <strong>Contábeis</strong>
+  </nav>
 
-  <main class="container mei-page">
-
-    <!-- ===== TÍTULO ===== -->
-    <header class="mei-header">
+  <main class="container contabeis-page">
+    <header class="contabeis-header">
       <h1>Serviços Contábeis</h1>
-      <p>Gestão contábil, fiscal e estratégica para empresas e profissionais.</p>
+      <p>Consultoria estratégica e gestão técnica para garantir a saúde financeira e legal do seu negócio.</p>
     </header>
 
-    <!-- ===== SERVIÇOS ===== -->
-    <section class="mei-section mei-servicos">
-      <h2>Serviços Disponíveis</h2>
-
+    <section class="contabeis-section">
+      <h2>Especialidades</h2>
       <div class="services-grid">
-
-        <a class="service-card"
-           href="/jl-servicos-contabeis/servicos/compra/?categoria=contabeis&servico=consultoria-contabil">
+        
+        <a class="service-card" data-servico="consultoria-contabil">
           <span class="service-title">Consultoria Contábil</span>
           <span class="service-price">R$ 249,99</span>
-          </a>
+        </a>
 
-        <a class="service-card"
-           href="/jl-servicos-contabeis/servicos/compra/?categoria=contabeis&servico=planejamento-tributario">
+        <a class="service-card" data-servico="planejamento-tributario">
           <span class="service-title">Planejamento Tributário</span>
           <span class="service-price">R$ 399,99</span>
-          </a>
+        </a>
 
-        <a class="service-card"
-           href="/jl-servicos-contabeis/servicos/compra/?categoria=contabeis&servico=balanco-patrimonial">
+        <a class="service-card" data-servico="balanco-patrimonial">
           <span class="service-title">Elaboração de Balanço</span>
           <span class="service-price">R$ 349,99</span>
-          </a>
+        </a>
 
-        <a class="service-card"
-           href="/jl-servicos-contabeis/servicos/compra/?categoria=contabeis&servico=regularizacao-empresa">
-           <span class="service-title">Regularização de Empresa</span>
+        <a class="service-card" data-servico="regularizacao-empresa">
+          <span class="service-title">Regularização de Empresa</span>
           <span class="service-price">R$ 299,99</span>
-          </a>
+        </a>
 
-        <a class="service-card"
-           href="/jl-servicos-contabeis/servicos/compra/?categoria=contabeis&servico=encerramento-empresa">
-           <span class="service-title">Encerramento de Empresa</span>
+        <a class="service-card" data-servico="encerramento-empresa">
+          <span class="service-title">Encerramento de Empresa</span>
           <span class="service-price">R$ 279,99</span>
-          </a>
+        </a>
 
       </div>
     </section>
-
   </main>
 
-    <!-- ===== FOOTER ===== -->
-<footer class="site-footer">
+  <footer class="site-footer" style="text-align: center; padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 80px;">
+    <h3 style="color: #bd9617; margin-bottom: 10px;">J L Serviços Contábeis</h3>
+    <p style="color: #fff; opacity: 0.5; font-size: 0.8rem;">© 2026 — Todos os direitos reservados</p>
+  </footer>
 
-  <div class="footer-container">
-
-    <!-- COLUNA 1 -->
-    <div class="footer-col">
-      <h3>J L Serviços Contábeis</h3>
-      <p>
-        Soluções contábeis com transparência, segurança e foco em resultados
-        para MEI, Pessoa Física e Empresas.
-      </p>
-    </div>
-
-    <!-- COLUNA 2 -->
-    <div class="footer-col">
-      <h4>Links Rápidos</h4>
-      <ul>
-        <li><a href="/jl-servicos-contabeis/">Início</a></li>
-        <li><a href="/jl-servicos-contabeis/">Serviços</a></li>
-        <li><a href="/jl-servicos-contabeis/sobre/">Quem Somos</a></li>
-        <li><a href="/jl-servicos-contabeis/lgpd/index.html">Política de Privacidade</a></li>
-      </ul>
-    </div>
-
-    <!-- COLUNA 3 -->
-    <div class="footer-col">
-      <h4>Contato</h4>
-
-      <a href="https://wa.me/5561920041427"
-         target="_blank"
-         style="
-           display:inline-block;
-           background:#25D366;
-           color:#000;
-           padding:12px 20px;
-           border-radius:30px;
-           font-weight:bold;
-           text-decoration:none;
-           margin-bottom:15px;
-         ">
-        Falar no WhatsApp
-      </a>
-
-      <p style="margin-top:15px;">
-        jlservicoscontabeis0@gmail.com
-      </p>
-    </div>
-
-  </div>
-
-  <div style="
-    border-top:1px solid rgba(255,255,255,0.1);
-    margin-top:40px;
-    padding-top:20px;
-    text-align:center;
-    font-size:14px;
-    color:#ffffff99;
-  ">
-    © 2026 J L Serviços Contábeis — Todos os direitos reservados
-  </div>
-
-</footer>
-
-  <!-- CTA FIXO -->
-  <a href="https://wa.me/5500000000000" class="cta-fixed" target="_blank">
-    Falar sobre Serviços Contábeis
-  </a>
-
+  <script src="./contabeis.js"></script>
 </body>
 </html>
