@@ -118,3 +118,34 @@ body { font-family: 'Montserrat', sans-serif; background: #0b1c2d; color: #fffff
     display: block;
     margin: 0 auto 20px; /* Centraliza a logo e dá espaço para o título */
 }
+
+/* Faz a logo e os textos ficarem na mesma linha */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza o conjunto todo */
+    gap: 20px;               /* Espaço entre a logo e o texto */
+    margin-bottom: 20px;     /* Espaço antes de começar o menu */
+}
+
+/* Controla o tamanho da logo */
+.site-logo {
+    max-width: 100px;        /* Ajuste conforme o tamanho da sua logo */
+    height: auto;
+}
+
+/* Garante que o subtítulo fique certinho abaixo do título */
+.title-group {
+    text-align: left;
+}
+
+.site-title {
+    font-size: 3.5rem !important; /* Aumentado como você pediu */
+    margin: 0;
+    line-height: 1;
+}
+
+.site-subtitle {
+    margin: 0;
+    color: #bd9617;
+}
