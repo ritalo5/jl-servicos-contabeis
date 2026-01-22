@@ -114,55 +114,50 @@ body { font-family: 'Montserrat', sans-serif; background: #0b1c2d; color: #fffff
 }
 
 /* ==========================================================================
-   REATIVANDO O DROPDOWN (SEM PERDER O ALINHAMENTO)
+   REATIVANDO O DROPDOWN (VERSÃO REFORÇADA)
    ========================================================================== */
 
 /* Garante que o menu de serviços seja o ponto de referência */
 .menu-item.dropdown {
-    position: relative;
+    position: relative !important;
 }
 
-/* Esconde a lista por padrão e define o visual */
+/* Esconde a lista por padrão */
 .dropdown-menu {
-    position: absolute;
-    top: 100%; /* Aparece exatamente abaixo do botão */
-    left: 50%;
-    transform: translateX(-50%); /* Centraliza em relação ao botão */
-    width: 260px;
+    position: absolute !important;
+    top: 100% !important; 
+    left: 0 !important;
+    width: 260px !important;
     background: #0e2a47 !important; 
-    border: 1px solid #bd9617;
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    list-style: none;
-    padding: 10px 0;
-    margin: 0;
-    z-index: 9999;
-    
-    /* Estado inicial: Invisível */
-    display: none; 
-    box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+    border: 1px solid #bd9617 !important;
+    list-style: none !important;
+    padding: 10px 0 !important;
+    margin: 0 !important;
+    z-index: 9999 !important;
+    display: none !important; /* Escondido */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.5) !important;
 }
 
-/* Mostra a lista quando o mouse passa por cima do "SERVIÇOS" */
-.menu-item.dropdown:hover .dropdown-menu {
+/* REGRA DE OURO: Mostra o menu quando passa o mouse no ITEM ou no BOTÃO */
+.menu-item:hover .dropdown-menu,
+.menu-item.dropdown:hover > .dropdown-menu {
     display: block !important;
 }
 
-/* Estilo dos links dentro da lista suspensa */
+/* Estilo dos links internos (Mantendo o design que você aprovou) */
 .dropdown-menu li a {
     display: block !important;
-    width: 100%;
+    width: 100% !important;
     padding: 12px 20px !important;
     font-size: 14px !important;
-    text-transform: none !important; /* Deixa a primeira letra maiúscula apenas */
+    text-transform: none !important;
     font-weight: 500 !important;
     text-align: left !important;
-    height: auto !important; /* Importante: links internos não seguem os 60px do menu */
+    height: auto !important; 
     color: #ffffff !important;
-    transition: background 0.2s;
+    line-height: 1.4 !important;
 }
 
-/* Efeito de destaque ao passar o mouse nos itens da lista */
 .dropdown-menu li a:hover {
     background: #bd9617 !important;
     color: #0b1c2d !important;
