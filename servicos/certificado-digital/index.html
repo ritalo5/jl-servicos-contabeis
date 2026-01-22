@@ -4,124 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Certificado Digital | J L Serviços Contábeis</title>
-
-  <!-- CSS GLOBAL -->
-  <link rel="stylesheet" href="/jl-servicos-contabeis/style.css">
-  <!-- CSS BASE (reaproveita o layout do MEI) -->
-  <link rel="stylesheet" href="../mei/mei.css">
+  
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="./certificado.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+<body>
 
-  <body>
+  <header class="site-header">
+    <div class="container header-top">
+      <h1 class="site-title" style="font-size: 1.5rem;">J L Serviços Contábeis</h1>
+      <nav class="main-nav">
+        <ul class="menu">
+          <li class="menu-item"><a href="../../index.html">Início</a></li>
+          <li class="menu-item"><a href="../../blog/index.html">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <!-- ===== BREADCRUMB ===== -->
   <nav class="breadcrumb container">
-  <a href="/jl-servicos-contabeis/">Início</a>
-  <span>›</span>
-  <a href="/jl-servicos-contabeis/">Serviços</a>
-  <span>›</span>
-  <strong>Certificado Digital</strong>
-</nav>
+    <a href="../../index.html">Início</a> / <span>Serviços</span> / <strong>Certificado Digital</strong>
+  </nav>
 
-  <main class="container mei-page">
-
-    <!-- ===== TÍTULO ===== -->
-    <header class="mei-header">
+  <main class="container certificado-page">
+    <header class="certificado-header">
       <h1>Certificado Digital</h1>
-      <p>Emissão, renovação e suporte para certificados digitais com validade jurídica.</p>
+      <p>Sua identidade digital com validade jurídica para assinar documentos e acessar portais governamentais.</p>
     </header>
 
-    <!-- ===== SERVIÇOS ===== -->
-    <section class="mei-section mei-servicos">
+    <section class="certificado-section">
       <h2>Tipos de Certificado</h2>
-
       <div class="services-grid">
+        
+        <a class="service-card" data-servico="certificado-a1">
+          <span class="service-title">Certificado Digital A1 (Arquivo)</span>
+          <span class="service-price">R$ 189,99</span>
+        </a>
 
-        <a class="service-card"
-   href="/jl-servicos-contabeis/servicos/compra/?categoria=certificado-digital&servico=certificado-a1">
-  <span class="service-title">Certificado Digital A1</span>
-  <span class="service-price">R$ 189,99</span>
-</a>
+        <a class="service-card" data-servico="certificado-a3">
+          <span class="service-title">Certificado Digital A3 (Token/Cartão)</span>
+          <span class="service-price">R$ 249,99</span>
+        </a>
 
-<a class="service-card"
-   href="/jl-servicos-contabeis/servicos/compra/?categoria=certificado-digital&servico=certificado-a3">
-  <span class="service-title">Certificado Digital A3</span>
-  <span class="service-price">R$ 249,99</span>
-</a>
-
-<a class="service-card"
-   href="/jl-servicos-contabeis/servicos/compra/?categoria=certificado-digital&servico=renovacao-certificado">
-  <span class="service-title">Renovação de Certificado Digital</span>
-  <span class="service-price">R$ 149,99</span>
-</a>
+        <a class="service-card" data-servico="renovacao-certificado">
+          <span class="service-title">Renovação de Certificado</span>
+          <span class="service-price">R$ 149,99</span>
+        </a>
 
       </div>
     </section>
-
   </main>
 
-    <!-- ===== FOOTER ===== -->
-<footer class="site-footer">
+  <footer class="site-footer" style="text-align: center; padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 80px;">
+    <h3 style="color: #bd9617; margin-bottom: 10px;">J L Serviços Contábeis</h3>
+    <p style="color: #fff; opacity: 0.5; font-size: 0.8rem;">© 2026 — Todos os direitos reservados</p>
+  </footer>
 
-  <div class="footer-container">
-
-    <!-- COLUNA 1 -->
-    <div class="footer-col">
-      <h3>J L Serviços Contábeis</h3>
-      <p>
-        Soluções contábeis com transparência, segurança e foco em resultados
-        para MEI, Pessoa Física e Empresas.
-      </p>
-    </div>
-
-    <!-- COLUNA 2 -->
-    <div class="footer-col">
-      <h4>Links Rápidos</h4>
-      <ul>
-        <li><a href="/jl-servicos-contabeis/">Início</a></li>
-        <li><a href="/jl-servicos-contabeis/">Serviços</a></li>
-        <li><a href="/jl-servicos-contabeis/sobre/">Quem Somos</a></li>
-        <li><a href="/jl-servicos-contabeis/lgpd/index.html">Política de Privacidade</a></li>
-      </ul>
-    </div>
-
-    <!-- COLUNA 3 -->
-    <div class="footer-col">
-      <h4>Contato</h4>
-
-      <a href="https://wa.me/5561920041427"
-         target="_blank"
-         style="
-           display:inline-block;
-           background:#25D366;
-           color:#000;
-           padding:12px 20px;
-           border-radius:30px;
-           font-weight:bold;
-           text-decoration:none;
-           margin-bottom:15px;
-         ">
-        Falar no WhatsApp
-      </a>
-
-      <p style="margin-top:15px;">
-        jlservicoscontabeis0@gmail.com
-      </p>
-    </div>
-
-  </div>
-
-  <div style="
-    border-top:1px solid rgba(255,255,255,0.1);
-    margin-top:40px;
-    padding-top:20px;
-    text-align:center;
-    font-size:14px;
-    color:#ffffff99;
-  ">
-    © 2026 J L Serviços Contábeis — Todos os direitos reservados
-  </div>
-
-</footer>
-
+  <script src="./certificado.js"></script>
 </body>
 </html>
