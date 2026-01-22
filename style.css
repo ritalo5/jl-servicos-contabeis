@@ -270,3 +270,17 @@ body {
     display: block;
   }
 }
+
+.menu-item a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px; /* Tamanho padronizado */
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  color: #ffffff;
+  transition: 0.3s;
+}
+
+.menu-item a:hover {
+  color: #bd9617;
+}
