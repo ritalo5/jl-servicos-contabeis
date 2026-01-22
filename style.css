@@ -56,7 +56,7 @@ body { font-family: 'Montserrat', sans-serif; background: #0b1c2d; color: #fffff
 }
 
 /* ==========================================================================
-   MENU E DROPDOWN
+   MENU E DROPDOWN (PADRONIZAÇÃO TOTAL)
    ========================================================================== */
 .main-nav { 
     width: 100%;
@@ -64,29 +64,60 @@ body { font-family: 'Montserrat', sans-serif; background: #0b1c2d; color: #fffff
     border-top: 1px solid rgba(189, 150, 23, 0.2); 
     border-bottom: 1px solid rgba(189, 150, 23, 0.2); 
 }
-.menu { display: flex; justify-content: center; list-style: none; padding: 0; }
+
+.menu { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; /* Garante alinhamento vertical perfeito */
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
+}
+
 .menu-item { position: relative; }
 
-.menu-item a, .dropdown-toggle {
-    display: block;
-    padding: 15px 25px;
+/* PADRONIZAÇÃO: Links e Botões com o mesmo DNA */
+.menu-item a, 
+.menu-item .dropdown-toggle {
+    display: flex; /* Flex ajuda a centralizar o texto internamente */
+    align-items: center;
+    justify-content: center;
+    
+    /* Fontes idênticas */
+    font-family: 'Montserrat', sans-serif !important;
     font-size: 15px !important; 
     font-weight: 600 !important;
     color: #ffffff !important;
     text-transform: uppercase;
     text-decoration: none;
-    transition: 0.3s;
-    background: none;
-    border: none;
+    
+    /* Espaçamento e Reset de Botão */
+    padding: 20px 25px; /* Aumentei o padding para um clique melhor */
+    background: none !important;
+    border: none !important;
     cursor: pointer;
+    outline: none;
+    transition: 0.3s;
+    
+    /* Garante que o botão não herde larguras estranhas */
+    width: auto;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
-.menu-item a:hover { color: #bd9617 !important; background: rgba(255,255,255,0.05); }
+/* Efeito Hover igual para todos */
+.menu-item a:hover, 
+.menu-item .dropdown-toggle:hover { 
+    color: #bd9617 !important; 
+    background: rgba(255,255,255,0.05) !important; 
+}
 
+/* Ajuste do Dropdown para não brotar do nada */
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza o dropdown em relação ao item pai */
     width: 240px;
     background: #0e2a47 !important; 
     border: 1px solid #bd9617;
@@ -95,6 +126,7 @@ body { font-family: 'Montserrat', sans-serif; background: #0b1c2d; color: #fffff
     z-index: 1000;
     list-style: none;
     padding: 10px 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
 .dropdown-menu li a {
@@ -102,10 +134,11 @@ body { font-family: 'Montserrat', sans-serif; background: #0b1c2d; color: #fffff
     text-transform: none !important;
     font-size: 14px !important;
     padding: 12px 20px !important;
+    display: block;
+    width: 100%;
 }
 
 .menu-item:hover .dropdown-menu { display: block; }
-
 /* ==========================================================================
    BLOG HOME (CARDS)
    ========================================================================== */
