@@ -113,31 +113,46 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(id)?.addEventListener("input", validarFormulario);
   });
 
-  // ENVIO (DADOS DO CLIENTE INCLUÍDOS)
-  form.addEventListener("submit", e => {
+  // --- ENVIO COM BLOQUEIO, SPINNER E EMOJIS ---
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    if (botao.classList.contains("btn-loading")) return;
+
+    botao.classList.add("btn-loading");
     botao.disabled = true;
-    
-    const clienteNome = document.getElementById("nome").value;
-    const clienteWhats = document.getElementById("whatsapp").value;
-    const clienteEmail = document.getElementById("email").value;
-    const clienteCpf = document.getElementById("cpf").value;
+    const textoOriginal = botao.innerHTML;
+    botao.innerHTML = `<span class="spinner"></span> Enviando pedido...`;
 
-    const mensagem = `
-📌 *Novo Pedido de Serviço*
+    // Captura os valores dos inputs
+    const nome = document.getElementById("nome").value.trim();
+    const whats = document.getElementById("whatsapp").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const cpf = document.getElementById("cpf").value.trim();
 
-🛎️ *Serviço:* ${dados.titulo}
+    // Montagem da mensagem com emojis genéricos
+    // Nota: O uso de \n garante a quebra de linha correta
+    const mensagem = 
+`🚀 *NOVO PEDIDO DE SERVIÇO*
+
+🛠️ *Serviço:* ${dados.titulo}
 💰 *Valor:* ${dados.valor}
 
-👤 *Dados do Cliente:*
-- *Nome:* ${clienteNome}
-- *WhatsApp:* ${clienteWhats}
-- *E-mail:* ${clienteEmail}
-- *CPF:* ${clienteCpf}
-    `.trim();
+👤 *DADOS DO CLIENTE:*
+📝 *Nome:* ${nome}
+📱 *WhatsApp:* ${whats}
+📧 *E-mail:* ${email}
+🆔 *CPF:* ${cpf}`.trim();
 
-    window.open(`https://wa.me/5561920041427?text=${encodeURIComponent(mensagem)}`, "_blank");
-    
-    setTimeout(() => { botao.disabled = false; }, 1000);
+    // Codifica a mensagem para a URL
+    const msgCodificada = encodeURIComponent(mensagem);
+    const linkWhats = `https://wa.me/5561920041427?text=${msgCodificada}`;
+
+    window.open(linkWhats, "_blank");
+
+    setTimeout(() => {
+      botao.classList.remove("btn-loading");
+      botao.innerHTML = textoOriginal;
+      validarFormulario();
+    }, 3000);
   });
-});
