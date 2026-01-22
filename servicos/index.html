@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pessoa Física | J L Serviços Contábeis</title>
+  <title>Todos os Serviços | J L Serviços Contábeis</title>
   
-  <link rel="stylesheet" href="../../style.css">
-  <link rel="stylesheet" href="./pessoa-fisica.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="./certidoes-regularizacoes/certidoes.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,82 +16,94 @@
       <h1 class="site-title" style="font-size: 1.5rem;">J L Serviços Contábeis</h1>
       <nav class="main-nav">
         <ul class="menu">
-          <li class="menu-item"><a href="../../index.html">Início</a></li>
-          <li class="menu-item"><a href="../../blog/index.html">Blog</a></li>
+          <li class="menu-item"><a href="../index.html">Início</a></li>
+          <li class="menu-item"><a href="../blog/index.html">Blog</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <nav class="breadcrumb container">
-    <a href="../../index.html">Início</a> / <span>Serviços</span> / <strong>Pessoa Física</strong>
+    <a href="../index.html">Início</a> <span>›</span> <strong>Serviços</strong>
   </nav>
 
   <main class="container pf-page">
     <header class="pf-header">
-      <h1>Pessoa Física</h1>
-      <p>Tranquilidade e conformidade com o leão. Cuidamos da sua vida fiscal para você focar no que importa.</p>
+      <h1>Catálogo de Serviços</h1>
+      <p>Soluções completas separadas por categorias para facilitar sua busca.</p>
     </header>
 
-    <section class="pf-section">
-      <h2>Serviços Disponíveis</h2>
+    <section class="pf-section" style="margin-bottom: 50px;">
+      <h2 style="text-align: left; border-left: 5px solid #bd9617; padding-left: 15px; margin-bottom: 25px;">Microempreendedor Individual (MEI)</h2>
       <div class="services-grid">
-        
-        <a class="service-card" data-servico="imposto-renda">
-          <span class="service-title">Declaração de Imposto de Renda</span>
-          <span class="service-price">R$ 139,99</span>
-        </a>
+        <a class="service-card" href="./mei/index.html"><span class="service-title">Planos Mensais MEI</span><span class="service-price">A partir de R$ 99,99</span></a>
+        <a class="service-card" href="./mei/index.html"><span class="service-title">Abertura e Regularização</span><span class="service-price">Consulte</span></a>
+      </div>
+    </section>
 
-        <a class="service-card" data-servico="ganho-capital">
-          <span class="service-title">Apuração de Ganho de Capital</span>
-          <span class="service-price">R$ 189,99</span>
-        </a>
+    <section class="pf-section" style="margin-bottom: 50px;">
+      <h2 style="text-align: left; border-left: 5px solid #bd9617; padding-left: 15px; margin-bottom: 25px;">Pessoa Física</h2>
+      <div class="services-grid">
+        <a class="service-card" href="./pessoa-fisica/index.html"><span class="service-title">Imposto de Renda (IRPF)</span><span class="service-price">R$ 139,99</span></a>
+        <a class="service-card" href="./pessoa-fisica/index.html"><span class="service-title">Regularização de CPF</span><span class="service-price">R$ 79,99</span></a>
+      </div>
+    </section>
 
-        <a class="service-card" data-servico="regularizacao-cpf">
-          <span class="service-title">Regularização de CPF</span>
-          <span class="service-price">R$ 79,99</span>
-        </a>
+    <section class="pf-section" style="margin-bottom: 50px;">
+      <h2 style="text-align: left; border-left: 5px solid #bd9617; padding-left: 15px; margin-bottom: 25px;">Certidões e Regularizações</h2>
+      <div class="services-grid">
+        <a class="service-card" href="./certidoes-regularizacoes/index.html"><span class="service-title">Emissão de Certidões</span><span class="service-price">R$ 89,99</span></a>
+        <a class="service-card" href="./certidoes-regularizacoes/index.html"><span class="service-title">Regularização de Empresas</span><span class="service-price">R$ 249,99</span></a>
+      </div>
+    </section>
 
-        <a class="service-card" data-servico="orientacao-fiscal">
-          <span class="service-title">Orientação Fiscal Personalizada</span>
-          <span class="service-price">R$ 119,99</span>
-        </a>
+    <section class="pf-section" style="margin-bottom: 50px;">
+      <h2 style="text-align: left; border-left: 5px solid #bd9617; padding-left: 15px; margin-bottom: 25px;">Certificado Digital</h2>
+      <div class="services-grid">
+        <a class="service-card" href="./certificado-digital/index.html"><span class="service-title">Emissão de A1 ou A3</span><span class="service-price">A partir de R$ 189,99</span></a>
+      </div>
+    </section>
 
+    <section class="pf-section">
+      <h2 style="text-align: left; border-left: 5px solid #bd9617; padding-left: 15px; margin-bottom: 25px;">Outros Serviços</h2>
+      <div class="services-grid">
+        <a class="service-card" href="./outros/index.html"><span class="service-title">Planilhas e Organização</span><span class="service-price">A partir de R$ 59,99</span></a>
       </div>
     </section>
   </main>
 
-<footer class="site-footer">
-  <div class="footer-container container">
-    <div class="footer-col">
-      <h3>J L Serviços Contábeis</h3>
-      <p>Soluções contábeis com transparência, segurança e foco em resultados para MEI, Pessoa Física e Empresas.</p>
+  <footer class="site-footer">
+    <div class="footer-container container">
+      <div class="footer-col">
+        <h3>J L Serviços Contábeis</h3>
+        <p>Soluções contábeis com transparência, segurança e foco em resultados.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Links Rápidos</h4>
+        <ul>
+          <li><a href="../index.html">Início</a></li>
+          <li><a href="index.html">Serviços</a></li>
+          <li><a href="../sobre/index.html">Quem Somos</a></li>
+          <li><a href="../lgpd/index.html">Privacidade</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <a href="https://wa.me/5561920041427" target="_blank" class="btn-footer-wpp">
+          Falar no WhatsApp
+        </a>
+        <div class="footer-email-box">
+          <span>jlservicoscontabeis0@gmail.com</span>
+        </div>
+      </div>
     </div>
 
-    <div class="footer-col">
-      <h4>Links Rápidos</h4>
-      <ul>
-        <li><a href="../../index.html">Início</a></li>
-        <li><a href="../../index.html#servicos">Serviços</a></li>
-        <li><a href="../../sobre/index.html">Quem Somos</a></li>
-        <li><a href="../../lgpd/index.html">Política de Privacidade</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <p>© 2026 J L Serviços Contábeis — Todos os direitos reservados</p>
     </div>
+  </footer>
 
-    <div class="footer-col">
-      <h4>Contato</h4>
-      <a href="https://wa.me/5561920041427" target="_blank" class="btn-whatsapp-footer">
-        Falar no WhatsApp
-      </a>
-      <p class="footer-email">jlservicoscontabeis0@gmail.com</p>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2026 J L Serviços Contábeis — Todos os direitos reservados</p>
-  </div>
-</footer>
-
-  <script src="./pessoa-fisica.js"></script>
 </body>
 </html>
