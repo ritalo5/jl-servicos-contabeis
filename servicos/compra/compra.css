@@ -1,13 +1,6 @@
-/* =================================================
-   🔹 CONFIGURAÇÕES GERAIS E LAYOUT
-   ================================================= */
-* {
-  box-sizing: border-box;
-}
-
+/* Restaura o background e cores originais */
 body {
-  margin: 0;
-  background: #081a2d;
+  background: #0b1c2d;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
 }
@@ -16,11 +9,6 @@ body {
   max-width: 1100px;
   margin: 60px auto;
   padding: 0 40px;
-}
-
-.titulo-servico {
-  text-align: center;
-  margin-bottom: 50px;
 }
 
 .grid {
@@ -33,47 +21,26 @@ body {
   background: #0e2a47;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-.card h2 {
-  margin-top: 0;
-  color: #d4af37;
-}
-
-.descricao {
-  line-height: 1.6;
-  opacity: 0.9;
-}
-
-.valor {
-  margin-top: 30px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #d4af37;
-}
-
-/* =================================================
-   🔹 FORMULÁRIO E INPUTS
-   ================================================= */
-input {
+/* Estilo para Inputs e Textarea (Observação) */
+input, textarea {
   width: 100%;
   padding: 12px;
   margin-bottom: 15px;
   border-radius: 6px;
   border: 1px solid rgba(255,255,255,0.1);
-  background: #0b1c2d;
+  background: #102a44; /* Cor escura que combina com o site */
   color: #fff;
   font-family: inherit;
 }
 
-input:focus {
-  outline: 2px solid #d4af37;
+textarea {
+  resize: vertical;
+  min-height: 100px;
 }
 
-/* =================================================
-   🔹 BOTÃO DE ENVIO E SPINNER
-   ================================================= */
+/* Botão Verde Original */
 button {
   width: 100%;
   padding: 16px;
@@ -82,38 +49,25 @@ button {
   border: none;
   border-radius: 6px;
   font-weight: bold;
-  font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  transition: all 0.3s ease;
-}
-
-button:hover:not(:disabled) {
-  background: #27ae60;
-  transform: translateY(-2px);
 }
 
 button:disabled {
-  background: #555 !important;
-  color: #ccc !important;
+  background: #555;
+  color: #ccc;
   cursor: not-allowed;
 }
 
-/* Estado visual de carregamento */
-.btn-loading {
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-/* O Círculo que Gira */
+/* Spinner */
 .spinner {
   width: 18px;
   height: 18px;
-  border: 3px solid rgba(0, 0, 0, 0.2); /* Fundo sutil */
-  border-top: 3px solid currentColor;    /* Cor igual ao texto do botão */
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top: 3px solid #000; /* Cor igual ao texto do botão */
   border-radius: 50%;
   display: inline-block;
   animation: spin 0.8s linear infinite;
@@ -123,9 +77,12 @@ button:disabled {
   to { transform: rotate(360deg); }
 }
 
-/* =================================================
-   🔹 BREADCRUMB (ESTILO DOURADO)
-   ================================================= */
+.btn-loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Breadcrumb */
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
@@ -134,33 +91,10 @@ button:disabled {
   margin-bottom: 30px;
 }
 
-.breadcrumb a {
-  color: #d4af37;
-  text-decoration: none;
-  transition: 0.2s;
-}
+.breadcrumb a { color: #d4af37; text-decoration: none; }
+.breadcrumb span { color: #d4af37; }
+.breadcrumb strong { color: #ffffff; }
 
-.breadcrumb a:hover {
-  text-decoration: underline;
-}
-
-.breadcrumb span {
-  color: #d4af37;
-}
-
-.breadcrumb strong {
-  color: #ffffff;
-}
-
-/* =================================================
-   🔹 RESPONSIVIDADE
-   ================================================= */
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-  .container {
-    margin: 30px auto;
-    padding: 0 20px;
-  }
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
 }
