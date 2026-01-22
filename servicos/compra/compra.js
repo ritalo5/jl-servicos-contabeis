@@ -50,10 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("valorServico").innerText = dados.valor;
   document.getElementById("inclusosServico").innerHTML = dados.inclusos.map(i => `<li>${i}</li>`).join("");
 
-  // Breadcrumb Dinâmico
+    // --- BREADCRUMB DINÂMICO COM CATEGORIA ---
   const bread = document.getElementById("breadcrumb");
-  if (bread) {
-    bread.innerHTML = `<a href="${BASE_URL}/">Início</a> <span>›</span> <a href="${BASE_URL}/">Serviços</a> <span>›</span> <strong>${dados.titulo}</strong>`;
+  if (bread && dados) {
+    bread.innerHTML = `
+      <a href="${BASE_URL}/">Início</a> 
+      <span>›</span> 
+      <a href="${BASE_URL}/">Serviços</a> 
+      <span>›</span> 
+      <a href="${BASE_URL}/servicos/${cat}/">${dados.categoriaLabel}</a> 
+      <span>›</span> 
+      <strong>${dados.titulo}</strong>
+    `;
   }
 
   // Máscaras (WhatsApp e CPF)
