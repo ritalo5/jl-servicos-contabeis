@@ -323,3 +323,8 @@ h2, .blog-content h2, .pf-section h2 {
     display: block;
     margin-top: 10px;
 }
+/* Correção de Contraste nos botões do topo */
+.menu-item a:hover {
+    color: #bd9617 !important; /* Força o Dourado no Início/Blog */
+    background: rgba(255,255,255,0.05) !important;
+}
