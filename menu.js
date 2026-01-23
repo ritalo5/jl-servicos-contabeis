@@ -5,26 +5,45 @@ const menu = document.querySelector('.menu');
 const dropdownToggle = document.querySelector('.dropdown-toggle');
 const dropdown = document.querySelector('.menu-item.dropdown');
 
-/* MENU MOBILE (ABRIR/FECHAR) */
+/* MENU MOBILE (ABRIR/FECHAR O HAMBÚRGUER) */
 if (menuToggle) {
   menuToggle.addEventListener('click', () => {
     menu.classList.toggle('open');
   });
 }
 
-/* DROPDOWN MOBILE (CLIQUE NO CELULAR) */
+/* DROPDOWN INTELIGENTE (MOBILE) */
 if (dropdownToggle) {
+  let isDropdownOpen = false;
+
   dropdownToggle.addEventListener('click', (e) => {
-    // Só age como clique se a tela for pequena
+    // Só aplica a lógica especial se a tela for menor que 768px
     if (window.innerWidth <= 768) {
-      e.preventDefault();
-      e.stopPropagation(); // Evita fechar o menu ao clicar
-      dropdown.classList.toggle('active'); // Usaremos 'active' para o mobile
       
-      const subMenu = dropdown.querySelector('.dropdown-menu');
-      if (subMenu) {
-        subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+      // Se for o primeiro clique, ele abre a lista em vez de seguir o link
+      if (!isDropdownOpen) {
+        e.preventDefault(); 
+        e.stopPropagation();
+        
+        dropdown.classList.add('active');
+        const subMenu = dropdown.querySelector('.dropdown-menu');
+        if (subMenu) {
+          subMenu.style.display = 'block';
+        }
+        
+        isDropdownOpen = true; // Agora o próximo clique funcionará como link
       }
+      // Se clicar de novo com ele aberto, o preventDefault não será chamado e ele seguirá o link para /servicos/index.html
+    }
+  });
+
+  // Fecha o dropdown se clicar fora dele
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+      const subMenu = dropdown.querySelector('.dropdown-menu');
+      if (subMenu) subMenu.style.display = 'none';
+      dropdown.classList.remove('active');
+      isDropdownOpen = false;
     }
   });
 }
@@ -36,7 +55,7 @@ async function testSupabase() {
     if (error) throw error;
     console.log('Supabase conectado com sucesso!');
   } catch (error) {
-    console.warn('Supabase: Verifique as tabelas ou conexão.', error.message);
+    console.warn('Supabase: Conexão ativa, mas verifique as tabelas.', error.message);
   }
 }
 
