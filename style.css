@@ -391,3 +391,17 @@ body.home-page .site-subtitle-header {
     background: #bd9617;
     color: #fff !important;
 }
+
+/* Remove qualquer estilo de lista do item do botão */
+.menu .menu-item {
+    list-style: none;
+    display: inline-block; /* Mantém um ao lado do outro */
+    vertical-align: middle;
+}
+
+/* Garante que o ícone e o texto fiquem alinhados */
+.btn-area-cliente {
+    display: inline-flex !important;
+    align-items: center;
+    text-transform: none; /* Evita que o botão fique todo em maiúsculo se o menu for */
+}
