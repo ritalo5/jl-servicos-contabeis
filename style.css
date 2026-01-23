@@ -405,3 +405,38 @@ body.home-page .site-subtitle-header {
     align-items: center;
     text-transform: none; /* Evita que o botão fique todo em maiúsculo se o menu for */
 }
+/* Garante que a lista ocupe a largura total e alinhe os itens */
+.menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-item {
+    margin: 0 15px; /* Espaço entre os botões */
+}
+
+/* Isso empurra o ÚLTIMO item (Área do Cliente) para a direita */
+.menu-item:last-child {
+    margin-left: auto; 
+}
+
+/* Estilo do botão para ele não parecer um link comum */
+.btn-area-cliente {
+    border: 1px solid #bd9617;
+    padding: 8px 18px;
+    border-radius: 5px;
+    color: #bd9617 !important;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.btn-area-cliente:hover {
+    background: #bd9617;
+    color: white !important;
+}
