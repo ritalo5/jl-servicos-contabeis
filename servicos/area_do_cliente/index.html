@@ -7,14 +7,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { background-color: #0a192f; color: white; font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-card { background: rgba(14, 42, 71, 0.8); padding: 40px; border-radius: 15px; border: 1px solid #bd9617; width: 100%; max-width: 350px; text-align: center; }
-        h2 { font-family: 'Playfair Display', serif; color: #bd9617; margin-bottom: 30px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #444; background: #0e2a47; color: white; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background: #bd9617; border: none; border-radius: 8px; color: white; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        button:hover { background: #d4a71c; }
-        .links { margin-top: 20px; font-size: 0.8rem; }
-        .links a { color: #ccc; text-decoration: none; }
+       body {
+    background: radial-gradient(circle at center, #0e2a47 0%, #0a192f 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px); /* Efeito de vidro moderno */
+    border: 1px solid rgba(189, 150, 23, 0.3);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+p.subtitle {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+input:focus {
+    border-color: #bd9617;
+    outline: none;
+    box-shadow: 0 0 10px rgba(189, 150, 23, 0.2);
+}
     </style>
 </head>
 <body>
