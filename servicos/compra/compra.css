@@ -169,3 +169,60 @@ input:focus, textarea:focus {
     .page-title { font-size: 2rem; }
     .row-inputs { grid-template-columns: 1fr; }
 }
+/* ===== HEADER ESTILO MEI (UNIFICADO) ===== */
+.mei-header {
+    text-align: center;
+    margin: 40px 0 60px;
+}
+
+.mei-header h1 {
+    font-size: 3rem;
+    color: #bd9617;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.mei-header p {
+    color: #ffffff;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/* ===== REGRAS PARA OS INPUTS (CORRIGINDO VISUAL) ===== */
+input, textarea {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    transition: 0.3s;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #bd9617;
+    z-index: 2;
+}
+
+.breadcrumb-custom {
+    margin-top: 30px; 
+    font-size: 0.9rem; 
+    color: rgba(255,255,255,0.6); 
+    font-family: 'Montserrat', sans-serif;
+}
+
+.breadcrumb-custom a { color: #bd9617; text-decoration: none; }
+.breadcrumb-custom span { margin: 0 8px; }
+
+@media (max-width: 768px) {
+    .mei-header h1 { font-size: 2rem; }
+}
