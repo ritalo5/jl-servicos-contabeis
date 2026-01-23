@@ -241,3 +241,34 @@ h2, .blog-content h2, .pf-section h2 {
         background: rgba(255, 255, 255, 0.05) !important;
     }
 }
+/* PADRONIZAÇÃO DO BREADCRUMB */
+.breadcrumb, .breadcrumb-custom {
+    padding: 20px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #bd9617; /* Cor do separador / e links */
+}
+
+.breadcrumb a, .breadcrumb-custom a {
+    color: #bd9617;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+.breadcrumb a:hover, .breadcrumb-custom a:hover {
+    opacity: 0.7;
+}
+
+/* Cor da página atual (sempre a última) */
+.breadcrumb strong, .breadcrumb span.current, .breadcrumb-custom strong {
+    color: #ffffff !important;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+/* Espaçamento dos separadores */
+.breadcrumb span, .breadcrumb-custom span {
+    margin: 0 8px;
+    color: #bd9617;
+}
