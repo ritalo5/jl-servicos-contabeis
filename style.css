@@ -272,3 +272,54 @@ h2, .blog-content h2, .pf-section h2 {
     margin: 0 8px;
     color: #bd9617;
 }
+/* CORREÇÃO GLOBAL DO RODAPÉ */
+.site-footer {
+    background-color: #0b1c2d; /* Garante o fundo escuro padrão */
+    color: #ffffff;
+    padding: 60px 0 30px;
+}
+
+/* Remove o azul de todos os links do rodapé */
+.site-footer a {
+    color: #cccccc !important; /* Cinza claro para não cansar a vista */
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* Cor ao passar o mouse (Hover) */
+.site-footer a:hover {
+    color: #bd9617 !important; /* Dourado no hover */
+    text-decoration: none;
+}
+
+/* Estilo específico para os títulos do rodapé */
+.site-footer h3, 
+.site-footer h4 {
+    color: #bd9617;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Garante que o botão do WhatsApp não mude de cor */
+.btn-whatsapp-footer {
+    background-color: #25D366 !important;
+    color: #ffffff !important;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.btn-whatsapp-footer:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+/* Ajuste do e-mail no rodapé */
+.footer-email {
+    color: #bd9617 !important;
+    font-weight: 600;
+    display: block;
+    margin-top: 10px;
+}
