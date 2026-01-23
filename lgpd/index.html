@@ -6,7 +6,24 @@
   <title>Política de Privacidade (LGPD) | J L Serviços Contábeis</title>
 
   <link rel="stylesheet" href="../style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Estilos específicos para manter o layout de duas colunas */
+    .sobre-main {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 40px 0;
+    }
+    .sobre-conteudo { flex: 2; min-width: 300px; }
+    .sobre-perfil { flex: 1; min-width: 300px; }
+    
+    /* Padronização do Breadcrumb via CSS */
+    .breadcrumb { padding: 20px 0; font-size: 0.9rem; }
+    .breadcrumb a { color: #bd9617; text-decoration: none; font-weight: 600; }
+    .breadcrumb span { color: #bd9617; margin: 0 8px; }
+    .breadcrumb strong { color: #ffffff; font-weight: 700; }
+  </style>
 </head>
 
 <body>
@@ -14,8 +31,6 @@
   <header class="site-header">
     <div class="container header-top">
       <h1 class="site-title">J L Serviços Contábeis</h1>
-      <p class="site-subtitle">Atendimento Online</p>
-      
       <nav class="main-nav">
         <ul class="menu">
           <li class="menu-item"><a href="/jl-servicos-contabeis/">Início</a></li>
@@ -26,56 +41,58 @@
     </div>
   </header>
 
-  <main class="container sobre-main"> <section class="sobre-conteudo">
+  <main class="container sobre-main"> 
+    
+    <section class="sobre-conteudo">
       <nav class="breadcrumb">
-        <a href="/jl-servicos-contabeis/">Início</a> <span>›</span> <strong>Política de Privacidade</strong>
+        <a href="/jl-servicos-contabeis/">Início</a> <span>/</span> <strong>Política de Privacidade</strong>
       </nav>
 
-      <h1 class="titulo-sessao">Política de Privacidade</h1>
+      <h1 class="titulo-sessao" style="color:#bd9617; font-family:'Playfair Display', serif; margin-bottom:30px;">Política de Privacidade</h1>
 
       <div class="bloco-texto">
-        <h2>🔹 COMPROMISSO</h2>
+        <h2 style="color:#bd9617; font-size: 1.2rem;">🔹 COMPROMISSO</h2>
         <p>A J L Serviços Contábeis respeita a sua privacidade e está comprometida com a proteção dos dados pessoais coletados por meio deste site. Esta Política explica como os dados são tratados conforme a Lei Geral de Proteção de Dados (LGPD).</p>
       </div>
 
-      <div class="bloco-texto">
-        <h2>🔹 QUAIS DADOS COLETAMOS</h2>
-        <ul class="lista-custom">
-          <li>Nome completo e E-mail</li>
-          <li>Telefone / WhatsApp</li>
-          <li>CPF (necessário para prestação de serviços específicos)</li>
-          <li>Informações voluntárias em formulários de contato</li>
+      <div class="bloco-texto" style="margin-top: 25px;">
+        <h2 style="color:#bd9617; font-size: 1.2rem;">🔹 QUAIS DADOS COLETAMOS</h2>
+        <ul class="lista-custom" style="list-style: none; padding: 0; color: #ccc; line-height: 1.8;">
+          <li>✔ Nome completo e E-mail</li>
+          <li>✔ Telefone / WhatsApp</li>
+          <li>✔ CPF (para prestação de serviços específicos)</li>
+          <li>✔ Informações voluntárias em formulários</li>
         </ul>
       </div>
 
-      <div class="bloco-texto">
-        <h2>🔹 FINALIDADE</h2>
+      <div class="bloco-texto" style="margin-top: 25px;">
+        <h2 style="color:#bd9617; font-size: 1.2rem;">🔹 FINALIDADE</h2>
         <p>Os dados são utilizados exclusivamente para entrar em contato com o cliente, prestar serviços contábeis, emitir guias fiscais e cumprir exigências legais junto aos órgãos públicos.</p>
       </div>
 
-      <div class="bloco-texto">
-        <h2>🔹 SEUS DIREITOS</h2>
+      <div class="bloco-texto" style="margin-top: 25px;">
+        <h2 style="color:#bd9617; font-size: 1.2rem;">🔹 SEUS DIREITOS</h2>
         <p>Conforme o Art. 18 da LGPD, você pode solicitar a qualquer momento a confirmação da existência de tratamento, correção de dados ou revogação de consentimento através dos nossos canais oficiais.</p>
       </div>
     </section>
 
     <aside class="sobre-perfil">
-      <div class="card-autoridade">
-        <div class="foto-placeholder">
-          <img src="../minha-foto.jpeg" alt="JOÃO VITOR SANTOS SILVA">
+      <div class="card-autoridade" style="background: rgba(14,42,71,0.5); border: 1px solid #bd9617; padding: 30px; border-radius: 15px; text-align: center;">
+        <div class="foto-placeholder" style="margin-bottom: 20px;">
+          <img src="../minha-foto.jpeg" alt="JOÃO VITOR SANTOS SILVA" style="width: 150px; height: 150px; border-radius: 50%; border: 2px solid #bd9617; object-fit: cover;">
         </div>
         <div class="perfil-info">
-          <h3>JOÃO VITOR SANTOS SILVA</h3>
-          <p class="cargo">Contador Responsável</p>
+          <h3 style="color:#bd9617; margin-bottom: 5px;">JOÃO VITOR SANTOS SILVA</h3>
+          <p class="cargo" style="color: #fff; font-weight: 600; font-size: 0.9rem;">Contador Responsável</p>
           
-          <div class="registro-box">
+          <div class="registro-box" style="background: rgba(189,150,23,0.1); padding: 10px; border-radius: 8px; margin: 15px 0; color: #bd9617; font-size: 0.85rem;">
             <strong>Registro Profissional</strong><br>
             CRC DF-031580/O
           </div>
 
-          <p class="bio-curta">Garantindo a segurança dos seus dados e a regularidade do seu negócio.</p>
+          <p class="bio-curta" style="font-size: 0.85rem; color: #ccc; margin-bottom: 20px;">Garantindo a segurança dos seus dados e a regularidade do seu negócio.</p>
 
-          <a href="https://wa.me/5561920041427" target="_blank" class="btn-whats-card">
+          <a href="https://wa.me/5561920041427" target="_blank" class="btn-whats-card" style="display: block; background: #25D366; color: #fff; text-decoration: none; padding: 12px; border-radius: 5px; font-weight: 700; font-size: 0.9rem;">
             Tirar dúvidas sobre dados
           </a>
         </div>
@@ -84,36 +101,36 @@
 
   </main>
 
-<footer class="site-footer">
-  <div class="footer-container container">
-    <div class="footer-col">
-      <h3>J L Serviços Contábeis</h3>
-      <p>Soluções contábeis com transparência, segurança e foco em resultados para MEI, Pessoa Física e Empresas.</p>
+  <footer class="site-footer">
+    <div class="footer-container container">
+      <div class="footer-col">
+        <h3>J L Serviços Contábeis</h3>
+        <p>Soluções contábeis com transparência, segurança e foco em resultados para MEI, Pessoa Física e Empresas.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Links Rápidos</h4>
+        <ul>
+          <li><a href="../../index.html">Início</a></li>
+          <li><a href="../../index.html#servicos">Serviços</a></li>
+          <li><a href="../../sobre/index.html">Quem Somos</a></li>
+          <li><a href="../../lgpd/index.html">Política de Privacidade</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <a href="https://wa.me/5561920041427" target="_blank" class="btn-whatsapp-footer">
+          Falar no WhatsApp
+        </a>
+        <p class="footer-email">jlservicoscontabeis0@gmail.com</p>
+      </div>
     </div>
 
-    <div class="footer-col">
-      <h4>Links Rápidos</h4>
-      <ul>
-        <li><a href="../../index.html">Início</a></li>
-        <li><a href="../../index.html#servicos">Serviços</a></li>
-        <li><a href="../../sobre/index.html">Quem Somos</a></li>
-        <li><a href="../../lgpd/index.html">Política de Privacidade</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <p>© 2026 J L Serviços Contábeis — Todos os direitos reservados</p>
     </div>
-
-    <div class="footer-col">
-      <h4>Contato</h4>
-      <a href="https://wa.me/5561920041427" target="_blank" class="btn-whatsapp-footer">
-        Falar no WhatsApp
-      </a>
-      <p class="footer-email">jlservicoscontabeis0@gmail.com</p>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2026 J L Serviços Contábeis — Todos os direitos reservados</p>
-  </div>
-</footer>
+  </footer>
 
 </body>
 </html>
