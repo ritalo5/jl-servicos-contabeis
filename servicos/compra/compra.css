@@ -180,3 +180,38 @@ input:focus, textarea:focus {
     .row-inputs { grid-template-columns: 1fr; }
     .mei-header h1 { font-size: 2.2rem; }
 }
+/* Garante que o cabeçalho do topo (onde fica o menu) fique organizado */
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 0;
+}
+
+.site-title {
+    font-size: 1.8rem;
+    font-family: 'Playfair Display', serif;
+    color: #bd9617;
+    margin: 0;
+}
+
+/* FORÇA O CABEÇALHO DA CATEGORIA (MEI) */
+body .mei-header {
+    text-align: center;
+    margin: 60px 0; /* Aumentei o espaço para respirar igual à categoria */
+}
+
+body .mei-header h1 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 3rem !important; /* Tamanho exato do mei.css */
+    color: #bd9617 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+}
+
+body .mei-header p {
+    color: #ffffff;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 15px auto 0;
+}
