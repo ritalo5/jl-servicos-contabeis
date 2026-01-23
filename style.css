@@ -41,12 +41,20 @@ body { font-family: 'Montserrat', sans-serif; background: #0b1c2d; color: #fffff
 .brand-text { text-align: left; }
 
 .site-title-header {
-    font-size: 4rem !important; /* Tamanho que você pediu */
-    font-weight: 850;
+    font-family: 'Playfair Display', serif !important;
+    font-size: 3.8rem !important; /* Ajustei para 3.8 porque a Playfair é encorpada */
+    font-weight: 900;
     color: #bd9617 !important;
     text-transform: uppercase;
-    line-height: 1;
+    letter-spacing: 1px; /* Fontes com serifa não precisam de tanto espaço */
+    line-height: 1.1;
     margin: 0;
+}
+
+/* Opcional: Para um visual ainda mais premium, use a Playfair também nos subtítulos dos cards */
+h2, .blog-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
 }
 
 .site-subtitle-header {
