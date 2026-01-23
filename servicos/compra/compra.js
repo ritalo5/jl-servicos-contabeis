@@ -36,19 +36,17 @@ document.addEventListener("DOMContentLoaded", () => {
   servicosMock["outros-servicos"] = servicosMock.outros;
   servicosMock["certidoes"] = servicosMock["certidoes-regularizacoes"];
 
- // --- CAPTURA DE PARÂMETROS DA URL (CORRIGIDO) ---
+  // --- CAPTURA DE PARÂMETROS DA URL (REVISADO) ---
   const params = new URLSearchParams(window.location.search);
-  const cat = params.get("categoria");
-  const serv = params.get("servico"); // Garanta que o link seja ?categoria=xxx&servico=yyy
-  
-  // Busca os dados no Mock
+  const cat = params.get("categoria")?.trim().toLowerCase();
+  const serv = (params.get("servico") || params.get("plano") || params.get("slug"))?.trim().toLowerCase();
+
   const dados = servicosMock[cat]?.[serv];
 
   if (!dados) {
-      console.error("Serviço não encontrado. Verifique se a URL tem ?categoria=...&servico=...");
-      // Opcional: mostrar mensagem amigável no HTML se quiser
+      console.warn(`Erro de Link: Categoria [${cat}] ou Serviço [${serv}] não batem com o Mock.`);
       const elDesc = document.getElementById("descricaoServico");
-      if(elDesc) elDesc.innerText = "Erro: Detalhes do serviço não localizados. Por favor, volte ao catálogo.";
+      if(elDesc) elDesc.innerHTML = `<span style="color: #ff4444;">Serviço não localizado. Por favor, selecione novamente no catálogo.</span>`;
       return;
   }
 
@@ -63,18 +61,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if(elValor) elValor.innerText = dados.valor;
   if(elInclu) elInclu.innerHTML = dados.inclusos.map(i => `<li>${i}</li>`).join("");
 
- // --- BREADCRUMB DINÂMICO NO COMPRA.JS ---
+  // --- BREADCRUMB DINÂMICO ---
   const bread = document.getElementById("breadcrumb");
   if (bread) {
     bread.innerHTML = `
       <a href="${BASE_URL}/index.html">Início</a> <span>›</span> 
-      <a href="${BASE_URL}/index.html#servicos">Serviços</a> <span>›</span> 
-      <a href="${BASE_URL}/servicos/${cat}/index.html">${dados.categoriaLabel}</a> <span>›</span> 
+      <a href="${BASE_URL}/servicos/index.html">Serviços</a> <span>›</span> 
       <strong>${dados.titulo}</strong>
     `;
   }
 
-  // --- MÁSCARAS BLINDADAS ---
+  // --- MÁSCARAS E VALIDAÇÕES (Mantidas conforme seu original) ---
   const maskWhatsApp = (val) => {
     val = val.replace(/\D/g, "").slice(0, 11);
     if (val.length > 0) val = "(" + val;
@@ -91,31 +88,27 @@ document.addEventListener("DOMContentLoaded", () => {
     return val;
   };
 
-  document.getElementById("whatsapp").addEventListener("input", (e) => {
+  document.getElementById("whatsapp")?.addEventListener("input", (e) => {
     e.target.value = maskWhatsApp(e.target.value);
     validarFormulario();
   });
 
-  document.getElementById("cpf").addEventListener("input", (e) => {
+  document.getElementById("cpf")?.addEventListener("input", (e) => {
     e.target.value = maskCPF(e.target.value);
     validarFormulario();
   });
 
-  // --- VALIDAÇÃO DO BOTÃO ---
   function validarFormulario() {
-    const email = document.getElementById("email").value;
-    const obrigatoriosOk = camposObrigatorios.every(id => document.getElementById(id).value.trim().length >= 3);
+    const emailEl = document.getElementById("email");
+    if(!emailEl || !botao) return;
+    const email = emailEl.value;
+    const obrigatoriosOk = camposObrigatorios.every(id => document.getElementById(id)?.value.trim().length >= 3);
     const emailOk = email.includes("@") && email.includes(".");
-    
-    if (botao) {
-        botao.disabled = !(obrigatoriosOk && emailOk) || botao.classList.contains("btn-loading");
-    }
+    botao.disabled = !(obrigatoriosOk && emailOk) || botao.classList.contains("btn-loading");
   }
 
-  document.getElementById("nome").addEventListener("input", validarFormulario);
-  document.getElementById("email").addEventListener("input", validarFormulario);
+  ["nome", "email"].forEach(id => document.getElementById(id)?.addEventListener("input", validarFormulario));
 
-  // --- ENVIO WHATSAPP ---
   if (form) {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -124,13 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
         botao.classList.add("btn-loading");
         botao.disabled = true;
         const textoOriginal = botao.innerHTML;
-        botao.innerHTML = `<span class="spinner"></span> Enviando pedido...`;
+        botao.innerHTML = `Enviando pedido...`;
 
         const obs = document.getElementById("observacoes")?.value.trim() || "Nenhuma";
-        
         const mensagem = 
 `🚀 *NOVO PEDIDO DE SERVIÇO*
-
 🛠️ *Serviço:* ${dados.titulo}
 💰 *Valor:* ${dados.valor}
 
