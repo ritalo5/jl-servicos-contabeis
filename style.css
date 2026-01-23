@@ -73,12 +73,15 @@ h2, .blog-content h2, .pf-section h2 {
     margin: 0 !important;
 }
 
-.menu-item { display: flex !important; align-items: center !important; }
+.menu-item { 
+    display: flex !important; 
+    align-items: center !important; 
+}
 
 .menu-item a, 
 .menu-item button.dropdown-toggle {
     background: transparent !important;
-    border: none !important;
+    border: 1px solid transparent !important; /* Borda invisível para evitar que o botão "pule" no hover */
     font-family: 'Montserrat', sans-serif !important;
     font-size: 15px !important; 
     font-weight: 600 !important;
@@ -89,18 +92,25 @@ h2, .blog-content h2, .pf-section h2 {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    height: 60px !important;
-    padding: 0 25px !important; 
-    transition: 0.3s !important;
+    height: 45px !important; /* Reduzi um pouco a altura para o quadrado ficar mais proporcional */
+    padding: 0 20px !important; 
+    transition: all 0.3s ease !important;
+    border-radius: 4px !important; /* Define o formato do quadrado de seleção */
 }
 
+/* Efeito de Seleção: Fundo escurecido, borda dourada e letra dourada */
 .menu-item a:hover, 
 .menu-item button.dropdown-toggle:hover { 
     color: #bd9617 !important; 
-    background: rgba(255,255,255,0.05) !important; 
+    background: rgba(189, 150, 23, 0.1) !important; /* Fundo levemente dourado/escuro */
+    border: 1px solid rgba(189, 150, 23, 0.5) !important; /* Borda do quadrado */
 }
 
-.menu-item.dropdown { position: relative !important; }
+.menu-item.dropdown { 
+    position: relative !important; 
+    display: flex !important;
+    align-items: center !important;
+}
 
 .dropdown-menu {
     position: absolute !important;
