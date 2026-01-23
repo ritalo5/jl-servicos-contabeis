@@ -328,3 +328,13 @@ h2, .blog-content h2, .pf-section h2 {
     color: #bd9617 !important; /* Força o Dourado no Início/Blog */
     background: rgba(255,255,255,0.05) !important;
 }
+
+/* Garante contraste nos links simples do cabeçalho de compra */
+.category-header a {
+    color: #ffffff !important;
+    transition: 0.3s !important;
+}
+
+.category-header a:hover {
+    color: #bd9617 !important;
+}
