@@ -440,3 +440,52 @@ body.home-page .site-subtitle-header {
     background: #bd9617;
     color: white !important;
 }
+/* Container do Header para garantir que as camadas fiquem uma sobre a outra */
+.main-header .container {
+    display: flex;
+    flex-direction: column; /* Faz as camadas ficarem em pilhas */
+    gap: 15px; /* Espaço entre a linha de cima e a de baixo */
+    padding: 10px 0;
+}
+
+/* Camada Superior: Alinha o botão à direita */
+.header-top {
+    display: flex;
+    justify-content: flex-end; /* Empurra tudo para a direita */
+    width: 100%;
+}
+
+/* Camada Inferior: Centraliza o Menu */
+.main-nav {
+    display: flex;
+    justify-content: center; /* Centraliza os itens do menu */
+    width: 100%;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px; /* Espaço entre os links do menu */
+}
+
+/* Estilo do Botão Área do Cliente (ajustado para ser mais discreto no topo) */
+.btn-area-cliente {
+    border: 1px solid #bd9617;
+    color: #bd9617 !important;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.btn-area-cliente:hover {
+    background: #bd9617;
+    color: white !important;
+}
