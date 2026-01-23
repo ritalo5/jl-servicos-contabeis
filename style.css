@@ -546,3 +546,10 @@ body.home-page .site-subtitle-header {
     align-items: center;
     gap: 8px;
 }
+
+.header-top-row {
+    display: flex;
+    justify-content: flex-end; /* Isso joga o botão para a ponta direita */
+    align-items: center;
+    width: 100%;
+}
