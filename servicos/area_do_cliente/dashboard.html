@@ -167,76 +167,129 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
-        // 2. Configurações
-        const SB_URL = 'https://qdgsmnfhpbkbovptwwjp.supabase.co';
-        const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkZ3NtbmZocGJrYm92cHR3d2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxNTQ1MzYsImV4cCI6MjA4MzczMDUzNn0.-fpxGBv738LflicnI2edM7ywwAmed3Uka4111fzTj8c';
-        
-        // Usamos um nome único para o cliente no Dashboard
-        const dashClient = supabase.createClient(SB_URL, SB_KEY);
+       // 1. Configurações e Instância do Supabase
+const SB_URL = 'https://qdgsmnfhpbkbovptwwjp.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkZ3NtbmZocGJrYm92cHR3d2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxNTQ1MzYsImV4cCI6MjA4MzczMDUzNn0.-fpxGBv738LflicnI2edM7ywwAmed3Uka4111fzTj8c';
+const dashClient = supabase.createClient(SB_URL, SB_KEY);
 
-        // 3. Função de Logout
-        async function logout() {
-            await dashClient.auth.signOut();
-            window.location.href = 'index.html';
-        }
+// 2. Dicionário de Nomes Amigáveis
+const nomesServicos = {
+    'abertura-mei': 'Abertura de MEI',
+    'regularizacao-mei': 'Regularização de MEI',
+    'baixa-mei': 'Baixa de MEI',
+    'emissao-das': 'Emissão de Guia DAS',
+    'dasn-anual': 'Declaração Anual (DASN)',
+    'parcelamento-mei': 'Parcelamento de Débitos',
+    'alteracao-mei': 'Alteração de Dados MEI',
+    'mei-plano-basico': 'Plano MEI Básico',
+    'mei-plano-premium': 'Plano MEI Premium',
+    'cnd': 'Certidão Negativa (CND)',
+    'reg-cadastral': 'Regularização Cadastral',
+    'cert-estadual': 'Certidão Estadual',
+    'certificado-a1': 'Certificado Digital A1',
+    'certificado-a3': 'Certificado Digital A3',
+    'renovacao-certificado': 'Renovação de Certificado',
+    'consultoria-contabil': 'Consultoria Contábil',
+    'planejamento-tributario': 'Planejamento Tributário',
+    'balanco-patrimonial': 'Elaboração de Balanço',
+    'regularizacao-empresa': 'Regularização de Empresa',
+    'encerramento-empresa': 'Encerramento de Empresa',
+    'planilha-financeira': 'Planilha Financeira Pessoal',
+    'organizacao-documentos': 'Organização de Documentos',
+    'orientacao-financeira': 'Orientação Financeira Básica',
+    'irpf': 'Declaração de Imposto de Renda',
+    'regularizacao-cpf': 'Regularização de CPF',
+    'orientacao-fiscal-pf': 'Orientação Fiscal PF'
+};
 
-      // 4. Verificação de Acesso e Busca de Perfil Real
+// 3. Funções de Suporte
+async function logout() {
+    await dashClient.auth.signOut();
+    window.location.href = 'index.html';
+}
+
+function abrirWhatsapp(msgPersonalizada = "") {
+    const telefone = "5561920041427"; 
+    const texto = msgPersonalizada || "Olá! Sou cliente da JL Serviços Contábeis e preciso de suporte.";
+    window.open(`https://wa.me/${telefone}?text=${encodeURIComponent(texto)}`, '_blank');
+}
+
+// 4. Verificação de Acesso e Lógica de Checkout
 async function verificarAcesso() {
     const { data: { user }, error } = await dashClient.auth.getUser();
 
     if (error || !user) {
         window.location.href = 'index.html';
-    } else {
-        // 1. Busca o Nome na tabela 'profiles'
-        const { data: profile } = await dashClient
-            .from('profiles')
-            .select('nome')
-            .eq('id', user.id)
-            .single();
+        return;
+    }
 
-        // 2. Busca a Assinatura na tabela 'Assinaturas'
-        // Buscamos o status e o plano_id (ou você pode fazer um join se tiver tabela de planos)
-        const { data: assinatura } = await dashClient
-            .from('Assinaturas')
-            .select('status, plano_id')
-            .eq('cliente_id', user.id)
-            .order('created_at', { ascending: false }) // Pega a mais recente
-            .limit(1)
-            .single();
+    // Busca Perfil e Assinatura
+    const { data: profile } = await dashClient.from('profiles').select('*').eq('id', user.id).single();
+    const { data: assinatura } = await dashClient.from('Assinaturas').select('*').eq('cliente_id', user.id).order('created_at', { ascending: false }).limit(1).single();
 
-        // 3. Define as variáveis de exibição
-        const nomeExibir = (profile && profile.nome) ? profile.nome.split(' ')[0] : user.email.split('@')[0];
-        const statusReal = (assinatura && assinatura.status) ? assinatura.status : "Sem Assinatura";
-        const planoReal = (assinatura && assinatura.plano_id) ? assinatura.plano_id : "Nenhum plano contratado";
+    // Atualiza Interface
+    const nomeExibir = (profile && profile.nome) ? profile.nome.split(' ')[0] : user.email.split('@')[0];
+    document.getElementById('user-name').innerText = "Olá, " + nomeExibir;
+    document.getElementById('user-email').innerText = user.email;
+    
+    const statusBadge = document.getElementById('sub-status');
+    const statusReal = (assinatura && assinatura.status) ? assinatura.status : "Sem Assinatura";
+    statusBadge.innerText = statusReal;
+    statusBadge.style.background = statusReal.toLowerCase() === 'ativo' ? '#25d366' : '#ff4444';
+    
+    document.getElementById('sub-details').innerText = nomesServicos[assinatura?.plano_id] || "Nenhum plano ativo";
 
-        // 4. Atualiza a tela
-        document.getElementById('user-name').innerText = "Olá, " + nomeExibir;
-        document.getElementById('user-email').innerText = user.email;
-        
-        const statusBadge = document.getElementById('sub-status');
-        statusBadge.innerText = statusReal;
-        document.getElementById('sub-details').innerText = planoReal;
+    // --- CHECKOUT AUTOMÁTICO ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const servicoParaContratar = urlParams.get('contratar');
 
-        // Ajuste de cor do Badge conforme o status
-        if (statusReal.toLowerCase() === 'ativo') {
-            statusBadge.style.background = '#25d366'; // Verde
-            statusBadge.style.color = 'black';
-        } else {
-            statusBadge.style.background = '#ff4444'; // Vermelho
-            statusBadge.style.color = 'white';
-        }
+    if (servicoParaContratar && nomesServicos[servicoParaContratar]) {
+        iniciarFluxoContratacao(user, servicoParaContratar, profile);
     }
 }
-        // Executa ao carregar
-        verificarAcesso();
-        function abrirWhatsapp() {
-    // COLOQUE SEU NÚMERO AQUI (DDD + NÚMERO, sem espaços ou traços)
-    const telefone = "5561920041427"; 
-    const mensagem = encodeURIComponent("Olá! Sou cliente da JL Serviços Contábeis e preciso de suporte.");
-    const url = `https://wa.me/${telefone}?text=${mensagem}`;
+
+// 5. Inicia o Processo de Finalização de Compra
+function iniciarFluxoContratacao(user, idServico, profile) {
+    const nomeServico = nomesServicos[idServico];
     
-    window.open(url, '_blank');
+    // Criar um Modal simples via JS (você pode estilizar no CSS depois)
+    const modal = document.createElement('div');
+    modal.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); display:flex; align-items:center; justify-content:center; z-index:9999; padding:20px;";
+    modal.innerHTML = `
+        <div style="background:#0a192f; border:1px solid #bd9617; padding:30px; border-radius:15px; max-width:400px; width:100%; text-align:center;">
+            <h2 style="color:#bd9617; font-family:'Playfair Display'; margin-bottom:10px;">Finalizar Pedido</h2>
+            <p style="font-size:0.9rem; margin-bottom:25px;">Você escolheu: <strong>${nomeServico}</strong>. Confirme seus dados para prosseguir:</p>
+            
+            <input type="text" id="comp-nome" placeholder="Nome Completo" value="${profile?.nome || ''}" style="width:100%; padding:12px; margin-bottom:10px; border-radius:5px; border:1px solid #333; background:#000; color:white;">
+            <input type="text" id="comp-cpf" placeholder="CPF ou CNPJ" value="${profile?.cpf_cnpj || ''}" style="width:100%; padding:12px; margin-bottom:10px; border-radius:5px; border:1px solid #333; background:#000; color:white;">
+            <input type="text" id="comp-tel" placeholder="WhatsApp com DDD" value="${profile?.telefone || ''}" style="width:100%; padding:12px; margin-bottom:20px; border-radius:5px; border:1px solid #333; background:#000; color:white;">
+            
+            <button id="btn-confirmar" style="background:#bd9617; color:white; border:none; padding:15px; width:100%; border-radius:8px; font-weight:bold; cursor:pointer;">CONFIRMAR E FALAR COM CONTADOR</button>
+            <button onclick="window.location.href='dashboard.html'" style="background:transparent; color:#888; border:none; margin-top:15px; cursor:pointer;">Cancelar</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    document.getElementById('btn-confirmar').onclick = async () => {
+        const n = document.getElementById('comp-nome').value;
+        const c = document.getElementById('comp-cpf').value;
+        const t = document.getElementById('comp-tel').value;
+
+        if(!n || !c || !t) return alert("Preencha todos os campos!");
+
+        // Salva no Supabase
+        await dashClient.from('profiles').upsert({ id: user.id, nome: n, cpf_cnpj: c, telefone: t });
+        await dashClient.from('Assinaturas').insert({ cliente_id: user.id, plano_id: idServico, status: 'Pendente' });
+
+        // Avisa no WhatsApp
+        const msg = `Olá! Acabei de solicitar o serviço *${nomeServico}* pelo site.\n\nNome: ${n}\nCPF: ${c}\nWhatsApp: ${t}`;
+        abrirWhatsapp(msg);
+        window.location.href = 'dashboard.html';
+    };
 }
+
+// Executa ao carregar
+verificarAcesso();
     </script>
 </body>
 </html>
