@@ -1,4 +1,4 @@
-const SB_URL = 'https://qdgsmnfhpbkbovptwwjp.supabase.co;
+const SB_URL = 'https://qdgsmnfhpbkbovptwwjp.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkZ3NtbmZocGJrYm92cHR3d2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxNTQ1MzYsImV4cCI6MjA4MzczMDUzNn0.-fpxGBv738LflicnI2edM7ywwAmed3Uka4111fzTj8c'
 const supabase = supabase.createClient(SB_URL, SB_KEY);
 
