@@ -161,17 +161,41 @@
         </div>
     </main>
 
-    <script src="cliente.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
-        // Lógica para preencher os dados vindo das tabelas do Supabase
-        window.onload = async () => {
-            const user = await checkUser(); // Função que criamos no cliente.js
-            if(user) {
+        // 2. Configurações
+        const SB_URL = 'https://qdgsmnfhpbkbovptwwjp.supabase.co';
+        const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkZ3NtbmZocGJrYm92cHR3d2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxNTQ1MzYsImV4cCI6MjA4MzczMDUzNn0.-fpxGBv738LflicnI2edM7ywwAmed3Uka4111fzTj8c';
+        
+        // Usamos um nome único para o cliente no Dashboard
+        const dashClient = supabase.createClient(SB_URL, SB_KEY);
+
+        // 3. Função de Logout
+        async function logout() {
+            await dashClient.auth.signOut();
+            window.location.href = 'index.html';
+        }
+
+        // 4. Verificação de Acesso e Preenchimento de Dados
+        async function verificarAcesso() {
+            const { data: { user }, error } = await dashClient.auth.getUser();
+
+            if (error || !user) {
+                window.location.href = 'index.html';
+            } else {
+                // Preenche o nome/email no Dashboard
+                document.getElementById('user-name').innerText = "Olá, " + user.email.split('@')[0];
                 document.getElementById('user-email').innerText = user.email;
-                // Aqui você chamaria uma função para buscar na tabela 'Profiles' e 'Assinaturas'
-                // Exemplo: getDadosPerfil(user.id);
+                
+                // Simulação de status de assinatura
+                document.getElementById('sub-status').innerText = "Ativo";
+                document.getElementById('sub-details').innerText = "Plano Contábil Premium";
             }
         }
+
+        // Executa ao carregar
+        verificarAcesso();
     </script>
 </body>
 </html>
