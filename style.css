@@ -553,3 +553,52 @@ body.home-page .site-subtitle-header {
     align-items: center;
     width: 100%;
 }
+/* Organiza o cabeçalho em camadas (pilha) */
+.header-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaçamento entre as 3 linhas */
+    padding: 20px 0;
+}
+
+/* Identidade visual (pode manter o alinhamento atual ou deixar na esquerda) */
+.brand-identity {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Linha do Botão: Joga para a direita */
+.client-access-row {
+    display: flex;
+    justify-content: flex-end; /* Alinha à direita */
+    width: 100%;
+}
+
+/* Linha do Menu: Centraliza tudo */
+.main-nav {
+    display: flex;
+    justify-content: center; /* Centraliza o menu principal */
+    border-top: 1px solid rgba(189, 150, 23, 0.1); /* Divisória opcional */
+    padding-top: 10px;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+/* Estilo do Botão Área do Cliente */
+.btn-area-cliente {
+    border: 1px solid #bd9617;
+    padding: 6px 14px;
+    border-radius: 4px;
+    color: #bd9617 !important;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
