@@ -187,34 +187,46 @@ async function verificarAcesso() {
     if (error || !user) {
         window.location.href = 'index.html';
     } else {
-        // 1. Busca o nome na sua tabela 'profiles'
-        // IMPORTANTE: Se sua coluna for 'nome', mude 'full_name' para 'nome' abaixo
+        // 1. Busca o Nome na tabela 'profiles'
         const { data: profile } = await dashClient
             .from('profiles')
-            .select('full_name') 
+            .select('nome')
             .eq('id', user.id)
             .single();
 
-        // 2. Define o nome que será exibido
-        let nomeParaExibir;
-        if (profile && profile.full_name) {
-            // Pega apenas o primeiro nome para ficar elegante
-            nomeParaExibir = profile.full_name.split(' ')[0];
-        } else {
-            // Se não achar no perfil, usa o apelido do e-mail como reserva
-            nomeParaExibir = user.email.split('@')[0];
-        }
+        // 2. Busca a Assinatura na tabela 'Assinaturas'
+        // Buscamos o status e o plano_id (ou você pode fazer um join se tiver tabela de planos)
+        const { data: assinatura } = await dashClient
+            .from('Assinaturas')
+            .select('status, plano_id')
+            .eq('cliente_id', user.id)
+            .order('created_at', { ascending: false }) // Pega a mais recente
+            .limit(1)
+            .single();
 
-        // 3. Atualiza os elementos na tela
-        document.getElementById('user-name').innerText = "Olá, " + nomeParaExibir;
+        // 3. Define as variáveis de exibição
+        const nomeExibir = (profile && profile.nome) ? profile.nome.split(' ')[0] : user.email.split('@')[0];
+        const statusReal = (assinatura && assinatura.status) ? assinatura.status : "Sem Assinatura";
+        const planoReal = (assinatura && assinatura.plano_id) ? assinatura.plano_id : "Nenhum plano contratado";
+
+        // 4. Atualiza a tela
+        document.getElementById('user-name').innerText = "Olá, " + nomeExibir;
         document.getElementById('user-email').innerText = user.email;
         
-        // Mantemos a simulação por enquanto (ou você pode puxar do banco depois)
-        document.getElementById('sub-status').innerText = "Ativo";
-        document.getElementById('sub-details').innerText = "Plano Contábil Premium";
+        const statusBadge = document.getElementById('sub-status');
+        statusBadge.innerText = statusReal;
+        document.getElementById('sub-details').innerText = planoReal;
+
+        // Ajuste de cor do Badge conforme o status
+        if (statusReal.toLowerCase() === 'ativo') {
+            statusBadge.style.background = '#25d366'; // Verde
+            statusBadge.style.color = 'black';
+        } else {
+            statusBadge.style.background = '#ff4444'; // Vermelho
+            statusBadge.style.color = 'white';
+        }
     }
 }
-
         // Executa ao carregar
         verificarAcesso();
         function abrirWhatsapp() {
