@@ -2,30 +2,174 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Cliente | JL Serviços</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { background: #0a192f; color: white; font-family: 'Montserrat', sans-serif; padding: 40px; }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #bd9617; padding-bottom: 20px; }
-        .btn-logout { background: transparent; border: 1px solid #ff4444; color: #ff4444; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
+        :root {
+            --gold: #bd9617;
+            --dark-blue: #0a192f;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background: var(--dark-blue);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            display: flex;
+        }
+
+        /* Sidebar simples */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: rgba(0,0,0,0.3);
+            border-right: 1px solid rgba(189, 150, 23, 0.2);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .welcome-section {
+            margin-bottom: 40px;
+        }
+
+        .welcome-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin: 0;
+        }
+
+        /* Grid de Cards */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .card i {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .status-badge {
+            background: #25d366;
+            color: black;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .btn-action {
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            margin-top: auto;
+            color: #ff4444;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1 style="font-family: 'Playfair Display', serif; color: #bd9617;">Painel de Controle</h1>
-        <button class="btn-logout" onclick="logout()">Sair</button>
-    </div>
-    
-    <div id="welcome-msg" style="margin-top: 30px;">Carregando dados...</div>
+
+    <aside class="sidebar">
+        <h2 style="color: var(--gold); font-family: 'Playfair Display';">JL Painel</h2>
+        <nav style="margin-top: 40px;">
+            <p style="font-size: 0.8rem; color: #888;">Navegação</p>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <a href="#" style="color: var(--gold); text-decoration: none;"><i class="fas fa-home"></i> Início</a>
+                <a href="#" style="color: white; text-decoration: none; opacity: 0.7;"><i class="fas fa-file-invoice"></i> Documentos</a>
+            </div>
+        </nav>
+        <a href="#" onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sair do Painel</a>
+    </aside>
+
+    <main class="main-content">
+        <section class="welcome-section">
+            <h1 id="user-name">Carregando...</h1>
+            <p id="user-email" style="color: #888;"></p>
+        </section>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <i class="fas fa-id-card"></i>
+                <h3>Sua Assinatura</h3>
+                <p style="font-size: 0.9rem;">Status: <span id="sub-status" class="status-badge">Verificando...</span></p>
+                <p id="sub-details" style="font-size: 0.8rem; color: #aaa;">Carregando plano...</p>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-folder-open"></i>
+                <h3>Meus Documentos</h3>
+                <p style="font-size: 0.9rem;">Guias DAS, IRPF e Relatórios mensais.</p>
+                <button class="btn-action">Acessar Arquivos</button>
+            </div>
+
+            <div class="card">
+                <i class="fab fa-whatsapp"></i>
+                <h3>Suporte Direto</h3>
+                <p style="font-size: 0.9rem;">Fale com seu contador agora pelo WhatsApp.</p>
+                <button class="btn-action" style="background: #25d366;">Iniciar Chat</button>
+            </div>
+        </div>
+    </main>
 
     <script src="cliente.js"></script>
     <script>
-        // Ao carregar a página, verifica se o usuário tem permissão
+        // Lógica para preencher os dados vindo das tabelas do Supabase
         window.onload = async () => {
-            const user = await checkUser();
+            const user = await checkUser(); // Função que criamos no cliente.js
             if(user) {
-                document.getElementById('welcome-msg').innerHTML = `<h3>Bem-vindo!</h3><p>E-mail: ${user.email}</p>`;
+                document.getElementById('user-email').innerText = user.email;
+                // Aqui você chamaria uma função para buscar na tabela 'Profiles' e 'Assinaturas'
+                // Exemplo: getDadosPerfil(user.id);
             }
         }
     </script>
