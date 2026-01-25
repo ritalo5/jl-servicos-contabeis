@@ -172,10 +172,19 @@
             </div>
 
             <div class="card">
-                <i class="fas fa-folder-open"></i>
-                <h3>Meus Documentos</h3>
-                <p style="font-size: 0.9rem;">Guias DAS, IRPF e Relatórios mensais.</p>
-                <button class="btn-action">Acessar Arquivos</button>
+                  <i class="fas fa-folder-open"></i>
+    <h3>Meus Documentos</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 15px;">Guias DAS, IRPF e Relatórios.</p>
+    
+    <div id="lista-documentos">
+        <p style="font-size: 0.8rem; color: #888;">Carregando arquivos...</p>
+        <div id="lista-documentos" style="max-height: 250px; overflow-y: auto; padding-right: 5px;">
+    <p style="font-size: 0.8rem; color: #888;">Carregando arquivos...</p>
+    </div>
+    
+    <button class="btn-action" onclick="window.location.reload()">
+        <i class="fas fa-sync-alt"></i> Atualizar Lista
+    </button>
             </div>
 
             <div class="card">
@@ -252,7 +261,24 @@ async function verificarAcesso() {
     // Busca Perfil e Assinatura
     const { data: profile } = await dashClient.from('profiles').select('*').eq('id', user.id).single();
     const { data: assinatura } = await dashClient.from('Assinaturas').select('*').eq('cliente_id', user.id).order('created_at', { ascending: false }).limit(1).single();
+// Busca os documentos do cliente
+const { data: docs } = await dashClient
+    .from('documentos')
+    .select('*')
+    .eq('cliente_id', user.id);
 
+const listaDocs = document.getElementById('lista-documentos'); // Crie uma div com esse ID
+
+if (docs && docs.length > 0) {
+    listaDocs.innerHTML = docs.map(doc => `
+        <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.05); padding:10px; border-radius:8px; margin-bottom:10px;">
+            <span><i class="far fa-file-pdf" style="color:#ff4444;"></i> ${doc.nome_arquivo}</span>
+            <a href="${doc.url_arquivo}" target="_blank" style="color:var(--gold); text-decoration:none; font-size:0.8rem;">Baixar <i class="fas fa-download"></i></a>
+        </div>
+    `).join('');
+} else {
+    listaDocs.innerHTML = "<p style='font-size:0.8rem; color:#666;'>Nenhum documento disponível ainda.</p>";
+}
     // Atualiza Interface
     const nomeExibir = (profile && profile.nome) ? profile.nome.split(' ')[0] : user.email.split('@')[0];
     document.getElementById('user-name').innerText = "Olá, " + nomeExibir;
