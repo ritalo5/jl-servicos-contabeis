@@ -3,7 +3,7 @@ const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 
 const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
 
-// --- LÓGICA DE LOGIN ---
+// --- LÓGICA DE LOGIN INTELIGENTE ---
 const loginForm = document.getElementById('login-form');
 
 if (loginForm) {
@@ -20,17 +20,24 @@ if (loginForm) {
         if (error) {
             alert("Erro no login: " + error.message);
         } else {
-            const urlParams = new URLSearchParams(window.location.search);
-            const servicoEscolhido = urlParams.get('servico');
-            
-            // Redireciona passando o serviço adiante se houver
-            window.location.href = servicoEscolhido 
-                ? `dashboard.html?contratar=${servicoEscolhido}` 
-                : 'dashboard.html';
+            // --- CONFIGURAÇÃO DE ADMIN ---
+            const EMAIL_ADMIN = "seu-email-aqui@exemplo.com"; // <-- COLOQUE SEU E-MAIL EXATO AQUI
+
+            if (data.user.email === EMAIL_ADMIN) {
+                // Se for você, vai direto para o painel de controle
+                window.location.href = 'admin.html';
+            } else {
+                // Se for cliente, mantém a lógica original de contratação
+                const urlParams = new URLSearchParams(window.location.search);
+                const servicoEscolhido = urlParams.get('servico');
+                
+                window.location.href = servicoEscolhido 
+                    ? `dashboard.html?contratar=${servicoEscolhido}` 
+                    : 'dashboard.html';
+            }
         }
     });
 }
-
 // --- FUNÇÕES DE APOIO PARA O DASHBOARD ---
 
 // 1. Verifica se o usuário está logado e retorna os dados
