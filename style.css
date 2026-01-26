@@ -799,43 +799,66 @@ body.home-page .site-subtitle-header {
    ========================================================================== */
 
 @media (max-width: 992px) {
+    /* 1. Container Geral em Coluna */
     .header-stack {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
+        padding: 15px 10px !important;
+        width: 100% !important;
+    }
+
+    /* 2. LOGO + J L (Lado a lado na primeira linha) */
+    .brand-identity {
+        display: flex !important;
+        flex-direction: row !important; /* Força lado a lado */
+        flex-wrap: wrap !important;     /* Permite que as outras palavras desçam */
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    .site-logo-circle {
+        width: 45px !important;
+        height: 45px !important;
+        flex-shrink: 0 !important; /* Impede a logo de amassar */
+    }
+
+    /* 3. O TÍTULO (Quebra as palavras Serviços e Contábeis para baixo) */
+    .site-title-header {
+        font-size: 1.4rem !important;
+        display: block !important;
+        line-height: 1.2 !important;
         text-align: center !important;
     }
 
-    /* O SEGREDO: Forçar a quebra por palavra no Mobile */
+    /* Forçamos a quebra após o "J L" usando um seletor de texto se possível, 
+       mas a forma mais segura via CSS puro é controlar o espaço: */
     .site-title-header {
-        font-size: 1.4rem !important;
-        line-height: 1.2 !important;
-        display: block !important;
-        max-width: 200px !important; /* Força o texto a "dobrar" por falta de espaço lateral */
-        margin: 0 auto !important;
+        max-width: 100% !important;
         white-space: normal !important;
-        word-spacing: 100vw !important; /* Truque: força cada palavra a pular de linha */
     }
 
+    /* Subtítulo centralizado */
     .site-subtitle-header {
         display: block !important;
         font-size: 0.85rem !important;
-        margin-top: 10px !important;
-        max-width: 250px !important; /* Também quebra o subtítulo se necessário */
+        margin: 10px 0 !important;
+        width: 100% !important;
     }
 
-    /* Hambúrguer na direita no final da escada */
+    /* 4. HAMBURGUER (Abaixo de tudo, na Direita) */
     .client-access-row {
         width: 100% !important;
         display: flex !important;
         justify-content: flex-end !important;
-        padding-right: 15px !important;
-        margin-top: 10px !important;
+        padding-right: 10px !important;
     }
 
     .menu-toggle {
         display: block !important;
-        font-size: 2.2rem !important;
         color: #bd9617 !important;
+        font-size: 2rem !important;
     }
 }
