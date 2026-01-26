@@ -841,14 +841,14 @@ body.home-page .site-subtitle-header {
     }
 
     /* Subtítulo totalmente centralizado */
-    .site-subtitle-header {
-        display: block !important;
-        width: 100% !important;         /* Ocupa a largura total para poder centralizar o texto */
-        text-align: center !important;   /* Centraliza o texto */
-        margin: 10px auto !important;    /* Garante margens iguais nas laterais */
-        font-size: 0.85rem !important;
-        line-height: 1.4 !important;
-        white-space: normal !important;  /* Permite que ele quebre linha se o celular for muito pequeno */
+.site-subtitle-header {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important; /* Alinha o texto no meio */
+    margin: 10px auto !important;  /* 'auto' distribui o espaço nas laterais igualmente */
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+}
     }
 
     /* 4. HAMBURGUER (Abaixo de tudo, na Direita) */
