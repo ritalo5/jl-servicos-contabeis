@@ -141,35 +141,56 @@
         }
 
         async function executarUpload() {
-            const file = document.getElementById('file-input').files[0];
-            if (!file || !clienteSelecionado) return alert("Selecione um arquivo!");
+    const fileInput = document.getElementById('file-input');
+    const file = fileInput.files[0];
+    const btn = document.querySelector('#upload-area .btn-upload');
 
-            const fileName = `${Date.now()}_${file.name}`;
-            const filePath = `${clienteSelecionado}/${fileName}`;
+    if (!file || !clienteSelecionado) {
+        return alert("Por favor, selecione um arquivo PDF.");
+    }
 
-            // 1. Upload para o Storage
-            const { data, error: storageError } = await adminClient.storage
-                .from('documentos')
-                .upload(filePath, file);
+    try {
+        // Feedback visual
+        btn.disabled = true;
+        btn.innerText = "Enviando...";
 
-            if (storageError) return alert("Erro no Storage: " + storageError.message);
+        // 1. Nome do arquivo (organizado por ID do cliente dentro do storage)
+        const fileName = `${Date.now()}_${file.name}`;
+        const filePath = `${clienteSelecionado}/${fileName}`;
 
-            // 2. Link público
-            const { data: { publicUrl } } = adminClient.storage.from('documentos').getPublicUrl(filePath);
+        // 2. Upload para o Storage (Certifique-se que o nome do Bucket no Supabase é 'documentos')
+        const { data, error: storageError } = await adminClient.storage
+            .from('documentos') // Ajuste aqui se o seu bucket tiver outro nome
+            .upload(filePath, file);
 
-            // 3. Registrar na tabela documentos
-            const { error: dbError } = await adminClient.from('documentos').insert({
-                cliente_id: clienteSelecionado,
-                nome_arquivo: file.name,
-                url_arquivo: publicUrl
-            });
+        if (storageError) throw storageError;
 
-            if (dbError) alert("Erro ao registrar no banco: " + dbError.message);
-            else {
-                alert("Documento enviado com sucesso!");
-                fecharModal();
-            }
-        }
+        // 3. Pegar a URL pública do arquivo
+        const { data: { publicUrl } } = adminClient.storage
+            .from('documentos')
+            .getPublicUrl(filePath);
+
+        // 4. Salvar na tabela 'documentos' para aparecer no painel do cliente
+        const { error: dbError } = await adminClient.from('documentos').insert({
+            cliente_id: clienteSelecionado,
+            nome_arquivo: file.name,
+            url_arquivo: publicUrl // Essa coluna deve ser a mesma que o Dashboard do Cliente lê
+        });
+
+        if (dbError) throw dbError;
+
+        alert("✅ Documento disponibilizado com sucesso!");
+        fileInput.value = ""; // Limpa o campo de arquivo
+        fecharModal();
+
+    } catch (err) {
+        console.error(err);
+        alert("Erro no processo: " + err.message);
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "Confirmar Envio";
+    }
+}
 
         async function logout() {
             await adminClient.auth.signOut();
