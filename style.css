@@ -754,86 +754,112 @@ body.home-page .site-subtitle-header {
     }
 }
 
-/* 2. CONFIGURAÇÃO MOBILE (Abaixo de 992px) */
-@media (max-width: 992px) {
-    html, body { max-width: 100vw !important; overflow-x: hidden !important; }
+/* ==========================================================================
+   SUBSTITUIÇÃO FINAL: FOCO EM CAMADAS (PC) E LINHA ÚNICA (MOBILE)
+   ========================================================================== */
 
-    /* LINHA ÚNICA: LOGO/NOME (E) | HAMBURGUER (D) */
+/* 1. DESKTOP (Acima de 992px) */
+@media (min-width: 993px) {
+    .menu-toggle { display: none !important; }
+
+    /* FORÇA O EMPILHAMENTO: Logo (top) -> Login (mid) -> Menu (bottom) */
     .header-stack, .site-header .container {
         display: flex !important;
-        flex-direction: row !important; /* Força ficar na mesma linha */
-        justify-content: space-between !important;
+        flex-direction: column !important;
         align-items: center !important;
-        padding: 10px 15px !important;
         width: 100% !important;
-        max-width: 100vw !important;
     }
 
-    /* Identidade na esquerda */
+    /* CAMADA 1: Identidade Centralizada */
     .brand-identity {
+        width: 100% !important;
+        justify-content: center !important;
+        margin-bottom: 15px !important;
+        display: flex !important;
+    }
+
+    /* CAMADA 2: Login na Direita */
+    .client-access-row, .header-top-row {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: flex-end !important; /* BOTÃO NA DIREITA */
+        padding-right: 20px !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* CAMADA 3: Menu Centralizado */
+    .main-nav, .main-nav-row {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important; /* MENU CENTRALIZADO */
+        border-top: 1px solid rgba(189, 150, 23, 0.1) !important;
+        padding-top: 15px !important;
+    }
+
+    .menu {
+        display: flex !important;
+        gap: 30px !important;
+    }
+}
+
+/* 2. MOBILE (Abaixo de 992px) */
+@media (max-width: 992px) {
+    /* Impede que o nome empurre o hambúrguer para fora */
+    .header-stack, .site-header .container {
         display: flex !important;
         flex-direction: row !important;
+        justify-content: space-between !important;
         align-items: center !important;
-        gap: 10px !important;
-        max-width: 80% !important;
+        flex-wrap: nowrap !important; /* PROIBIDO QUEBRAR LINHA */
+        padding: 10px !important;
+        width: 100% !important;
     }
 
-    .site-logo-circle { 
-        width: 40px !important; 
-        height: 40px !important; 
-        display: block !important;
+    .brand-identity {
+        display: flex !important;
+        align-items: center !important;
+        max-width: 75% !important; /* Limita o espaço do nome */
+        gap: 8px !important;
     }
 
+    .site-logo-circle { width: 35px !important; height: 35px !important; flex-shrink: 0 !important; }
+
+    /* CORREÇÃO DO NOME CORTADO */
     .site-title-header { 
-        font-size: 0.95rem !important; /* Reduz para caber sem cortar */
+        font-size: 0.9rem !important; 
         white-space: nowrap !important;
-        color: #bd9617 !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important; /* Se não couber, ele põe ... em vez de quebrar o layout */
     }
 
-    .site-subtitle-header { display: none !important; }
-
-    /* HAMBURGUER NA DIREITA */
+    /* GARANTE QUE O HAMBURGUER APAREÇA */
     .menu-toggle {
         display: block !important;
         color: #bd9617 !important;
-        font-size: 1.8rem !important;
+        font-size: 22px !important;
         background: none !important;
         border: none !important;
-        cursor: pointer !important;
-        padding: 5px !important;
-        z-index: 10001 !important;
+        flex-shrink: 0 !important;
+        z-index: 9999 !important;
     }
 
-    /* MENU CORTINA */
+    /* MENU MOBILE (ESCONDIDO) */
     .menu, .nav-links {
-        display: none !important; /* Escondido */
-        flex-direction: column !important;
+        display: none !important;
         position: absolute !important;
         top: 100% !important;
         left: 0 !important;
         width: 100% !important;
         background: #0b1c2d !important;
-        z-index: 9999 !important;
+        flex-direction: column !important;
+        padding: 20px 0 !important;
         border-bottom: 2px solid #bd9617 !important;
-        padding-bottom: 20px !important;
     }
 
-    /* Quando ativo via JS */
-    .menu.open, .menu.active, .nav-links.active { display: flex !important; }
-
-    .menu-item { width: 100% !important; text-align: center !important; }
-
-    /* Botão de login vira item de menu no mobile */
-    .btn-area-cliente {
-        display: flex !important;
-        margin: 15px auto !important;
-        width: fit-content !important;
-    }
+    .menu.open, .menu.active { display: flex !important; }
 }
 
-/* 3. Ajustes de Colunas (Grid) */
+/* 3. GRIDS */
 @media (max-width: 768px) {
-    .services-grid, .blog-home, .footer-container { 
-        grid-template-columns: 1fr !important; 
-    }
+    .services-grid, .blog-home, .footer-container { grid-template-columns: 1fr !important; }
 }
