@@ -602,3 +602,71 @@ body.home-page .site-subtitle-header {
     align-items: center;
     gap: 5px;
 }
+/* Ajuste Geral Header */
+.header-stack {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+/* Estilo do Menu Desktop */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+}
+
+/* Responsividade Mobile (Telas até 992px) */
+@media (max-width: 992px) {
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: #bd9617;
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+
+    .nav-links {
+        display: none; /* Esconde por padrão */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #0a192f;
+        padding: 20px;
+        border-top: 2px solid #bd9617;
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        display: flex; /* Mostra ao clicar */
+    }
+
+    .brand-identity {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Esconde o botão no Desktop */
+@media (min-width: 993px) {
+    .menu-toggle {
+        display: none;
+    }
+}
