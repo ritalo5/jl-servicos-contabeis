@@ -149,13 +149,13 @@
 
             // 1. Upload para o Storage
             const { data, error: storageError } = await adminClient.storage
-                .from('documentos_clientes')
+                .from('documentos')
                 .upload(filePath, file);
 
             if (storageError) return alert("Erro no Storage: " + storageError.message);
 
             // 2. Link público
-            const { data: { publicUrl } } = adminClient.storage.from('documentos_clientes').getPublicUrl(filePath);
+            const { data: { publicUrl } } = adminClient.storage.from('documentos').getPublicUrl(filePath);
 
             // 3. Registrar na tabela documentos
             const { error: dbError } = await adminClient.from('documentos').insert({
