@@ -74,17 +74,19 @@
 
     <script>
         const SB_URL = 'https://qdgsmnfhpbkbovptwwjp.supabase.co';
-        const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkZ3NtbmZocGJrYm92cHR3d2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxNTQ1MzYsImV4cCI6MjA4MzczMDUzNn0.-fpxGBv738LflicnI2edM7ywwAmed3Uka4111fzTj8c';
+        const SB_KEY = 'SUA_KEY_ANON_AQUI'; 
         const dashClient = supabase.createClient(SB_URL, SB_KEY);
 
         const nomesServicos = {
-            'abertura-mei': 'Abertura de MEI', 'mei-plano-basico': 'Plano MEI Básico', 'mei-plano-premium': 'Plano MEI Premium', 'irpf': 'Declaração IRPF'
-            // ... adicione os outros nomes se necessário
+            'abertura-mei': 'Abertura de MEI', 
+            'mei-plano-basico': 'Plano MEI Básico', 
+            'mei-plano-premium': 'Plano MEI Premium', 
+            'irpf': 'Declaração IRPF'
         };
 
         async function logout() {
             await dashClient.auth.signOut();
-            window.location.href = 'index.html';
+            window.location.href = '../../index.html'; // Ajustado para voltar da pasta servicos/area_do_cliente
         }
 
         function abrirWhatsapp(msg = "Olá! Sou cliente JL e preciso de suporte.") {
@@ -95,12 +97,12 @@
             const { data: { user } } = await dashClient.auth.getUser();
 
             if (!user) {
-                window.location.href = 'index.html';
+                window.location.href = '../../index.html';
                 return;
             }
 
-            // BOTÃO DO ADMIN (Troque pelo seu e-mail real)
-            const EMAIL_ADMIN = "seu-email-aqui@exemplo.com"; 
+            // BOTÃO DO ADMIN - Troque pelo seu e-mail real
+            const EMAIL_ADMIN = "jlservicoscontabeis0@gmail.com"; 
             if (user.email === EMAIL_ADMIN) {
                 const btnAdmin = document.createElement('button');
                 btnAdmin.innerHTML = '<i class="fas fa-user-shield"></i> Voltar ao Admin';
@@ -109,10 +111,10 @@
                 document.body.appendChild(btnAdmin);
             }
 
-            // Carregar Perfil e Documentos
+            // Carregar Perfil e Documentos (Correção de nomes de tabela)
             const { data: profile } = await dashClient.from('profiles').select('*').eq('id', user.id).single();
-            const { data: assinatura } = await dashClient.from('Assinaturas').select('*').eq('cliente_id', user.id).order('created_at', { ascending: false }).limit(1).single();
-            const { data: docs } = await dashClient.from('documentos').select('*').eq('cliente_id', user.id);
+            const { data: assinatura } = await dashClient.from('assinaturas').select('*').eq('cliente_id', user.id).order('created_at', { ascending: false }).limit(1).maybeSingle();
+            const { data: docs } = await dashClient.from('documentos').select('*').eq('cliente_id', user.id).order('created_at', { ascending: false });
 
             // Atualiza UI
             document.getElementById('user-name').innerText = "Olá, " + (profile?.nome?.split(' ')[0] || user.email.split('@')[0]);
@@ -132,21 +134,65 @@
                 listaDocs.innerHTML = docs.map(doc => `
                     <div class="doc-item">
                         <span style="font-size:0.8rem;"><i class="far fa-file-pdf" style="color:#ff4444;"></i> ${doc.nome_arquivo}</span>
-                        <a href="${doc.url_arquivo}" target="_blank" style="color:var(--gold); text-decoration:none; font-size:0.7rem;">BAIXAR</a>
+                        <a href="${doc.url_arquivo}" target="_blank" style="color:var(--gold); text-decoration:none; font-size:0.7rem; font-weight:bold;">BAIXAR</a>
                     </div>
                 `).join('');
             } else {
                 listaDocs.innerHTML = "<p style='font-size:0.7rem; color:#666;'>Nada disponível ainda.</p>";
             }
 
-            // Lógica de Checkout Automático
+            // Lógica de Checkout Automático (Seu código original chamando a nova função)
             const urlParams = new URLSearchParams(window.location.search);
             const servico = urlParams.get('contratar');
             if (servico) iniciarFluxoContratacao(user, servico, profile);
         }
 
-        // ... Mantenha sua função iniciarFluxoContratacao aqui abaixo ...
+        async function iniciarFluxoContratacao(user, servicoID, profile) {
+            console.log("Iniciando contratação para:", servicoID);
+            try {
+                // 1. Verificar duplicidade
+                const { data: existente } = await dashClient
+                    .from('assinaturas')
+                    .select('*')
+                    .eq('cliente_id', user.id)
+                    .eq('plano_id', servicoID)
+                    .in('status', ['Pendente', 'Ativo'])
+                    .maybeSingle();
 
+                if (existente) {
+                    alert(`Você já possui uma solicitação para ${nomesServicos[servicoID] || servicoID}.`);
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    return;
+                }
+
+                // 2. Registrar no banco
+                const { error: insError } = await dashClient.from('assinaturas').insert({
+                    cliente_id: user.id,
+                    plano_id: servicoID,
+                    status: 'Pendente'
+                });
+
+                if (insError) throw insError;
+
+                // 3. Notificar via WhatsApp
+                const nomeCliente = profile?.nome || user.email;
+                const nomeServico = nomesServicos[servicoID] || servicoID;
+                const mensagem = `Olá! Meu nome é ${nomeCliente}. Acabei de solicitar o serviço *${nomeServico}* pelo site e gostaria de prosseguir com o atendimento.`;
+                
+                alert("Solicitação registrada! Vamos te redirecionar para o WhatsApp.");
+                window.history.replaceState({}, document.title, window.location.pathname);
+                
+                setTimeout(() => {
+                    abrirWhatsapp(mensagem);
+                    location.reload();
+                }, 1000);
+
+            } catch (err) {
+                alert("Erro ao processar pedido: " + err.message);
+            }
+        }
+
+        // Executa a verificação ao carregar a página
         verificarAcesso();
     </script>
 </body>
