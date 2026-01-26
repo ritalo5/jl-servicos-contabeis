@@ -98,7 +98,9 @@
 
             profiles.forEach(p => {
                 const sub = assinaturas.find(s => s.cliente_id === p.id) || { status: 'Sem pedido', plano_id: '-' };
-                
+                const dataFormatada = sub.created_at 
+                ? new Date(sub.created_at).toLocaleDateString('pt-BR') 
+                : '---';                
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>
@@ -113,6 +115,9 @@
                             <option value="Cancelado" ${sub.status === 'Cancelado' ? 'selected' : ''}>Cancelado</option>
                         </select>
                     </td>
+                    </td>
+        <td style="color: #aaa;">${dataFormatada}</td> 
+        <td>
                     <td>
                         <button class="btn-upload" onclick="abrirModal('${p.id}', '${p.nome}')">
                             <i class="fas fa-upload"></i> Doc
