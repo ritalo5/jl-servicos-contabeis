@@ -852,20 +852,22 @@ body.home-page .site-subtitle-header {
 
 /* RESOLUÇÃO DEFINITIVA DESKTOP */
 @media (min-width: 993px) {
-    /* Força o desaparecimento no desktop */
     .menu-toggle { 
         display: none !important; 
     }
 
-    /* Contraste de COR (Fundo + Borda) no Hover */
     .menu-item a:hover, 
     .menu-item button.dropdown-toggle:hover,
     .nav-links a:hover { 
         color: #bd9617 !important; 
         background: rgba(189, 150, 23, 0.1) !important; 
-        border: 1px solid rgba(189, 150, 23, 0.5) !important;
+        
+        /* AQUI: Mudei de 'border' para 'border-color' */
+        border-color: rgba(189, 150, 23, 0.5) !important; 
+        
         border-radius: 4px !important;
-        padding: 10px 20px !important;
         text-decoration: none !important;
+        
+        /* A LINHA DO PADDING FOI EXCLUÍDA DAQUI */
     }
 }
