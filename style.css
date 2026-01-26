@@ -675,3 +675,70 @@ body.home-page .site-subtitle-header {
     align-items: center;
     padding: 10px 20px;
 }
+/* Ajuste Geral da Identidade (Logo + Texto) */
+.brand-identity {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 1; /* Permite que diminua se necessário */
+}
+
+.site-logo-circle {
+    width: 60px; /* Tamanho padrão no PC */
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold);
+    transition: 0.3s;
+}
+
+.site-title-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; /* Tamanho padrão no PC */
+    margin: 0;
+    color: var(--gold);
+}
+
+.site-subtitle-header {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* --- AJUSTES PARA CELULAR (Mobile) --- */
+@media (max-width: 768px) {
+    .header-stack {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+
+    .brand-identity {
+        gap: 10px; /* Reduz espaço entre logo e texto */
+    }
+
+    .site-logo-circle {
+        width: 45px; /* Logo menor no celular */
+        height: 45px;
+    }
+
+    .site-title-header {
+        font-size: 1.1rem; /* Título menor para não quebrar linha */
+        line-height: 1.2;
+    }
+
+    .site-subtitle-header {
+        font-size: 0.7rem; /* Subtítulo menor */
+        display: block; /* Garante que fique embaixo do título */
+    }
+}
+
+/* Para telas muito pequenas (iPhone SE, etc) */
+@media (max-width: 400px) {
+    .site-title-header {
+        font-size: 0.95rem;
+    }
+    .site-subtitle-header {
+        display: none; /* Esconde o subtítulo em telas minúsculas para priorizar o nome */
+    }
+}
