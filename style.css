@@ -851,7 +851,7 @@ body.home-page .site-subtitle-header {
 }
     }
 
-  /* 4. HAMBURGUER (Abaixo de tudo, na Direita) */
+ /* 4. HAMBURGUER (Abaixo de tudo, na Direita) */
     .client-access-row {
         width: 100% !important;
         display: flex !important;
@@ -862,34 +862,28 @@ body.home-page .site-subtitle-header {
         margin-top: 15px !important;
     }
 
-    .btn-area-cliente { 
-        display: flex !important; 
-        font-size: 0.75rem !important;
-        padding: 5px 10px !important;
-    }
-
     .menu-toggle {
-        display: flex !important; /* Mudado de block para flex para centralizar as linhas */
+        display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        background: transparent !important;   /* Fundo removido */
-        color: #bd9617 !important;            /* Linhas douradas */
-        border: 2px solid #bd9617 !important; /* Quadrado dourado */
+        background: transparent !important;
+        color: #bd9617 !important;
+        border: 2px solid #bd9617 !important;
         width: 45px !important;
         height: 45px !important;
         font-size: 1.5rem !important;
         border-radius: 4px !important;
-        order: 2;
     }
-} /* <--- ESSA CHAVE FECHA O @MEDIA MAX-WIDTH 992PX E É O QUE IMPEDE O VAZAMENTO */
+} /* <--- ESSA CHAVE É O PONTO CRÍTICO. Ela fecha o Media Query do Mobile */
 
-/* ESCONDE O HAMBURGUER NO DESKTOP E RESTAURA O CONTRASTE BONITO */
+/* RESOLUÇÃO DEFINITIVA DESKTOP */
 @media (min-width: 993px) {
-    .menu-toggle {
-        display: none !important;
+    /* 1. Remove o hambúrguer do Desktop */
+    .menu-toggle { 
+        display: none !important; 
     }
 
-    /* Restaura o contraste de fundo e borda no hover */
+    /* 2. Recupera o contraste (Fundo + Borda) no Hover */
     .menu-item a:hover, 
     .menu-item button.dropdown-toggle:hover,
     .nav-links a:hover { 
@@ -897,6 +891,7 @@ body.home-page .site-subtitle-header {
         background: rgba(189, 150, 23, 0.1) !important; 
         border: 1px solid rgba(189, 150, 23, 0.5) !important;
         border-radius: 4px !important;
-        padding: 10px 20px !important; /* Mantém o preenchimento para o fundo aparecer */
+        padding: 10px 20px !important;
+        text-decoration: none !important;
     }
 }
