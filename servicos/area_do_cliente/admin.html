@@ -96,7 +96,7 @@
     // 1. CARREGAR ASSINATURAS
     async function carregarPedidos() {
         const { data: pedidos, error } = await adminClient
-            .from('Assinaturas')
+            .from('assinaturas')
             .select(`*, profiles(nome, email)`)
             .order('created_at', { ascending: false });
 
@@ -126,7 +126,7 @@
     // 2. ALTERAR STATUS
     async function alterarStatus(idPedido, novoStatus) {
         if (!confirm(`Mudar status para ${novoStatus}?`)) return;
-        const { error } = await adminClient.from('Assinaturas').update({ status: novoStatus }).eq('id', idPedido);
+        const { error } = await adminClient.from('assinaturas').update({ status: novoStatus }).eq('id', idPedido);
         if (!error) { alert('Status atualizado!'); carregarPedidos(); }
     }
 
