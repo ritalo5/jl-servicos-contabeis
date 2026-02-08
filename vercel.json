@@ -1,4 +1,7 @@
 {
+    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+{
   "rewrites": [
     { "source": "/", "destination": "/servicos/index.html" },
     { "source": "/admin", "destination": "/servicos/area_do_cliente/admin.html" },
