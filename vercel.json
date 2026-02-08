@@ -1,3 +1,8 @@
 {
-  "version": 2
+  "rewrites": [
+    { "source": "/", "destination": "/servicos/index.html" },
+    { "source": "/admin", "destination": "/servicos/area_do_cliente/admin.html" },
+    { "source": "/dashboard", "destination": "/servicos/area_do_cliente/dashboard.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
